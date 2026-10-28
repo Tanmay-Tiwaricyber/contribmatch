@@ -1,0 +1,195 @@
+/* ==========================================================================
+   ContribMatch — mascot ("the ink stamp")
+   One shared base; moods are expressed with data-mood on the wrapper.
+   Dark mode inverts through tokens so the character never disappears.
+   Decorative only: always aria-hidden, state is also carried in text.
+   ========================================================================== */
+
+.mascot {
+  --mascot-size: 120px;
+  width: var(--mascot-size);
+  height: var(--mascot-size);
+  flex: none;
+  display: block;
+  color: var(--ink);
+}
+
+.mascot svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* --- Base layers ---------------------------------------------------------- */
+.mascot__body {
+  fill: var(--mascot-body);
+}
+
+.mascot__band {
+  fill: var(--mascot-band);
+}
+
+.mascot__cut {
+  fill: var(--mascot-cut);
+}
+
+.mascot__mark {
+  fill: var(--mascot-mark);
+}
+
+.mascot__face {
+  fill: none;
+  stroke: var(--mascot-cut);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.mascot__mouth {
+  fill: none;
+  stroke: var(--mascot-cut);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+/* Mood variants are stacked and toggled by opacity so the base stays shared. */
+.mascot__mood {
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+}
+
+.mascot[data-mood="idle"] .mood-idle,
+.mascot[data-mood="thinking"] .mood-thinking,
+.mascot[data-mood="scouting"] .mood-scouting,
+.mascot[data-mood="happy"] .mood-happy,
+.mascot[data-mood="celebrating"] .mood-celebrating,
+.mascot[data-mood="oops"] .mood-oops,
+.mascot[data-mood="sleepy"] .mood-sleepy {
+  opacity: 1;
+}
+
+/* --- Motion --------------------------------------------------------------- */
+.mascot[data-mood="thinking"] .mascot__body {
+  animation: cm-tilt 2.6s var(--ease) infinite;
+  transform-origin: 50% 90%;
+}
+
+.mascot[data-mood="scouting"] .mascot__body {
+  animation: cm-lean 3.4s var(--ease) infinite;
+  transform-origin: 50% 90%;
+}
+
+.mascot[data-mood="celebrating"] .mascot__body {
+  animation: cm-hop 900ms var(--ease) infinite;
+  transform-origin: 50% 95%;
+}
+
+.mascot[data-mood="happy"] .mascot__body {
+  animation: cm-breathe 3.2s var(--ease) infinite;
+  transform-origin: 50% 95%;
+}
+
+.mascot[data-mood="oops"] .mascot__body {
+  animation: cm-shake 900ms var(--ease) infinite;
+  transform-origin: 50% 95%;
+}
+
+.mascot[data-mood="sleepy"] .mascot__body {
+  animation: cm-sway 4.2s var(--ease) infinite;
+  transform-origin: 50% 95%;
+}
+
+@keyframes cm-tilt {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-3.5deg);
+  }
+}
+
+@keyframes cm-lean {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+}
+
+@keyframes cm-hop {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-6px);
+  }
+  70% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes cm-breathe {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.025);
+  }
+}
+
+@keyframes cm-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  75% {
+    transform: translateX(2px);
+  }
+}
+
+@keyframes cm-sway {
+  0%,
+  100% {
+    transform: rotate(-1.5deg);
+  }
+  50% {
+    transform: rotate(1.5deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascot[data-mood] .mascot__body {
+    animation: none;
+  }
+  .mascot__mood {
+    transition: none;
+  }
+}
+
+/* --- Sizes ---------------------------------------------------------------- */
+.mascot--xs {
+  --mascot-size: 24px;
+}
+
+.mascot--sm {
+  --mascot-size: 40px;
+}
+
+.mascot--md {
+  --mascot-size: 72px;
+}
+
+.mascot--lg {
+  --mascot-size: 120px;
+}
+
+.mascot--xl {
+  --mascot-size: 200px;
+}

@@ -1,0 +1,270 @@
+/* ==========================================================================
+   ContribMatch — design tokens
+
+   A neutral studio system: one paper colour, one ink, hairline rules and a
+   single interactive accent (--accent #2d81ff). Everything is flat — no
+   gradients, no glow, no glass. Depth comes from layered flat shadows in the
+   surface colour, exactly like a physical object on a table.
+
+   Every colour pair used for text or control boundaries is measured in
+   /docs/DESIGN_CHANGES.md and on /design-system.html.
+   ========================================================================== */
+
+@import url("../assets/fonts/fonts.css");
+
+:root {
+  color-scheme: light;
+
+  /* --- Surfaces ---------------------------------------------------------- */
+  --paper: #f2f1ee; /* page */
+  --paper-raised: #faf9f7; /* cards, raised panels */
+  --paper-sunken: #e9e8e4; /* recessed wells, code chips */
+  --paper-overlay: #ffffff; /* popovers, modals */
+
+  /* --- Ink (text) -------------------------------------------------------- */
+  --ink: #101014; /* primary text */
+  --ink-2: #666667; /* secondary text, 5.08:1 on --paper */
+  --ink-3: #6d6d6f; /* labels, 4.58:1 on --paper */
+  --ink-inverse: #f2f1ee; /* text on an inverted block */
+  --ink-strong: #000000;
+
+  /* Decorative only. Never used for text — 2.72:1 on --paper. */
+  --faint: #939392;
+
+  /* --- Structure (hairlines) --------------------------------------------- */
+  --line: #e3e2df; /* 1px dividers, card edges */
+  --line-strong: #c3c2be; /* 1px edges that must read as a boundary */
+  --line-faint: #ecebe8;
+
+  /* --- Accent (the single interactive colour) --------------------------- */
+  --accent: #2d81ff;
+  --accent-solid: #1659c4; /* fill for solid buttons: white text = 6.3:1 */
+  --accent-solid-hover: #12499a;
+  --accent-ink: #ffffff; /* text on --accent-solid */
+  --accent-text: #1659c4; /* accent-coloured text, 5.70:1 on --paper */
+  --accent-text-hover: #12499a;
+  --accent-wash: #e6eeff;
+  --accent-wash-2: #d3e1ff;
+  --accent-border: #a9c8ff;
+
+  /* --- Semantic ---------------------------------------------------------- */
+  --success: #176b46;
+  --success-wash: #e3f1e9;
+  --success-border: #96c7ab;
+  --warning: #7d5400;
+  --warning-wash: #f8efd8;
+  --warning-border: #d6b273;
+  --danger: #b3261e;
+  --danger-wash: #fbe7e5;
+  --danger-border: #dd9a93;
+  --danger-solid: #b3261e;
+  --danger-ink: #ffffff;
+  --info: #1659c4;
+  --info-wash: #e6eeff;
+  --info-border: #a9c8ff;
+
+  /* --- Interaction boundaries (>= 3:1 against their own surface) -------- */
+  --control-border: #6d6d6f; /* 4.58:1 on --paper-raised */
+  --control-border-hover: #101014;
+  --focus-ring: #2d81ff;
+  --focus-offset: #f2f1ee;
+
+  /* --- Contribution heatmap (never GitHub green) ------------------------ */
+  --heat-0: #e4e3e0;
+  --heat-1: #d3e1ff;
+  --heat-2: #a9c8ff;
+  --heat-3: #5a95ff;
+  --heat-4: #2d81ff;
+  --heat-0-border: #d7d6d2;
+
+  /* --- The 3D scene ------------------------------------------------------
+     The wall sits behind the hero headline, so its cells are muted enough
+     that ink text stays readable on top of them. The darkest cell still
+     gives 5.27:1 against --ink. */
+  --scene-0: #faf9f7;
+  --scene-0-border: #e3e2df;
+  --scene-1: #dbe7ff;
+  --scene-2: #b9d0ff;
+  --scene-3: #8fb4ff;
+  --scene-4: #4b86f0;
+
+  /* --- Mascot ------------------------------------------------------------ */
+  --mascot-body: #101014;
+  --mascot-band: #3c3c40;
+  --mascot-cut: #f2f1ee;
+  --mascot-mark: #2d81ff;
+
+  /* --- Inverted blocks --------------------------------------------------- */
+  --invert-bg: #101014;
+  --invert-fg: #f2f1ee;
+  --invert-line: #3a3a3e;
+  --invert-muted: #a3a3a2;
+  /* Accent that passes on the inverted block, which is dark in this theme. */
+  --accent-on-invert: #74aaff;
+
+  /* --- Texture ----------------------------------------------------------- */
+  --scanline: rgba(16, 16, 20, 0.03);
+
+  /* --- Typography -------------------------------------------------------- */
+  /* Noto Sans Devanagari is in every stack: none of the Latin faces carry
+     Devanagari, so the Hindi build needs a fallback that does. */
+  --font-display: "Archivo", "Noto Sans Devanagari", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Instrument Serif", "Noto Sans Devanagari", "Iowan Old Style", Georgia, serif;
+  --font-mono: "Geist Mono", "Noto Sans Devanagari", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --font-body: "Inter", "Noto Sans Devanagari", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --weight-display: 620;
+  --stretch-display: 118%;
+
+  --fs-xs: 0.6875rem;  /* 11 — HUD labels */
+  --fs-sm: 0.8125rem;  /* 13 */
+  --fs-base: 0.9375rem; /* 15 */
+  --fs-md: 1rem;       /* 16 */
+  --fs-lg: 1.125rem;   /* 18 */
+  --fs-xl: 1.375rem;   /* 22 */
+  --fs-2xl: 1.875rem;  /* 30 */
+  --fs-3xl: 2.25rem;   /* 36 */
+  --fs-4xl: 3rem;      /* 48 */
+  --fs-5xl: 4.5rem;    /* 72 */
+
+  --lh-tight: 1.05;
+  --lh-snug: 1.2;
+  --lh-normal: 1.5;
+  --lh-relaxed: 1.65;
+
+  --tracking-tight: -0.03em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.06em;
+  --tracking-caps: 0.15em;
+  --tracking-button: 0.12em;
+
+  /* --- Space (8px rhythm, 4px fine tuning) ------------------------------ */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 40px;
+  --sp-8: 48px;
+  --sp-9: 64px;
+  --sp-10: 80px;
+  --sp-11: 96px;
+  --sp-12: 128px;
+
+  /* --- Edges (square by default) ---------------------------------------- */
+  --r-xs: 0;
+  --r-sm: 0;
+  --r-md: 0;
+  --r-lg: 0;
+  --r-xl: 0;
+  --r-pill: 0;
+
+  --border: 1px solid var(--line);
+  --border-strong: 1px solid var(--line-strong);
+  --radius-cell: 0;
+
+  /* Flat, physical depth: a solid offset shadow in the ink colour, never a
+     soft glow and never a gradient. */
+  --shadow-sm: 1px 1px 0 rgba(16, 16, 20, 0.08);
+  --shadow-md: 2px 2px 0 rgba(16, 16, 20, 0.1), 6px 6px 0 rgba(16, 16, 20, 0.05);
+  --shadow-lg: 4px 4px 0 rgba(16, 16, 20, 0.12), 12px 12px 0 rgba(16, 16, 20, 0.07);
+  --shadow-scene: 10px 14px 0 rgba(16, 16, 20, 0.08);
+
+  /* --- Motion ------------------------------------------------------------ */
+  --dur-fast: 120ms;
+  --dur: 180ms;
+  --dur-slow: 240ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.3, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* --- Layout ------------------------------------------------------------ */
+  --container: 1200px;
+  --container-prose: 68ch;
+  --header-h: 58px;
+  --tap: 44px;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --paper: #121316;
+  --paper-raised: #101014;
+  --paper-sunken: #060607;
+  --paper-overlay: #1a1d22;
+
+  --ink: #f2f1ee;
+  --ink-2: #989898; /* 6.37:1 on --paper */
+  --ink-3: #7e7e80; /* 4.52:1 on --paper */
+  --ink-inverse: #0b0b0c;
+  --ink-strong: #ffffff;
+
+  --faint: #5a5a5c;
+
+  --line: #26262b;
+  --line-strong: #3e3e45;
+  --line-faint: #1c1c20;
+
+  --accent: #2d81ff;
+  --accent-solid: #2d81ff;
+  --accent-solid-hover: #5a95ff;
+  --accent-ink: #04122b;
+  --accent-text: #74aaff; /* 7.82:1 on --paper */
+  --accent-text-hover: #a3c8ff;
+  --accent-wash: #12213a;
+  --accent-wash-2: #1a3358;
+  --accent-border: #2c5a99;
+
+  --success: #56c795;
+  --success-wash: #0f2419;
+  --success-border: #2c6249;
+  --warning: #d9a75e;
+  --warning-wash: #261d0f;
+  --warning-border: #6a5227;
+  --danger: #ff6259;
+  --danger-wash: #2a1210;
+  --danger-border: #762e29;
+  --danger-solid: #ff6259;
+  --danger-ink: #2a0d0a;
+  --info: #74aaff;
+  --info-wash: #12213a;
+  --info-border: #2c5a99;
+
+  --control-border: #7e7e80; /* 4.52:1 on --paper-raised */
+  --control-border-hover: #f2f1ee;
+  --focus-ring: #74aaff;
+  --focus-offset: #121316;
+
+  --heat-0: #1b1d21;
+  --heat-1: #14294a;
+  --heat-2: #1b4587;
+  --heat-3: #3a7ae0;
+  --heat-4: #74aaff;
+  --heat-0-border: #24262b;
+
+  --scene-0: #101014;
+  --scene-0-border: #26262b;
+  --scene-1: #16294a;
+  --scene-2: #1d4689;
+  --scene-3: #2f6bd0;
+  --scene-4: #5a95ff;
+
+  --mascot-body: #f2f1ee;
+  --mascot-band: #3c3c40;
+  --mascot-cut: #121316;
+  --mascot-mark: #2d81ff;
+
+  --invert-bg: #ffffff;
+  --invert-fg: #0b0b0c;
+  --invert-line: #d7d6d2;
+  --invert-muted: #5c5c5e;
+  /* The inverted block is light in this theme, so the accent darkens. */
+  --accent-on-invert: #1659c4;
+
+  --scanline: rgba(255, 255, 255, 0.025);
+
+  --shadow-sm: 1px 1px 0 rgba(0, 0, 0, 0.5);
+  --shadow-md: 2px 2px 0 rgba(0, 0, 0, 0.55), 6px 6px 0 rgba(0, 0, 0, 0.35);
+  --shadow-lg: 4px 4px 0 rgba(0, 0, 0, 0.6), 12px 12px 0 rgba(0, 0, 0, 0.4);
+  --shadow-scene: 10px 14px 0 rgba(0, 0, 0, 0.45);
+}

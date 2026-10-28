@@ -1,0 +1,420 @@
+/* ==========================================================================
+   ContribMatch — base layer
+   Reset, typography, focus, links, layout primitives.
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + var(--sp-4));
+}
+
+/* The hidden attribute must win over component display rules. */
+[hidden] {
+  display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: var(--lh-normal);
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+/* A very quiet scanline texture, the way a light table looks. It is drawn as
+   a flat SVG tile rather than a gradient, so nothing in this file paints a
+   gradient. It never moves. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='3' height='3' viewBox='0 0 3 3'%3E%3Crect width='3' height='1' fill='%23101014' fill-opacity='0.03'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+[data-theme="dark"] body::before {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='3' height='3' viewBox='0 0 3 3'%3E%3Crect width='3' height='1' fill='%23ffffff' fill-opacity='0.025'/%3E%3C/svg%3E");
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 var(--sp-4);
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--ink);
+  font-stretch: var(--stretch-display);
+}
+
+h1 {
+  font-size: clamp(2rem, 5.2vw, var(--fs-3xl));
+}
+h2 {
+  font-size: clamp(1.625rem, 3.4vw, var(--fs-2xl));
+}
+h3 {
+  font-size: clamp(1.25rem, 2.2vw, var(--fs-xl));
+}
+h4 {
+  font-size: var(--fs-md);
+}
+h5,
+h6 {
+  font-size: var(--fs-base);
+}
+
+p {
+  margin: 0 0 var(--sp-4);
+}
+
+p:last-child,
+ul:last-child,
+ol:last-child {
+  margin-bottom: 0;
+}
+
+ul,
+ol {
+  margin: 0 0 var(--sp-4);
+  padding-left: var(--sp-5);
+}
+
+li {
+  margin-bottom: var(--sp-2);
+}
+
+a {
+  color: var(--accent-text);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--dur-fast) var(--ease);
+}
+
+a:hover {
+  color: var(--accent-text-hover);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--r-xs);
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+/* Long inline code must wrap rather than widen the page. */
+code {
+  overflow-wrap: anywhere;
+}
+
+hr {
+  border: 0;
+  border-top: var(--border);
+  margin: var(--sp-8) 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+legend {
+  padding: 0;
+}
+
+/* --- Skip link ---------------------------------------------------------- */
+.skip-link {
+  position: absolute;
+  left: var(--sp-4);
+  top: var(--sp-4);
+  z-index: 200;
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--accent-solid);
+  color: var(--accent-ink);
+  border-radius: var(--r-sm);
+  font-weight: 600;
+  transform: translateY(-200%);
+  transition: transform var(--dur) var(--ease);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  color: var(--accent-ink);
+}
+
+/* --- Screen-reader only -------------------------------------------------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- Layout primitives --------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--sp-5);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-inline: var(--sp-6);
+  }
+}
+
+.container--narrow {
+  max-width: 860px;
+}
+
+.grid {
+  display: grid;
+  gap: var(--sp-5);
+}
+
+/* Grid items must be allowed to shrink below their content's intrinsic
+   width, otherwise a long option label or URL widens the whole page. */
+.grid > *,
+.page__grid > *,
+.cluster > * {
+  min-width: 0;
+}
+
+.grid--2 {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.grid--3 {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.grid--4 {
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}
+
+.stack > * + * {
+  margin-top: var(--sp-4);
+}
+
+.stack--lg > * + * {
+  margin-top: var(--sp-6);
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  align-items: center;
+}
+
+.prose {
+  max-width: var(--container-prose);
+}
+
+.prose > * + * {
+  margin-top: var(--sp-4);
+}
+
+.prose h2 {
+  margin-top: var(--sp-9);
+}
+
+.prose h3 {
+  margin-top: var(--sp-6);
+}
+
+.prose code {
+  background: var(--paper-sunken);
+  border: var(--border);
+  border-radius: var(--r-xs);
+  padding: 0.1em 0.35em;
+  color: var(--ink-2);
+}
+
+/* A code chip inside a link keeps the link colour, which still passes on the
+   recessed chip. */
+.prose a code,
+.prose a code:visited {
+  color: var(--accent-text);
+}
+
+/* --- Type helpers -------------------------------------------------------- */
+
+/* The HUD label: the small monospaced caption that sits above a heading. */
+.eyebrow,
+.hud-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 var(--sp-3);
+}
+
+.hud-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.hud-label::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  flex: none;
+}
+
+.lede {
+  font-size: var(--fs-lg);
+  line-height: var(--lh-relaxed);
+  color: var(--ink-2);
+  max-width: 56ch;
+}
+
+.serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--ink-2);
+}
+
+.display {
+  font-family: var(--font-display);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.muted {
+  color: var(--ink-3);
+}
+
+.small {
+  font-size: var(--fs-sm);
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Rules --------------------------------------------------------------- */
+.rule {
+  height: 1px;
+  background: var(--line);
+  border: 0;
+  margin: var(--sp-8) 0;
+}
+
+.section {
+  padding-block: var(--sp-9);
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding-block: var(--sp-11);
+  }
+}
+
+.section__head {
+  max-width: 70ch;
+  margin-bottom: var(--sp-7);
+}
+
+.section__head p {
+  color: var(--ink-2);
+  font-size: var(--fs-md);
+}
+
+/* --- Section background variants ---------------------------------------- */
+.section--sunken {
+  background: var(--paper-sunken);
+}
+
+.section--raised {
+  background: var(--paper-raised);
+  border-block: var(--border);
+}
+
+.section--tight {
+  padding-block: var(--sp-8);
+}

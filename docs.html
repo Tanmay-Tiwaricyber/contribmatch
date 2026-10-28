@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Documentation — ContribMatch</title>
+<meta name="description" content="Set up ContribMatch locally, connect Ollama or Google AI Studio, understand the exact and approximate contribution data, and see the privacy model.">
+<link rel="canonical" href="https://contribmatch.github.io/contribmatch/docs.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ContribMatch">
+<meta property="og:title" content="Documentation — ContribMatch">
+<meta property="og:description" content="Set up ContribMatch locally, connect a model, and understand the privacy model.">
+<meta property="og:url" content="https://contribmatch.github.io/contribmatch/docs.html">
+<meta property="og:image" content="https://contribmatch.github.io/contribmatch/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Documentation — ContribMatch">
+<meta name="twitter:description" content="Set up ContribMatch locally, connect a model, and understand the privacy model.">
+<meta name="twitter:image" content="https://contribmatch.github.io/contribmatch/assets/og-image.png">
+<meta name="theme-color" content="#faf8f4">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/icons/icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/mascot.css">
+<link rel="stylesheet" href="css/heatmap.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/pages.css">
+<script>
+  (function () {
+    try {
+      var mode = localStorage.getItem('contribmatch:v1:theme') || 'system';
+      var dark = mode === 'dark' || (mode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      var lang = localStorage.getItem('contribmatch:v1:lang') || 'en';
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.lang = lang === 'hi' ? 'hi' : (lang === 'hinglish' ? 'en-Latn' : 'en');
+    } catch (e) { /* ignore */ }
+  })();
+</script>
+</head>
+<body data-page="docs">
+<a class="skip-link" href="#main" data-i18n="skip.link">Skip to main content</a>
+<div id="site-header"></div>
+
+<main id="main" class="page">
+  <div class="container">
+    <nav aria-label="Breadcrumb">
+      <ol class="breadcrumbs">
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><span aria-current="page" data-i18n="docs.eyebrow">Documentation</span></li>
+      </ol>
+    </nav>
+
+    <div class="page__head">
+      <h1 class="page__title" data-i18n-html="docs.title">Setup, settings and the privacy model</h1>
+      <p class="page__lede" data-i18n="docs.lede"></p>
+    </div>
+
+    <div class="page__grid page__grid--sidebar-left">
+      <aside class="sticky-col">
+        <nav id="toc" aria-label="On this page"></nav>
+      </aside>
+
+      <article class="prose" id="docs-article">
+        <h2 id="quickstart">Quick start</h2>
+        <p>
+          ContribMatch is a static site: HTML, CSS and ES modules. There is no build
+          step and no bundler. Clone the repository and serve the folder over HTTP,
+          because ES modules and <code>fetch</code> do not work from <code>file://</code>.
+        </p>
+        <div class="code" data-copy>
+          <div class="code__head"><span class="code__lang">bash</span></div>
+          <pre><code>git clone https://github.com/contribmatch/contribmatch.git
+cd contribmatch
+python3 -m http.server 8080
+# open http://localhost:8080</code></pre>
+        </div>
+        <p>
+          Any static server works — <code>npx serve</code>, <code>caddy file-server</code>,
+          or GitHub Pages. The site uses relative links, so it also works from a
+          sub-path such as <code>https://&lt;user&gt;.github.io/contribmatch/</code>.
+        </p>
+
+        <h2 id="ollama">Connect a local model with Ollama</h2>
+        <p>
+          Ollama runs open-weight models on your own machine. Gemma 3 is the default
+          because it is small, multilingual and follows the JSON instruction format.
+        </p>
+        <div class="code" data-copy>
+          <div class="code__head"><span class="code__lang">bash</span></div>
+          <pre><code>ollama serve
+ollama pull gemma3:4b
+curl http://localhost:11434/api/tags</code></pre>
+        </div>
+        <p>Then choose <strong>Ollama</strong> in the settings below and press <strong>Save</strong>.</p>
+
+        <h3 id="ollama-cors">Allow the browser to reach the daemon</h3>
+        <p>
+          Ollama's default CORS policy rejects browser requests from a page served on a
+          different origin. Set the allowed origins before you start the daemon:
+        </p>
+        <div class="code" data-copy>
+          <div class="code__head"><span class="code__lang">bash</span></div>
+          <pre><code>OLLAMA_ORIGINS="http://localhost:8080,http://127.0.0.1:8080" ollama serve</code></pre>
+        </div>
+        <p>
+          If you deploy ContribMatch to GitHub Pages, add that origin too, for example
+          <code>OLLAMA_ORIGINS="https://your-user.github.io"</code>. If the daemon refuses
+          the connection, the app keeps working: every agent falls back to its rule-based
+          answer and says so under the results.
+        </p>
+
+        <h2 id="ai-studio">Connect Google AI Studio</h2>
+        <p>
+          Google AI Studio hosts Gemma and needs an API key. The key is typed into the
+          browser and kept in <code>sessionStorage</code>, so it disappears when the tab
+          closes. It is never written to <code>localStorage</code>, never logged and never
+          sent anywhere except to Google.
+        </p>
+        <div class="notice notice--warning">
+          <span class="notice__icon" aria-hidden="true">!</span>
+          <p>
+            A key pasted into a web page is visible to anyone who can use that browser
+            profile. Use a key with the smallest scope that works, rotate it if the
+            machine is shared, and never commit a key to a repository.
+          </p>
+        </div>
+        <ol>
+          <li>Create a key in Google AI Studio.</li>
+          <li>Paste it into the API key field below.</li>
+          <li>Choose <strong>Google AI Studio</strong> and a Gemma model, then <strong>Save</strong>.</li>
+        </ol>
+
+        <h2 id="settings">Settings</h2>
+        <p>
+          Preferences are stored in <code>localStorage</code>. Secrets are stored in
+          <code>sessionStorage</code> only.
+        </p>
+        <form id="settings-form" class="card stack">
+          <div class="field">
+            <label class="field__label" for="setting-provider">Provider</label>
+            <select class="select" id="setting-provider" name="provider">
+              <option value="ollama">Ollama (local, open weights)</option>
+              <option value="google">Google AI Studio (hosted Gemma)</option>
+              <option value="mock">Sample mode (offline, no model)</option>
+            </select>
+            <p class="field__hint">
+              Sample mode runs the whole flow offline on local sample data. It is the
+              fastest way to demo ContribMatch.
+            </p>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="setting-model">Model</label>
+            <input class="input" id="setting-model" name="model" type="text" value="gemma3:4b"
+                   autocomplete="off" spellcheck="false">
+            <p class="field__hint">
+              For Ollama: <code>gemma3:4b</code>, <code>gemma3:12b</code>, <code>qwen2.5:7b</code>.
+              For AI Studio: <code>gemma-3-27b-it</code> or <code>gemma-3-12b-it</code>.
+            </p>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="setting-endpoint">Ollama endpoint</label>
+            <input class="input" id="setting-endpoint" name="endpoint" type="url"
+                   value="http://localhost:11434" autocomplete="off" spellcheck="false">
+          </div>
+
+          <div class="field is-hidden">
+            <label class="field__label" for="setting-api-key">Google AI Studio API key</label>
+            <input class="input" id="setting-api-key" name="apiKey" type="password"
+                   autocomplete="off" spellcheck="false" placeholder="Paste a key — it stays in this tab">
+            <p class="field__hint">Kept in sessionStorage only. Never committed, never logged.</p>
+          </div>
+
+          <fieldset class="stack">
+            <legend class="field__label">GitHub access</legend>
+            <label class="switch">
+              <input type="checkbox" id="setting-use-token" name="useToken">
+              <span class="switch__text">Use a GitHub token (read-only, public data only)</span>
+            </label>
+            <div class="field">
+              <label class="field__label" for="setting-token">GitHub token</label>
+              <input class="input" id="setting-token" name="token" type="password"
+                     autocomplete="off" spellcheck="false" placeholder="ghp_…">
+              <p class="field__hint">
+                A token with no scopes is enough. It is kept in sessionStorage only.
+              </p>
+            </div>
+          </fieldset>
+
+          <label class="switch">
+            <input type="checkbox" id="setting-mock" name="mockMode">
+            <span class="switch__text">Sample mode — run offline on local sample data</span>
+          </label>
+
+          <div class="cluster">
+            <button class="btn btn--primary" type="submit">Save settings</button>
+            <button class="btn btn--secondary" id="settings-clear" type="button">Forget the key and the token</button>
+          </div>
+          <p class="field__hint" id="settings-status" role="status" hidden></p>
+        </form>
+
+        <h2 id="token">Why add a GitHub token</h2>
+        <p>
+          Unauthenticated GitHub API requests are limited to 60 per hour, and search is
+          limited further. A token raises the limit and gives you the exact contribution
+          calendar.
+        </p>
+        <p>
+          The token needs no scopes: ContribMatch only reads public data. It is stored in
+          <code>sessionStorage</code> and is sent only to <code>api.github.com</code>.
+        </p>
+
+        <h2 id="ollama-timing">Local model timing and origins</h2>
+        <p>
+          The first call to a local model includes loading it into memory; on a
+          CPU-only machine a single call can take one to five minutes.
+          ContribMatch waits up to 5 minutes per model call and asks Ollama to
+          keep the model resident (<code>keep_alive: 30m</code>), so follow-up
+          calls in the same session are much faster.
+        </p>
+        <p>
+          If you serve the site from an origin other than
+          <code>http://localhost</code>, start Ollama with
+          <code>OLLAMA_ORIGINS=*</code> (or your exact site origin) so its CORS
+          preflight is accepted — otherwise the matcher quietly falls back to
+          rule scores.
+        </p>
+
+        <h2 id="rate-limits">Rate limits, queuing and caching</h2>
+        <p>
+          ContribMatch keeps GitHub usage low in three ways, and tells you what
+          it is doing while it does it.
+        </p>
+        <ul>
+          <li>
+            <strong>One request at a time.</strong> Every GitHub request from
+            every page and agent runs through a single queue with a short pause
+            between requests. Identical requests made at the same moment are
+            collapsed into one. There is a small fixed cap on queued requests,
+            and the queue reports itself on the matcher page.
+          </li>
+          <li>
+            <strong>A local issue catalogue.</strong> The matcher starts from a
+            periodically refreshed list of open, beginner-labelled issues
+            (<code>data/issues.json</code>), so most visitors never trigger a
+            live search. When the catalogue is fresh you make no GitHub search
+            requests at all; the chip above the results shows when it was last
+            refreshed.
+          </li>
+          <li>
+            <strong>Caching with honest labels.</strong> Search results are
+            reused for 5 minutes, profiles and repository metadata for 15
+            minutes. If GitHub is throttling, the app serves your last cached
+            copy and flags it — it never shows old data as fresh, and it never
+            invents results.
+          </li>
+        </ul>
+        <p>
+          When GitHub really does refuse, the page says which limit ran out
+          (core REST, search or GraphQL) and when it resets. Rate limits can
+          never be fully ruled out — the goal of this design is to make them
+          rare and harmless, not to promise they cannot happen.
+        </p>
+
+        <h2 id="contributions">Exact and approximate contribution data</h2>
+        <p>
+          The activity graph has three modes, and the label under the graph always says
+          which one you are looking at.
+        </p>
+        <ul>
+          <li>
+            <strong>Exact</strong> — uses the GitHub GraphQL contribution calendar, which
+            covers the last year. It needs a token. Add one and the label changes to
+            <em>Exact</em>.
+          </li>
+          <li>
+            <strong>Approximate</strong> — counts your public events
+            (<code>/users/&lt;login&gt;/events/public</code>). That covers roughly the last
+            90 days and at most 300 events, so it is not the full year. The label reads
+            <em>Approximate</em> and the note says so in full.
+          </li>
+          <li>
+            <strong>Sample</strong> — synthetic data shown before a username is entered
+            and in sample mode. It is labelled <em>Sample</em> everywhere it appears.
+          </li>
+        </ul>
+        <p>
+          Event types map to the four buckets like this: <code>PushEvent</code> to commits
+          (counted with the number of commits in the payload), <code>PullRequestEvent</code>
+          to pull requests, <code>IssuesEvent</code> and <code>IssueCommentEvent</code> to
+          issues, and <code>PullRequestReviewEvent</code> and
+          <code>PullRequestReviewCommentEvent</code> to reviews.
+        </p>
+
+        <h2 id="privacy">Privacy model</h2>
+        <ul>
+          <li>There is no backend. ContribMatch serves static files and nothing else.</li>
+          <li>Your GitHub token and AI Studio key live in <code>sessionStorage</code>.</li>
+          <li>Your shortlist lives in <code>localStorage</code> and can be cleared from the shortlist page.</li>
+          <li>The model only receives the issue title, body and labels of the shortlist, plus your inferred skills.</li>
+          <li>With Ollama, that request never leaves your machine.</li>
+          <li>ContribMatch never posts a comment, a branch or a pull request.</li>
+        </ul>
+        <p><a href="privacy.html">Read the full privacy page</a>.</p>
+
+        <h2 id="packs">Community packs</h2>
+        <p>
+          A pack is a plain JSON or YAML file describing skills, language and tone. The
+          matcher uses it to explain an issue in the right words. Three real packs ship
+          with the app, and you can add more in a pull request.
+        </p>
+        <p><a href="packs.html">Browse the packs</a></p>
+
+        <h2 id="troubleshooting">Troubleshooting</h2>
+        <h3 id="trouble-ollama">The matcher says the model is unavailable</h3>
+        <p>
+          Ollama is probably not running, or it is refusing the browser origin. Check
+          <code>curl http://localhost:11434/api/tags</code>, then start it with
+          <code>OLLAMA_ORIGINS</code> set to the origin serving ContribMatch. The app keeps
+          working without the model — every agent has a rule-based fallback.
+        </p>
+
+        <h3 id="trouble-rate">GitHub says the rate limit is reached</h3>
+        <p>
+          Add a read-only token in the settings above and switch the matcher to use it.
+          Results are cached in <code>localStorage</code> for a few minutes, so repeating
+          the same search does not spend more of your limit.
+        </p>
+
+        <h3 id="trouble-graph">The graph looks empty</h3>
+        <p>
+          In approximate mode only the last 90 days are covered, so a quiet month can look
+          empty. Add a token for the exact calendar, and check the label under the graph
+          to see which mode you are in.
+        </p>
+
+        <h3 id="trouble-modules">The page is blank and the console shows a module error</h3>
+        <p>
+          Serve the folder over HTTP rather than opening the file directly. Browsers
+          block ES modules and <code>fetch</code> on <code>file://</code> origins.
+        </p>
+      </article>
+    </div>
+
+    <p class="field__error" data-page-error hidden role="alert"></p>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

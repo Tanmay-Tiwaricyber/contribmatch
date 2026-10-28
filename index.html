@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ContribMatch — find a GitHub issue you can actually finish</title>
+<meta name="description" content="ContribMatch reads your public GitHub activity, finds open issues labelled for newcomers, and coaches you toward a quality first pull request. Powered by open-weight Gemma. No account, no backend.">
+<link rel="canonical" href="https://contribmatch.github.io/contribmatch/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ContribMatch">
+<meta property="og:title" content="ContribMatch — find a GitHub issue you can actually finish">
+<meta property="og:description" content="Matches developers with beginner-friendly GitHub issues and coaches them toward a quality first pull request. Open weights, local-first, public data only.">
+<meta property="og:url" content="https://contribmatch.github.io/contribmatch/">
+<meta property="og:image" content="https://contribmatch.github.io/contribmatch/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ContribMatch — find a GitHub issue you can actually finish">
+<meta name="twitter:description" content="Matches developers with beginner-friendly GitHub issues and coaches them toward a quality first pull request.">
+<meta name="twitter:image" content="https://contribmatch.github.io/contribmatch/assets/og-image.png">
+<meta name="theme-color" content="#f2f1ee">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/icons/icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/mascot.css">
+<link rel="stylesheet" href="css/heatmap.css">
+<link rel="stylesheet" href="css/scene.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/pages.css">
+<link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+  // Set the theme before the first paint so the page never flashes.
+  (function () {
+    try {
+      var mode = localStorage.getItem('contribmatch:v1:theme') || 'system';
+      var dark = mode === 'dark' || (mode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      var lang = localStorage.getItem('contribmatch:v1:lang') || 'en';
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.lang = lang === 'hi' ? 'hi' : (lang === 'hinglish' ? 'en-Latn' : 'en');
+    } catch (e) { /* storage may be blocked */ }
+  })();
+</script>
+</head>
+<body data-page="home">
+<a class="skip-link" href="#main" data-i18n="skip.link">Skip to main content</a>
+<div id="site-header"></div>
+
+<main id="main">
+
+  <!-- Hero ------------------------------------------------------------- -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero__stage">
+        <div class="scene" id="hero-scene" aria-hidden="true"></div>
+        <div class="hero__headline">
+          <p class="hud-label" data-i18n="hero.eyebrow">One issue at a time</p>
+          <h1 class="hero__title" data-i18n-html="hero.title">Find an issue you can actually finish</h1>
+        </div>
+      </div>
+
+      <div class="hero__inner">
+      <div class="hero__main">
+        <p class="hero__promise" data-i18n="hero.promise"></p>
+
+        <form class="hero__form" id="hero-form" novalidate>
+          <div class="field">
+            <label class="field__label" for="hero-username" data-i18n="hero.inputLabel">GitHub username</label>
+            <div class="input-group">
+              <input
+                class="input"
+                id="hero-username"
+                name="username"
+                type="text"
+                inputmode="text"
+                autocomplete="off"
+                autocapitalize="off"
+                spellcheck="false"
+                maxlength="39"
+                placeholder="e.g. octocat"
+                aria-describedby="hero-error hero-trust"
+                required>
+              <button class="btn btn--primary" id="hero-submit" type="submit" data-i18n="hero.submit">Find my issues</button>
+            </div>
+            <p class="field__error" id="hero-error" role="alert" hidden></p>
+          </div>
+          <p class="hero__trust" id="hero-trust" data-i18n="hero.trust"></p>
+        </form>
+
+        <div class="cluster" id="hero-cta" style="margin-top: var(--sp-5);"></div>
+      </div>
+
+      <!-- Your activity ------------------------------------------------ -->
+      <aside class="hero__aside" aria-labelledby="activity-heading">
+        <div class="activity" id="activity-panel">
+          <h2 class="activity__title" id="activity-heading" data-i18n="activity.title">Your activity</h2>
+          <p class="activity__note" data-i18n="activity.loading">Loading activity…</p>
+        </div>
+      </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marquee ------------------------------------------------------------ -->
+  <section class="marquee-band" aria-label="What ContribMatch looks at">
+    <div class="marquee">
+      <div class="marquee__track" id="hero-marquee"></div>
+    </div>
+  </section>
+
+  <!-- How it works ------------------------------------------------------ -->
+  <section class="section section--sunken" id="how" aria-labelledby="how-title">
+    <div class="container">
+      <div class="section__head">
+        <p class="section-index"><span class="section-index__num">01</span><span class="section-index__label" data-i18n="how.eyebrow">How it works</span></p>
+        <h2 id="how-title" data-i18n-html="how.title">Four agents, one shortlist</h2>
+        <p data-i18n="how.lead"></p>
+      </div>
+      <div class="how">
+        <article class="how__item">
+          <span class="how__num" aria-hidden="true">1</span>
+          <h3 data-i18n="how.1.title">Profile agent</h3>
+          <p data-i18n="how.1.body"></p>
+        </article>
+        <article class="how__item">
+          <span class="how__num" aria-hidden="true">2</span>
+          <h3 data-i18n="how.2.title">Scout agent</h3>
+          <p data-i18n="how.2.body"></p>
+        </article>
+        <article class="how__item">
+          <span class="how__num" aria-hidden="true">3</span>
+          <h3 data-i18n="how.3.title">Ranker agent</h3>
+          <p data-i18n="how.3.body"></p>
+        </article>
+        <article class="how__item">
+          <span class="how__num" aria-hidden="true">4</span>
+          <h3 data-i18n="how.4.title">Coach agent</h3>
+          <p data-i18n="how.4.body"></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features ----------------------------------------------------------- -->
+  <section class="section" id="features" aria-labelledby="features-title">
+    <div class="container">
+      <div class="section__head">
+        <p class="section-index"><span class="section-index__num">02</span><span class="section-index__label" data-i18n="features.eyebrow">What you get</span></p>
+        <h2 id="features-title" data-i18n-html="features.title">Built for the first pull request</h2>
+        <p data-i18n="features.lead"></p>
+      </div>
+      <div class="features">
+        <article class="feature">
+          <h3 data-i18n="features.1.title">Matches, not a feed</h3>
+          <p data-i18n="features.1.body"></p>
+        </article>
+        <article class="feature">
+          <h3 data-i18n="features.2.title">A plan before you code</h3>
+          <p data-i18n="features.2.body"></p>
+        </article>
+        <article class="feature">
+          <h3 data-i18n="features.3.title">Quality guard</h3>
+          <p data-i18n="features.3.body"></p>
+        </article>
+        <article class="feature">
+          <h3 data-i18n="features.4.title">Open weights, local-first</h3>
+          <p data-i18n="features.4.body"></p>
+        </article>
+        <article class="feature">
+          <h3 data-i18n="features.5.title">Your language</h3>
+          <p data-i18n="features.5.body"></p>
+        </article>
+        <article class="feature">
+          <h3 data-i18n="features.6.title">Community packs</h3>
+          <p data-i18n="features.6.body"></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why open innovation matters --------------------------------------- -->
+  <section class="section section--raised" id="open-innovation" aria-labelledby="open-title">
+    <div class="container">
+      <div class="section__head">
+        <p class="section-index"><span class="section-index__num">03</span><span class="section-index__label" data-i18n="open.eyebrow">Why open innovation matters</span></p>
+        <h2 id="open-title" data-i18n-html="open.title">Open weights, open data, open contribution</h2>
+        <p data-i18n="open.lead"></p>
+      </div>
+      <div class="grid grid--4">
+        <article class="card">
+          <h3 class="card__title" data-i18n="open.1.title">Open weights</h3>
+          <p class="card__body" data-i18n="open.1.body"></p>
+        </article>
+        <article class="card">
+          <h3 class="card__title" data-i18n="open.2.title">Local-first privacy</h3>
+          <p class="card__body" data-i18n="open.2.body"></p>
+        </article>
+        <article class="card">
+          <h3 class="card__title" data-i18n="open.3.title">Community packs</h3>
+          <p class="card__body" data-i18n="open.3.body"></p>
+        </article>
+        <article class="card">
+          <h3 class="card__title" data-i18n="open.4.title">Local languages</h3>
+          <p class="card__body" data-i18n="open.4.body"></p>
+        </article>
+      </div>
+      <p class="small muted" style="margin-top: var(--sp-5);">
+        <a href="open-innovation.html">Read the full argument</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Community packs ---------------------------------------------------- -->
+  <section class="section" id="packs" aria-labelledby="packs-title">
+    <div class="container">
+      <div class="section__head">
+        <p class="section-index"><span class="section-index__num">04</span><span class="section-index__label" data-i18n="packs.eyebrow">Community packs</span></p>
+        <h2 id="packs-title" data-i18n-html="packs.title">Packs written by the community</h2>
+        <p data-i18n="packs.lead"></p>
+      </div>
+      <div class="grid grid--3">
+        <article class="card">
+          <p class="eyebrow" data-i18n="packs.example">Example pack</p>
+          <h3 class="card__title">Web basics</h3>
+          <p class="card__body">
+            HTML, CSS and accessible JavaScript — the first stop for most newcomers.
+            A pack describes the skills, tone and ecosystems a project works in.
+          </p>
+          <div class="cluster">
+            <span class="badge badge--accent">skill</span>
+            <span class="badge">html</span>
+            <span class="badge">css</span>
+            <span class="badge">javascript</span>
+            <span class="badge">accessibility</span>
+          </div>
+        </article>
+        <article class="card">
+          <p class="eyebrow" data-i18n="packs.example">Example pack</p>
+          <h3 class="card__title">Python and data tooling</h3>
+          <p class="card__body">
+            Python packages, typing, pytest suites and small data tooling.
+            Used when the issue lives in a Python repository.
+          </p>
+          <div class="cluster">
+            <span class="badge badge--accent">skill</span>
+            <span class="badge">python</span>
+            <span class="badge">pytest</span>
+            <span class="badge">typing</span>
+          </div>
+        </article>
+        <article class="card">
+          <p class="eyebrow" data-i18n="packs.example">Example pack</p>
+          <h3 class="card__title">Plain technical English</h3>
+          <p class="card__body">
+            House style for every explanation the coach writes. Short sentences,
+            concrete nouns, no hedging. Written in YAML.
+          </p>
+          <div class="cluster">
+            <span class="badge badge--accent">tone</span>
+            <span class="badge">plain-technical</span>
+            <span class="badge">en</span>
+          </div>
+        </article>
+      </div>
+      <div class="cluster" style="margin-top: var(--sp-5);">
+        <a class="btn btn--primary" href="packs.html" data-i18n="packs.browse">Browse packs</a>
+        <a class="btn btn--secondary" href="packs.html#add" data-i18n="packs.add">Add a pack</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ ---------------------------------------------------------------- -->
+  <section class="section section--sunken" id="faq" aria-labelledby="faq-title">
+    <div class="container container--narrow">
+      <div class="section__head">
+        <p class="section-index"><span class="section-index__num">05</span><span class="section-index__label" data-i18n="faq.eyebrow">Questions</span></p>
+        <h2 id="faq-title" data-i18n-html="faq.title">Common questions</h2>
+      </div>
+      <div class="accordion" id="faq-accordion">
+        <div class="accordion__item">
+          <h3><button class="accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-panel-1" id="faq-trigger-1" data-i18n="faq.1.q"></button></h3>
+          <div class="accordion__panel" id="faq-panel-1" role="region" aria-labelledby="faq-trigger-1" hidden data-i18n="faq.1.a"></div>
+        </div>
+        <div class="accordion__item">
+          <h3><button class="accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-panel-2" id="faq-trigger-2" data-i18n="faq.2.q"></button></h3>
+          <div class="accordion__panel" id="faq-panel-2" role="region" aria-labelledby="faq-trigger-2" hidden data-i18n="faq.2.a"></div>
+        </div>
+        <div class="accordion__item">
+          <h3><button class="accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-panel-3" id="faq-trigger-3" data-i18n="faq.3.q"></button></h3>
+          <div class="accordion__panel" id="faq-panel-3" role="region" aria-labelledby="faq-trigger-3" hidden data-i18n="faq.3.a"></div>
+        </div>
+        <div class="accordion__item">
+          <h3><button class="accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-panel-4" id="faq-trigger-4" data-i18n="faq.4.q"></button></h3>
+          <div class="accordion__panel" id="faq-panel-4" role="region" aria-labelledby="faq-trigger-4" hidden data-i18n="faq.4.a"></div>
+        </div>
+        <div class="accordion__item">
+          <h3><button class="accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-panel-5" id="faq-trigger-5" data-i18n="faq.5.q"></button></h3>
+          <div class="accordion__panel" id="faq-panel-5" role="region" aria-labelledby="faq-trigger-5" hidden data-i18n="faq.5.a"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA ----------------------------------------------------------- -->
+  <section class="section section--invert" aria-labelledby="cta-title">
+    <div class="container">
+      <div class="cta-band">
+        <div>
+          <p class="section-index section-index--invert"><span class="section-index__num">06</span><span class="section-index__label" data-i18n="cta.eyebrow">Start here</span></p>
+          <h2 id="cta-title" data-i18n-html="cta.title">Pick one issue. That is the whole job.</h2>
+          <p data-i18n="cta.body"></p>
+        </div>
+        <div class="cluster">
+          <a class="btn btn--invert" href="app.html" data-i18n="cta.button">Find my issue</a>
+          <a class="btn btn--invert-outline" href="docs.html" data-i18n="cta.secondary">Read the docs</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+
+<script type="module" src="js/main.js"></script>
+<script type="module" src="js/ui/accordion.js"></script>
+</body>
+</html>

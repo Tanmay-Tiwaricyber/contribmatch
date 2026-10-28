@@ -1,0 +1,32 @@
+{
+  "id": "docs-translation",
+  "name": "Docs and translation",
+  "type": "skill",
+  "version": "1.0.0",
+  "description": "Writing, translating and reviewing documentation. Use when the issue asks for a README change, a guide or a translation.",
+  "languages": ["en", "hi", "hinglish"],
+  "skills": ["documentation", "translation", "markdown", "technical-writing"],
+  "tone": "plain",
+  "level": "beginner",
+  "ecosystems": ["docs"],
+  "license": "CC0-1.0",
+  "author": "ContribMatch community",
+  "homepage": "https://github.com/contribmatch/contribmatch/tree/main/packs",
+  "vocabulary": {
+    "pull request": "A change to words on a page, with the same shape as the original text."
+  },
+  "guidance": {
+    "documentation": [
+      "Quote the sentence you would change and say what is wrong with it now.",
+      "Leave code blocks untouched unless the issue asks for them."
+    ],
+    "translation": [
+      "Keep command names, file paths and code exactly as they are.",
+      "Say which file you would translate and which languages it would cover."
+    ],
+    "markdown": [
+      "Name the heading or section you would add.",
+      "Match the heading level and the link style the file already uses."
+    ]
+  }
+}

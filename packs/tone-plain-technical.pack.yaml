@@ -1,0 +1,36 @@
+# ContribMatch community pack — language and tone
+# The YAML variant proves the loader reads both formats.
+id: tone-plain-technical
+name: Plain technical English
+type: tone
+version: 1.0.0
+description: >-
+  House style for every explanation the coach writes. Short sentences, concrete
+  nouns, no hedging, and no words that promise more than the work delivers.
+languages: [en]
+skills:
+  - explanation
+  - comment
+  - review
+tone: plain-technical
+level: beginner
+ecosystems: [documentation, reviews]
+license: CC0-1.0
+author: ContribMatch community
+homepage: https://github.com/contribmatch/contribmatch/tree/main/packs
+vocabulary:
+  pull request: A change you propose, with a description of what changed and why.
+  issue: A task someone wrote down for the project.
+  first pull request: Your first change to a project you do not own.
+guidance:
+  explanation:
+    - Lead with what the issue asks for, in one sentence.
+    - Name the files or functions the change touches.
+    - Do not repeat the issue text back to the reader.
+  comment:
+    - Say what you plan to do, in three to five steps.
+    - Ask whether the approach suits the maintainer before you start.
+    - Never promise a result you cannot check.
+  review:
+    - Quote the line you are talking about.
+    - Offer a concrete suggestion, not just a question.

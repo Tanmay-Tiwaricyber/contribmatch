@@ -1,0 +1,33 @@
+{
+  "id": "go-ecosystem",
+  "name": "Go ecosystem",
+  "type": "ecosystem",
+  "version": "1.0.0",
+  "description": "Go command line tools and libraries: interfaces, error handling, benchmarks and module hygiene. Use for issues in Go repositories.",
+  "languages": ["en"],
+  "skills": ["go", "cli", "benchmarking", "modules"],
+  "tone": "plain",
+  "level": "intermediate",
+  "ecosystems": ["go", "cli"],
+  "license": "CC0-1.0",
+  "author": "ContribMatch community",
+  "homepage": "https://github.com/contribmatch/contribmatch/tree/main/packs",
+  "vocabulary": {
+    "interface": "A set of methods a value promises to have, so other code can use it without knowing the concrete type.",
+    "benchmark": "A test that measures how fast something runs, and how much it allocates."
+  },
+  "guidance": {
+    "go": [
+      "Name the package and the exported function you would change.",
+      "Say how errors are returned, because Go projects are strict about this."
+    ],
+    "cli": [
+      "Say the flag or command you would add and what it prints.",
+      "Mention that you would add the new flag to the command's help text."
+    ],
+    "benchmarking": [
+      "Say which benchmark you would add and what number should improve.",
+      "Include the benchmark output in the pull request description."
+    ]
+  }
+}

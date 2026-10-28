@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shortlist — ContribMatch</title>
+<meta name="description" content="The issues you saved, stored in this browser only. Remove them, or export the list as Markdown.">
+<link rel="canonical" href="https://contribmatch.github.io/contribmatch/shortlist.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ContribMatch">
+<meta property="og:title" content="Shortlist — ContribMatch">
+<meta property="og:description" content="The issues you saved, stored in this browser only.">
+<meta property="og:url" content="https://contribmatch.github.io/contribmatch/shortlist.html">
+<meta property="og:image" content="https://contribmatch.github.io/contribmatch/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Shortlist — ContribMatch">
+<meta name="twitter:description" content="The issues you saved, stored in this browser only.">
+<meta name="twitter:image" content="https://contribmatch.github.io/contribmatch/assets/og-image.png">
+<meta name="theme-color" content="#faf8f4">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/icons/icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/mascot.css">
+<link rel="stylesheet" href="css/heatmap.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/pages.css">
+<script>
+  (function () {
+    try {
+      var mode = localStorage.getItem('contribmatch:v1:theme') || 'system';
+      var dark = mode === 'dark' || (mode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      var lang = localStorage.getItem('contribmatch:v1:lang') || 'en';
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.lang = lang === 'hi' ? 'hi' : (lang === 'hinglish' ? 'en-Latn' : 'en');
+    } catch (e) { /* ignore */ }
+  })();
+</script>
+</head>
+<body data-page="shortlist">
+<a class="skip-link" href="#main" data-i18n="skip.link">Skip to main content</a>
+<div id="site-header"></div>
+
+<main id="main" class="page">
+  <div class="container container--narrow">
+    <nav aria-label="Breadcrumb">
+      <ol class="breadcrumbs">
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><span aria-current="page" data-i18n="shortlist.eyebrow">Shortlist</span></li>
+      </ol>
+    </nav>
+
+    <div class="page__head">
+      <h1 class="page__title" data-i18n-html="shortlist.title">Your saved issues</h1>
+      <p class="page__lede" data-i18n="shortlist.lede"></p>
+    </div>
+
+    <div class="cluster" style="margin-bottom: var(--sp-5);">
+      <span class="badge" id="shortlist-count"></span>
+      <button class="btn btn--sm btn--secondary" id="export-shortlist" type="button" data-i18n="shortlist.export">Export as Markdown</button>
+      <button class="btn btn--sm btn--ghost" id="clear-shortlist" type="button" data-i18n="shortlist.clear">Clear shortlist</button>
+    </div>
+
+    <div id="shortlist-items" class="stack"></div>
+
+    <p class="field__error" data-page-error hidden role="alert"></p>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+{
+  "id": "python-data",
+  "name": "Python and data tooling",
+  "type": "skill",
+  "version": "1.0.0",
+  "description": "Python packages, typing, pytest suites and small data tooling. Use when the issue lives in a Python repository.",
+  "languages": ["en", "hi"],
+  "skills": ["python", "pytest", "typing", "packaging", "pandas", "numpy"],
+  "tone": "plain",
+  "level": "beginner",
+  "ecosystems": ["python", "data"],
+  "license": "CC0-1.0",
+  "author": "ContribMatch community",
+  "homepage": "https://github.com/contribmatch/contribmatch/tree/main/packs",
+  "vocabulary": {
+    "pull request": "A change you propose to a Python project, with a description and a test.",
+    "type hint": "A type written next to a function so readers and tools know what to expect."
+  },
+  "guidance": {
+    "python": [
+      "Name the module and the function you would change.",
+      "Say which behaviour changes at the function boundary, not only inside the body."
+    ],
+    "pytest": [
+      "Name the test file and the case you would add.",
+      "Say what the test asserts, in one sentence."
+    ],
+    "typing": [
+      "Say which public functions get type hints and which types you would use.",
+      "Mention whether mypy or pyright runs in the project's CI."
+    ],
+    "packaging": [
+      "Say which packaging file changes and why the metadata is needed.",
+      "Check the supported Python versions before you change anything."
+    ]
+  }
+}

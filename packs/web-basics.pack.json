@@ -1,0 +1,38 @@
+{
+  "id": "web-basics",
+  "name": "Web basics",
+  "type": "skill",
+  "version": "1.0.0",
+  "description": "HTML, CSS and accessible JavaScript — the first stop for most newcomers. Use when the issue touches a page, a component or a stylesheet.",
+  "languages": ["en", "hi", "hinglish"],
+  "skills": ["html", "css", "javascript", "accessibility", "responsive"],
+  "tone": "plain",
+  "level": "beginner",
+  "ecosystems": ["web", "frontend"],
+  "license": "CC0-1.0",
+  "author": "ContribMatch community",
+  "homepage": "https://github.com/contribmatch/contribmatch/tree/main/packs",
+  "vocabulary": {
+    "pull request": "A change you propose to a project, with a description of what changed and why.",
+    "issue": "A task someone wrote down for the project.",
+    "accessibility": "Making the interface usable with a keyboard and a screen reader, not just with a mouse."
+  },
+  "guidance": {
+    "html": [
+      "Say which element changes and what it should contain afterwards.",
+      "Keep the heading order of the page intact."
+    ],
+    "css": [
+      "Name the token or variable you would change, not just the visual result.",
+      "Check the change in both light and dark themes if the project has both."
+    ],
+    "javascript": [
+      "Name the function or module you would change and what the new behaviour should be.",
+      "Mention how you would test it: a unit test, or a manual step in the browser console."
+    ],
+    "accessibility": [
+      "State the keyboard behaviour you are adding, and the focus order you expect.",
+      "Name the accessibility rule you are following if the project references one."
+    ]
+  }
+}

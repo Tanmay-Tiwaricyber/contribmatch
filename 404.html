@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found — ContribMatch</title>
+<meta name="description" content="That page does not exist. The ContribMatch matcher and the documentation are both a click away.">
+<link rel="canonical" href="https://contribmatch.github.io/contribmatch/404.html">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#faf8f4">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/icons/icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/mascot.css">
+<link rel="stylesheet" href="css/heatmap.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/pages.css">
+<script>
+  (function () {
+    try {
+      var mode = localStorage.getItem('contribmatch:v1:theme') || 'system';
+      var dark = mode === 'dark' || (mode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      var lang = localStorage.getItem('contribmatch:v1:lang') || 'en';
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.lang = lang === 'hi' ? 'hi' : (lang === 'hinglish' ? 'en-Latn' : 'en');
+    } catch (e) { /* ignore */ }
+  })();
+</script>
+</head>
+<body data-page="home">
+<a class="skip-link" href="#main" data-i18n="skip.link">Skip to main content</a>
+<div id="site-header"></div>
+
+<main id="main" class="page">
+  <div class="container container--narrow">
+    <div class="state" style="border: 0; background: none; padding-block: var(--sp-10);">
+      <div id="mascot-host" aria-hidden="true"></div>
+      <p class="eyebrow" data-i18n="notFound.eyebrow">404</p>
+      <h1 class="state__title" data-i18n-html="notFound.title">This page does not exist</h1>
+      <p class="state__body" data-i18n="notFound.body"></p>
+      <div class="cluster">
+        <a class="btn btn--primary" href="index.html" data-i18n="notFound.home">Go to the home page</a>
+        <a class="btn btn--secondary" href="app.html" data-i18n="nav.openApp">Open the matcher</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+
+<script type="module" src="js/main.js"></script>
+<script type="module">
+  import { createMascot } from './js/ui/mascot.js';
+  const host = document.getElementById('mascot-host');
+  if (host) host.append(createMascot({ mood: 'oops', size: 'lg' }));
+</script>
+</body>
+</html>

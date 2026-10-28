@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matcher — ContribMatch</title>
+<meta name="description" content="Run the ContribMatch matcher: your public GitHub profile, a ranked shortlist of beginner-friendly issues, and a plan for the one you pick.">
+<link rel="canonical" href="https://contribmatch.github.io/contribmatch/app.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ContribMatch">
+<meta property="og:title" content="Matcher — ContribMatch">
+<meta property="og:description" content="A ranked shortlist of beginner-friendly GitHub issues, scored by rules and refined by an open-weight model.">
+<meta property="og:url" content="https://contribmatch.github.io/contribmatch/app.html">
+<meta property="og:image" content="https://contribmatch.github.io/contribmatch/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Matcher — ContribMatch">
+<meta name="twitter:description" content="A ranked shortlist of beginner-friendly GitHub issues.">
+<meta name="twitter:image" content="https://contribmatch.github.io/contribmatch/assets/og-image.png">
+<meta name="theme-color" content="#faf8f4">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/icons/icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/mascot.css">
+<link rel="stylesheet" href="css/heatmap.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/pages.css">
+<script>
+  (function () {
+    try {
+      var mode = localStorage.getItem('contribmatch:v1:theme') || 'system';
+      var dark = mode === 'dark' || (mode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      var lang = localStorage.getItem('contribmatch:v1:lang') || 'en';
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.lang = lang === 'hi' ? 'hi' : (lang === 'hinglish' ? 'en-Latn' : 'en');
+    } catch (e) { /* ignore */ }
+  })();
+</script>
+</head>
+<body data-page="app">
+<a class="skip-link" href="#main" data-i18n="skip.link">Skip to main content</a>
+<div id="site-header"></div>
+
+<main id="main" class="page">
+  <div class="container">
+    <nav aria-label="Breadcrumb">
+      <ol class="breadcrumbs">
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><span aria-current="page" data-i18n="app.eyebrow">Matcher</span></li>
+      </ol>
+    </nav>
+
+    <div class="page__head">
+      <h1 class="page__title" data-i18n-html="app.title">Your issue shortlist</h1>
+      <p class="page__lede" data-i18n="app.lede"></p>
+    </div>
+
+    <div class="notice notice--warning" id="sample-banner" hidden style="margin-bottom: var(--sp-5);">
+      <span class="notice__icon" aria-hidden="true">i</span>
+      <p data-i18n="app.sampleBanner"></p>
+    </div>
+
+    <div class="page__grid page__grid--sidebar">
+      <div>
+        <!-- Run form ---------------------------------------------------- -->
+        <section class="card" aria-labelledby="run-title">
+          <h2 class="card__title" id="run-title" data-i18n="app.run">Run the matcher</h2>
+          <form id="matcher-form" novalidate>
+            <div class="field">
+              <label class="field__label" for="matcher-username" data-i18n="app.usernameLabel">GitHub username</label>
+              <div class="input-group">
+                <input class="input" id="matcher-username" name="username" type="text"
+                       autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="39"
+                       placeholder="e.g. octocat" aria-describedby="matcher-error">
+                <button class="btn btn--primary" id="run-button" type="submit" data-i18n="app.run">Run the matcher</button>
+              </div>
+              <p class="field__error" id="matcher-error" role="alert" hidden></p>
+            </div>
+          </form>
+        </section>
+
+        <!-- Profile ----------------------------------------------------- -->
+        <section id="profile-section" style="margin-top: var(--sp-5);" aria-labelledby="profile-title" hidden>
+          <h2 class="sr-only" id="profile-title" data-i18n="app.profile.title">GitHub profile</h2>
+          <div id="profile-host"></div>
+        </section>
+
+        <!-- Filters ----------------------------------------------------- -->
+        <section class="card" id="filters-card" style="margin-top: var(--sp-5);" aria-labelledby="filters-title" hidden>
+          <h2 class="card__title" id="filters-title" data-i18n="app.filters">Filters</h2>
+          <div class="grid grid--3" id="filters"></div>
+        </section>
+
+        <!-- Results ----------------------------------------------------- -->
+        <section style="margin-top: var(--sp-6);" aria-labelledby="results-title">
+          <div class="cluster" style="justify-content: space-between; margin-bottom: var(--sp-4);">
+            <h2 class="card__title" id="results-title" style="margin: 0;" data-i18n="app.results">Matches</h2>
+            <div id="results-meta" class="cluster"></div>
+          </div>
+          <div id="results" class="stack"></div>
+        </section>
+      </div>
+
+      <!-- Sidebar ------------------------------------------------------- -->
+      <aside class="sticky-col" aria-labelledby="steps-title">
+        <div id="steps-host"></div>
+        <section class="card" style="margin-top: var(--sp-4);">
+          <h2 class="card__title" data-i18n="common.source">Source</h2>
+          <p class="card__body">
+            Public GitHub search and your public profile. The model only ever sees
+            the issue title, body and labels of the shortlist, plus your inferred skills.
+          </p>
+          <p class="card__body" style="margin-top: var(--sp-3);">
+            <a href="docs.html#settings" data-i18n="nav.docs">Documentation</a>
+            ·
+            <a href="privacy.html" data-i18n="nav.privacy">Privacy</a>
+          </p>
+        </section>
+      </aside>
+    </div>
+
+    <p class="field__error" data-page-error hidden role="alert"></p>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

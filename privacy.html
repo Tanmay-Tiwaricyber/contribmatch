@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy — ContribMatch</title>
+<meta name="description" content="ContribMatch has no backend and no server-side storage. This page lists exactly what is kept in your browser and what is sent, where.">
+<link rel="canonical" href="https://contribmatch.github.io/contribmatch/privacy.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ContribMatch">
+<meta property="og:title" content="Privacy — ContribMatch">
+<meta property="og:description" content="No backend, no server-side storage. Here is exactly what is kept in your browser.">
+<meta property="og:url" content="https://contribmatch.github.io/contribmatch/privacy.html">
+<meta property="og:image" content="https://contribmatch.github.io/contribmatch/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Privacy — ContribMatch">
+<meta name="twitter:description" content="No backend, no server-side storage.">
+<meta name="twitter:image" content="https://contribmatch.github.io/contribmatch/assets/og-image.png">
+<meta name="theme-color" content="#faf8f4">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/icons/icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/mascot.css">
+<link rel="stylesheet" href="css/heatmap.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/pages.css">
+<script>
+  (function () {
+    try {
+      var mode = localStorage.getItem('contribmatch:v1:theme') || 'system';
+      var dark = mode === 'dark' || (mode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      var lang = localStorage.getItem('contribmatch:v1:lang') || 'en';
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.lang = lang === 'hi' ? 'hi' : (lang === 'hinglish' ? 'en-Latn' : 'en');
+    } catch (e) { /* ignore */ }
+  })();
+</script>
+</head>
+<body data-page="home">
+<a class="skip-link" href="#main" data-i18n="skip.link">Skip to main content</a>
+<div id="site-header"></div>
+
+<main id="main" class="page">
+  <div class="container container--narrow">
+    <nav aria-label="Breadcrumb">
+      <ol class="breadcrumbs">
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><span aria-current="page" data-i18n="privacy.eyebrow">Privacy</span></li>
+      </ol>
+    </nav>
+
+    <div class="page__head">
+      <h1 class="page__title" data-i18n-html="privacy.title">What ContribMatch stores</h1>
+      <p class="page__lede" data-i18n="privacy.lede"></p>
+    </div>
+
+    <div class="prose">
+      <p class="lede">
+        ContribMatch is a static site. There is no application server, no database and
+        no analytics script. The only things that persist are the files below, and they
+        never leave your browser unless you ask them to.
+      </p>
+
+      <h2 id="stored">Stored in your browser</h2>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">What</th>
+              <th scope="col">Where</th>
+              <th scope="col">Why</th>
+              <th scope="col">How to remove it</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Your shortlist</th>
+              <td><code>localStorage</code></td>
+              <td>So your saved issues survive a reload</td>
+              <td>“Clear shortlist” on the shortlist page</td>
+            </tr>
+            <tr>
+              <th scope="row">Cached GitHub responses</th>
+              <td><code>localStorage</code></td>
+              <td>So a repeat search does not spend your rate limit</td>
+              <td>Clear site data for this origin</td>
+            </tr>
+            <tr>
+              <th scope="row">Your preferences</th>
+              <td><code>localStorage</code></td>
+              <td>Provider, model, theme and language</td>
+              <td>Clear site data for this origin</td>
+            </tr>
+            <tr>
+              <th scope="row">GitHub token</th>
+              <td><code>sessionStorage</code></td>
+              <td>To raise the GitHub rate limit</td>
+              <td>Close the tab, or press “Forget the key and the token”</td>
+            </tr>
+            <tr>
+              <th scope="row">AI Studio key</th>
+              <td><code>sessionStorage</code></td>
+              <td>To call the hosted model</td>
+              <td>Close the tab, or press “Forget the key and the token”</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="sent">What is sent, and where</h2>
+      <ul>
+        <li>
+          <strong>To GitHub</strong> (<code>api.github.com</code>) — your username, and the
+          search terms ContribMatch builds for you. All of it is public data.
+        </li>
+        <li>
+          <strong>To your model</strong> — with Ollama, to <code>localhost</code> on your
+          own machine. With Google AI Studio, to Google. What is included: the issue
+          title, body and labels of the shortlist, plus your inferred skills and level.
+          Nothing else. No token, no key, no shortlist.
+        </li>
+        <li>
+          <strong>Never</strong> — ContribMatch never posts a comment, a branch or a
+          pull request, and never writes to GitHub with your token.
+        </li>
+      </ul>
+
+      <h2 id="model">About the model</h2>
+      <p>
+        Issue text and README text are untrusted. ContribMatch wraps them in a clearly
+        marked block and tells the model that the block is data, not instructions. The
+        model is never asked to execute anything from an issue.
+      </p>
+      <p>
+        Even so, a hosted model is a third party. If that matters to you, run the model
+        locally with Ollama and nothing you read is sent off the machine.
+      </p>
+
+      <h2 id="children">Children</h2>
+      <p>
+        ContribMatch is a developer tool and collects no personal data from anyone,
+        including children. Because there is no backend, there is no account to create
+        and no profile to delete.
+      </p>
+
+      <h2 id="contact">Questions</h2>
+      <p>
+        Open an issue on
+        <a href="https://github.com/contribmatch/contribmatch/issues">the repository</a>.
+        If something on this page is wrong, that is a bug worth reporting.
+      </p>
+    </div>
+
+    <p class="field__error" data-page-error hidden role="alert"></p>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

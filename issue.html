@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Issue plan — ContribMatch</title>
+<meta name="description" content="A plain-language plan for one GitHub issue: likely files, a step-by-step plan, a comment you can post and a pull request checklist.">
+<link rel="canonical" href="https://contribmatch.github.io/contribmatch/issue.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ContribMatch">
+<meta property="og:title" content="Issue plan — ContribMatch">
+<meta property="og:description" content="Likely files, a step-by-step plan, a comment you can post and a pull request checklist.">
+<meta property="og:url" content="https://contribmatch.github.io/contribmatch/issue.html">
+<meta property="og:image" content="https://contribmatch.github.io/contribmatch/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Issue plan — ContribMatch">
+<meta name="twitter:description" content="Likely files, a step-by-step plan and a pull request checklist.">
+<meta name="twitter:image" content="https://contribmatch.github.io/contribmatch/assets/og-image.png">
+<meta name="theme-color" content="#faf8f4">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/icons/icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/mascot.css">
+<link rel="stylesheet" href="css/heatmap.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/pages.css">
+<script>
+  (function () {
+    try {
+      var mode = localStorage.getItem('contribmatch:v1:theme') || 'system';
+      var dark = mode === 'dark' || (mode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      var lang = localStorage.getItem('contribmatch:v1:lang') || 'en';
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.lang = lang === 'hi' ? 'hi' : (lang === 'hinglish' ? 'en-Latn' : 'en');
+    } catch (e) { /* ignore */ }
+  })();
+</script>
+</head>
+<body data-page="issue">
+<a class="skip-link" href="#main" data-i18n="skip.link">Skip to main content</a>
+<div id="site-header"></div>
+
+<main id="main" class="page">
+  <div class="container container--narrow">
+    <nav aria-label="Breadcrumb">
+      <ol class="breadcrumbs">
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><a href="app.html" data-i18n="app.eyebrow">Matcher</a></li>
+        <li><span aria-current="page" data-i18n-html="issue.title">Your plan for this issue</span></li>
+      </ol>
+    </nav>
+
+    <h1 class="page__title" id="issue-title" data-i18n-html="issue.title">Your plan for this issue</h1>
+    <p class="lede" id="issue-lede" data-i18n="issue.lede">
+      Pick an issue from the matcher and this page will explain it, plan the work and draft a comment you can review.
+    </p>
+
+    <div id="issue-content" class="stack--lg"></div>
+
+    <p class="field__error" data-page-error hidden role="alert"></p>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

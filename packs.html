@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Community packs — ContribMatch</title>
+<meta name="description" content="Packs describe the skills, language and tone a project works in. Browse the shipped packs in JSON and YAML, and add your own in a pull request.">
+<link rel="canonical" href="https://contribmatch.github.io/contribmatch/packs.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ContribMatch">
+<meta property="og:title" content="Community packs — ContribMatch">
+<meta property="og:description" content="Packs describe the skills, language and tone a project works in. Browse them and add your own.">
+<meta property="og:url" content="https://contribmatch.github.io/contribmatch/packs.html">
+<meta property="og:image" content="https://contribmatch.github.io/contribmatch/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Community packs — ContribMatch">
+<meta name="twitter:description" content="Browse the shipped packs in JSON and YAML, and add your own.">
+<meta name="twitter:image" content="https://contribmatch.github.io/contribmatch/assets/og-image.png">
+<meta name="theme-color" content="#faf8f4">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/icons/icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/mascot.css">
+<link rel="stylesheet" href="css/heatmap.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/pages.css">
+<script>
+  (function () {
+    try {
+      var mode = localStorage.getItem('contribmatch:v1:theme') || 'system';
+      var dark = mode === 'dark' || (mode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      var lang = localStorage.getItem('contribmatch:v1:lang') || 'en';
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.lang = lang === 'hi' ? 'hi' : (lang === 'hinglish' ? 'en-Latn' : 'en');
+    } catch (e) { /* ignore */ }
+  })();
+</script>
+</head>
+<body data-page="packs">
+<a class="skip-link" href="#main" data-i18n="skip.link">Skip to main content</a>
+<div id="site-header"></div>
+
+<main id="main" class="page">
+  <div class="container">
+    <nav aria-label="Breadcrumb">
+      <ol class="breadcrumbs">
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><span aria-current="page" data-i18n="packsPage.eyebrow">Community packs</span></li>
+      </ol>
+    </nav>
+
+    <div class="page__head">
+      <h1 class="page__title" data-i18n-html="packsPage.title">Packs</h1>
+      <p class="page__lede" data-i18n="packsPage.lede"></p>
+    </div>
+
+    <div class="cluster" id="packs-filter" style="margin-bottom: var(--sp-5);" role="group" aria-label="Pack type"></div>
+    <p id="packs-error" class="small muted"></p>
+
+    <div id="packs-list" class="stack"></div>
+
+    <!-- Add a pack ------------------------------------------------------ -->
+    <section class="section" id="add" aria-labelledby="add-title">
+      <div class="section__head">
+        <h2 id="add-title" data-i18n="packsPage.addTitle">Add a pack</h2>
+        <p data-i18n="packsPage.addBody"></p>
+      </div>
+
+      <div class="grid grid--2">
+        <div>
+          <div class="code" data-copy>
+            <div class="code__head">
+              <span class="code__lang">json</span>
+            </div>
+            <pre><code>{
+  "id": "my-pack",
+  "name": "My pack",
+  "type": "skill",
+  "version": "1.0.0",
+  "description": "What this pack is for, in one or two sentences.",
+  "languages": ["en"],
+  "skills": ["python", "testing"],
+  "tone": "plain",
+  "level": "beginner"
+}</code></pre>
+          </div>
+          <ol class="prose small" style="margin-top: var(--sp-4);">
+            <li>Create <code class="mono">packs/my-pack.pack.json</code> (or <code class="mono">.yaml</code>).</li>
+            <li>Run <code class="mono">npm run validate:packs</code>.</li>
+            <li>Add the file to <code class="mono">PACK_FILES</code> in <code class="mono">js/core/packs.js</code>.</li>
+            <li>Open a pull request that explains which projects the pack helps with.</li>
+          </ol>
+        </div>
+
+        <div>
+          <h3 class="card__title" data-i18n="packsPage.schema">Pack schema</h3>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Field</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Required</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row"><code>id</code></th><td>string</td><td>yes</td></tr>
+                <tr><th scope="row"><code>name</code></th><td>string</td><td>yes</td></tr>
+                <tr><th scope="row"><code>type</code></th><td>skill · ecosystem · tone</td><td>yes</td></tr>
+                <tr><th scope="row"><code>version</code></th><td>semver</td><td>yes</td></tr>
+                <tr><th scope="row"><code>description</code></th><td>string</td><td>yes</td></tr>
+                <tr><th scope="row"><code>languages</code></th><td>array</td><td>yes</td></tr>
+                <tr><th scope="row"><code>skills</code></th><td>array</td><td>yes</td></tr>
+                <tr><th scope="row"><code>tone</code></th><td>string</td><td>yes</td></tr>
+                <tr><th scope="row"><code>level</code></th><td>beginner · intermediate · advanced</td><td>no</td></tr>
+                <tr><th scope="row"><code>ecosystems</code></th><td>array</td><td>no</td></tr>
+                <tr><th scope="row"><code>vocabulary</code></th><td>object</td><td>no</td></tr>
+                <tr><th scope="row"><code>guidance</code></th><td>object</td><td>no</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <p class="field__error" data-page-error hidden role="alert"></p>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

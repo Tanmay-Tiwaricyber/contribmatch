@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design system — ContribMatch</title>
+<meta name="description" content="The living style guide for ContribMatch: tokens with measured contrast ratios, type scale, spacing, every component in every state, all mascot moods and all logo versions.">
+<link rel="canonical" href="https://contribmatch.github.io/contribmatch/design-system.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ContribMatch">
+<meta property="og:title" content="Design system — ContribMatch">
+<meta property="og:description" content="Tokens with measured contrast ratios, type scale, spacing, components, mascot moods and logo versions.">
+<meta property="og:url" content="https://contribmatch.github.io/contribmatch/design-system.html">
+<meta property="og:image" content="https://contribmatch.github.io/contribmatch/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Design system — ContribMatch">
+<meta name="twitter:description" content="The living style guide for ContribMatch.">
+<meta name="twitter:image" content="https://contribmatch.github.io/contribmatch/assets/og-image.png">
+<meta name="theme-color" content="#faf8f4">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/icons/icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/mascot.css">
+<link rel="stylesheet" href="css/heatmap.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/pages.css">
+<script>
+  (function () {
+    try {
+      var mode = localStorage.getItem('contribmatch:v1:theme') || 'system';
+      var dark = mode === 'dark' || (mode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      var lang = localStorage.getItem('contribmatch:v1:lang') || 'en';
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.lang = lang === 'hi' ? 'hi' : (lang === 'hinglish' ? 'en-Latn' : 'en');
+    } catch (e) { /* ignore */ }
+  })();
+</script>
+</head>
+<body data-page="design">
+<a class="skip-link" href="#main" data-i18n="skip.link">Skip to main content</a>
+<div id="site-header"></div>
+
+<main id="main" class="page">
+  <div class="container">
+    <nav aria-label="Breadcrumb">
+      <ol class="breadcrumbs">
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><span aria-current="page" data-i18n="design.eyebrow">Design system</span></li>
+      </ol>
+    </nav>
+
+    <div class="page__head">
+      <h1 class="page__title" data-i18n-html="design.title">Living style guide</h1>
+      <p class="page__lede" data-i18n="design.lede"></p>
+      <button class="btn btn--secondary" id="design-theme-toggle" type="button">Dark theme</button>
+    </div>
+
+    <section class="section section--tight" aria-labelledby="tokens-title">
+      <h2 id="tokens-title">Tokens</h2>
+      <p class="prose muted">
+        Every colour in the interface comes from a token. The swatches below are read
+        from the live document, so they follow the theme you are viewing.
+      </p>
+      <div id="token-table"></div>
+    </section>
+
+    <section class="section section--tight" aria-labelledby="contrast-title">
+      <h2 id="contrast-title">Contrast</h2>
+      <p class="prose muted">
+        Measured in the browser from the computed token values, in the theme you are
+        viewing. Text needs 4.5:1, controls and graphics need 3:1.
+      </p>
+      <div id="contrast-table"></div>
+    </section>
+
+    <section class="section section--tight" aria-labelledby="type-title">
+      <h2 id="type-title">Type scale</h2>
+      <div class="grid grid--2">
+        <div class="card">
+          <p class="eyebrow">Display — Archivo</p>
+          <p class="type-sample type-sample--display">ContribMatch</p>
+          <p class="small muted">Archivo ExtraBold, 48px, tight tracking. Used for headings and the wordmark.</p>
+        </div>
+        <div class="card">
+          <p class="eyebrow">Emphasis — Instrument Serif italic</p>
+          <p class="type-sample type-sample--serif">one phrase per heading</p>
+          <p class="small muted">Instrument Serif italic, 36px. At most one emphasised phrase in each heading.</p>
+        </div>
+        <div class="card">
+          <p class="eyebrow">Labels and numbers — Geist Mono</p>
+          <p style="font-family: var(--font-mono); font-size: var(--fs-lg); font-weight: 500;">42 issues · 318 stars</p>
+          <p class="small muted">Geist Mono, 22px. Labels, statistics, code and metadata.</p>
+        </div>
+        <div class="card">
+          <p class="eyebrow">Body — Inter</p>
+          <p>Body copy sits at 16px with a 1.55 line height, and prose is capped at 68 characters so it stays readable.</p>
+          <p class="small muted">Inter, 16px. Long-form text, with Noto Sans Devanagari for Hindi.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight" aria-labelledby="space-title">
+      <h2 id="space-title">Spacing</h2>
+      <p class="prose muted">An 8px rhythm, with 4px for fine tuning.</p>
+      <div class="cluster">
+        <span class="badge">4</span><span class="badge">8</span><span class="badge">12</span>
+        <span class="badge">16</span><span class="badge">24</span><span class="badge">32</span>
+        <span class="badge">40</span><span class="badge">48</span><span class="badge">64</span>
+        <span class="badge">80</span><span class="badge">96</span><span class="badge">128</span>
+      </div>
+    </section>
+
+    <section class="section section--tight" aria-labelledby="components-title">
+      <h2 id="components-title">Components</h2>
+
+      <h3>Buttons</h3>
+      <div class="cluster" style="margin-bottom: var(--sp-4);">
+        <button class="btn btn--primary" type="button">Primary</button>
+        <button class="btn btn--secondary" type="button">Secondary</button>
+        <button class="btn btn--ghost" type="button">Ghost</button>
+        <button class="btn btn--danger" type="button">Danger</button>
+        <button class="btn btn--primary" type="button" disabled>Disabled</button>
+        <button class="btn btn--primary" type="button" data-loading="true">Loading</button>
+      </div>
+
+      <h3>Inputs</h3>
+      <div class="grid grid--3" style="margin-bottom: var(--sp-4);">
+        <div class="field">
+          <label class="field__label" for="ds-input">Default</label>
+          <input class="input" id="ds-input" type="text" placeholder="octocat">
+        </div>
+        <div class="field">
+          <label class="field__label" for="ds-input-error">Error</label>
+          <input class="input" id="ds-input-error" type="text" value="not a username!" aria-invalid="true">
+          <p class="field__error">That is not a GitHub username.</p>
+        </div>
+        <div class="field">
+          <label class="field__label" for="ds-input-disabled">Disabled</label>
+          <input class="input" id="ds-input-disabled" type="text" value="octocat" disabled>
+        </div>
+      </div>
+
+      <h3>Select, switch and check</h3>
+      <div class="grid grid--3" style="margin-bottom: var(--sp-4);">
+        <div class="field">
+          <label class="field__label" for="ds-select">Select</label>
+          <select class="select" id="ds-select"><option>Good first issue</option><option>Help wanted</option></select>
+        </div>
+        <div class="field">
+          <span class="field__label">Switch</span>
+          <label class="switch"><input type="checkbox" checked><span class="switch__text">Use a token</span></label>
+        </div>
+        <div class="field">
+          <span class="field__label">Checkbox</span>
+          <label class="check"><input type="checkbox" checked><span class="check__text">Unassigned only</span></label>
+          <label class="check"><input type="checkbox"><span class="check__text">Recently updated</span></label>
+        </div>
+      </div>
+
+      <h3>Badges, chips and notices</h3>
+      <div class="cluster" style="margin-bottom: var(--sp-4);">
+        <span class="badge">good first issue</span>
+        <span class="badge badge--accent">accent</span>
+        <span class="badge badge--success">success</span>
+        <span class="badge badge--warning">warning</span>
+        <span class="badge badge--danger">danger</span>
+        <span class="badge badge--info">info</span>
+        <button class="chip" type="button" aria-pressed="true">Python</button>
+        <button class="chip" type="button" aria-pressed="false">Go</button>
+      </div>
+      <div class="notice"><span class="notice__icon" aria-hidden="true">i</span><p>This is an informational notice.</p></div>
+      <div class="notice notice--warning" style="margin-top: var(--sp-3);"><span class="notice__icon" aria-hidden="true">!</span><p>This is a warning notice.</p></div>
+      <div class="notice notice--danger" style="margin-top: var(--sp-3);"><span class="notice__icon" aria-hidden="true">!</span><p>This is a danger notice.</p></div>
+
+      <h3>Score ring</h3>
+      <div class="cluster" style="margin-bottom: var(--sp-4);">
+        <span class="score" style="width:48px;height:48px">
+          <svg viewBox="0 0 48 48" width="48" height="48"><circle class="score__track" cx="24" cy="24" r="20"></circle><circle class="score__value" cx="24" cy="24" r="20" stroke-dasharray="125.66" stroke-dashoffset="25"></circle></svg>
+          <span class="score__label">80</span>
+        </span>
+        <span class="score" style="width:48px;height:48px">
+          <svg viewBox="0 0 48 48" width="48" height="48"><circle class="score__track" cx="24" cy="24" r="20"></circle><circle class="score__value" cx="24" cy="24" r="20" stroke-dasharray="125.66" stroke-dashoffset="88"></circle></svg>
+          <span class="score__label">30</span>
+        </span>
+      </div>
+
+      <h3>Skeleton</h3>
+      <div class="card" aria-hidden="true">
+        <div class="skeleton skeleton--title" style="margin-bottom: var(--sp-3);"></div>
+        <div class="skeleton skeleton--line" style="margin-bottom: var(--sp-2);"></div>
+        <div class="skeleton skeleton--line short"></div>
+      </div>
+    </section>
+
+    <section class="section section--tight" aria-labelledby="mascot-title">
+      <h2 id="mascot-title">Mascot moods</h2>
+      <p class="prose muted">
+        One shared base, seven moods. The mascot is decorative: every state it shows is
+        also stated in text.
+      </p>
+      <div class="grid grid--4" id="mascot-moods"></div>
+    </section>
+
+    <section class="section section--tight" aria-labelledby="logo-title">
+      <h2 id="logo-title">Logo versions</h2>
+      <p class="prose muted">
+        The overlap lens: a large ink disc and a smaller charcoal disc, with the
+        intersection in the accent colour. Flat fills only, and it holds at 16px and
+        in pure black and white.
+      </p>
+      <div class="grid grid--3" id="logo-versions"></div>
+    </section>
+
+    <section class="section section--tight" aria-labelledby="heat-title">
+      <h2 id="heat-title">Heatmap levels</h2>
+      <p class="prose muted">
+        A paper-to-accent ramp, never GitHub green. Each level is also described in
+        words in the hidden data table.
+      </p>
+      <div id="heat-levels"></div>
+    </section>
+
+    <p class="field__error" data-page-error hidden role="alert"></p>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

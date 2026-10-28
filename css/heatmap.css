@@ -1,0 +1,262 @@
+/* ==========================================================================
+   ContribMatch — contribution heatmap
+   Paper-to-accent ramp (never GitHub green). Keyboard navigable with a
+   roving tabindex; the same data is exposed as a table for screen readers.
+   ========================================================================== */
+
+.heat {
+  --cell: 11px;
+  --cell-gap: 3px;
+  display: grid;
+  gap: var(--sp-4);
+}
+
+.heat__scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: var(--sp-1);
+  scrollbar-width: thin;
+}
+
+.heat__grid-wrap {
+  display: flex;
+  gap: var(--sp-2);
+  min-width: max-content;
+}
+
+.heat__body {
+  display: flex;
+  gap: var(--sp-2);
+  min-width: max-content;
+  align-items: flex-start;
+}
+
+.heat__cols {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.heat__months {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: var(--cell);
+  gap: var(--cell-gap);
+  height: 12px;
+}
+
+.heat__month {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-3);
+  line-height: 12px;
+  height: 12px;
+  white-space: nowrap;
+}
+
+.heat__weekdays {
+  display: grid;
+  grid-template-rows: repeat(7, var(--cell));
+  row-gap: var(--cell-gap);
+  flex: none;
+  padding-top: calc(12px + var(--sp-1));
+}
+
+.heat__weekday {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-3);
+  line-height: var(--cell);
+  height: var(--cell);
+}
+
+.heat__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 53), var(--cell));
+  grid-template-rows: repeat(7, var(--cell));
+  gap: var(--cell-gap);
+}
+
+/* The ARIA rows exist for assistive technology; the cells keep their own
+   grid placement, so the rows do not take part in the layout. */
+.heat__row {
+  display: contents;
+}
+
+.heat__cell {
+  width: var(--cell);
+  height: var(--cell);
+  border-radius: var(--radius-cell);
+  border: 1px solid var(--heat-0-border);
+  background: var(--heat-0);
+  padding: 0;
+  cursor: default;
+  transition: outline-color var(--dur-fast) var(--ease);
+  outline: 2px solid transparent;
+  outline-offset: 1px;
+}
+
+.heat__cell:hover {
+  outline-color: var(--ink-3);
+}
+
+.heat__cell:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 1px;
+}
+
+.heat__cell[data-level="1"] {
+  background: var(--heat-1);
+  border-color: transparent;
+}
+
+.heat__cell[data-level="2"] {
+  background: var(--heat-2);
+  border-color: transparent;
+}
+
+.heat__cell[data-level="3"] {
+  background: var(--heat-3);
+  border-color: transparent;
+}
+
+.heat__cell[data-level="4"] {
+  background: var(--heat-4);
+  border-color: transparent;
+}
+
+/* Column fade-in, staggered. Disabled under reduced motion. */
+.heat__grid[data-animate="true"] .heat__cell {
+  animation: cm-cell-in 260ms var(--ease-out) backwards;
+}
+
+@keyframes cm-cell-in {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heat__grid[data-animate="true"] .heat__cell {
+    animation: none;
+  }
+}
+
+/* --- Legend --------------------------------------------------------------- */
+.heat__legend {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+}
+
+.heat__legend-scale {
+  display: flex;
+  gap: 3px;
+}
+
+.heat__legend-cell {
+  width: 11px;
+  height: 11px;
+  border-radius: var(--radius-cell);
+  border: 1px solid var(--heat-0-border);
+  background: var(--heat-0);
+}
+
+.heat__legend-cell[data-level="1"] {
+  background: var(--heat-1);
+  border-color: transparent;
+}
+.heat__legend-cell[data-level="2"] {
+  background: var(--heat-2);
+  border-color: transparent;
+}
+.heat__legend-cell[data-level="3"] {
+  background: var(--heat-3);
+  border-color: transparent;
+}
+.heat__legend-cell[data-level="4"] {
+  background: var(--heat-4);
+  border-color: transparent;
+}
+
+/* --- Type breakdown -------------------------------------------------------- */
+.breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.breakdown__row {
+  display: grid;
+  grid-template-columns: 108px 1fr 48px;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.breakdown__label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--ink-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.breakdown__track {
+  height: 6px;
+  border-radius: var(--radius-cell);
+  background: var(--paper-sunken);
+  border: 1px solid var(--heat-0-border);
+  overflow: hidden;
+}
+
+.breakdown__fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: var(--radius-cell);
+  transition: width var(--dur-slow) var(--ease);
+}
+
+.breakdown__value {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--ink-2);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Tooltip --------------------------------------------------------------- */
+.heat__tip {
+  position: fixed;
+  z-index: 80;
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--r-sm);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease);
+  max-width: 240px;
+}
+
+.heat__tip[data-open="true"] {
+  opacity: 1;
+}
+
+@media (max-width: 640px) {
+  .heat {
+    --cell: 10px;
+    --cell-gap: 2px;
+  }
+
+  .breakdown__row {
+    grid-template-columns: 92px 1fr 40px;
+  }
+}

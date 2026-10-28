@@ -1,0 +1,253 @@
+/* ==========================================================================
+   ContribMatch — the 3D contribution scene
+
+   A contribution wall and three floating panels, built in real 3D with
+   perspective and flat fills. Depth comes from a solid offset shadow in the
+   surface colour, the way a physical object casts on a table — never a
+   gradient, never a glow.
+
+   The scene is decorative: it sits behind the hero copy, takes no pointer
+   events and is hidden from assistive technology.
+   ========================================================================== */
+
+.scene {
+  --scene-cell: 15px;
+  --scene-gap: 4px;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  contain: layout paint;
+}
+
+/* The copy sits on top of the scene. */
+.scene + * {
+  position: relative;
+  z-index: 1;
+}
+
+.scene__stage {
+  position: absolute;
+  inset: 0;
+  perspective: 1400px;
+  perspective-origin: 62% 38%;
+  transform-style: preserve-3d;
+}
+
+/* --- The wall: a contribution calendar tilted into the page -------------- */
+
+.scene__wall {
+  position: absolute;
+  top: 2%;
+  left: -3%;
+  width: max-content;
+  display: grid;
+  grid-template-rows: repeat(7, var(--scene-cell));
+  grid-auto-flow: column;
+  grid-auto-columns: var(--scene-cell);
+  gap: var(--scene-gap);
+  padding: var(--sp-4);
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  transform: rotateX(52deg) rotateZ(-8deg) scale(1.06) translateZ(-40px);
+  transform-origin: 94% 8%;
+  box-shadow: var(--shadow-scene);
+}
+
+.scene__cell {
+  width: var(--scene-cell);
+  height: var(--scene-cell);
+  background: var(--scene-0);
+  border: 1px solid var(--scene-0-border);
+  box-shadow: 1px 1px 0 rgba(16, 16, 20, 0.07);
+}
+
+.scene__cell[data-level="1"] {
+  background: var(--scene-1);
+  border-color: transparent;
+}
+.scene__cell[data-level="2"] {
+  background: var(--scene-2);
+  border-color: transparent;
+}
+.scene__cell[data-level="3"] {
+  background: var(--scene-3);
+  border-color: transparent;
+}
+.scene__cell[data-level="4"] {
+  background: var(--scene-4);
+  border-color: transparent;
+  box-shadow: 1px 1px 0 rgba(22, 89, 196, 0.4);
+}
+
+.scene__wall-label {
+  position: absolute;
+  left: var(--sp-4);
+  bottom: -26px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* --- Floating panels ----------------------------------------------------- */
+
+.scene__panel {
+  position: absolute;
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-md);
+  transform-style: preserve-3d;
+}
+
+.scene__panel--a {
+  top: 6%;
+  right: 12%;
+  width: 172px;
+  padding: var(--sp-4);
+  transform: rotateY(20deg) rotateX(8deg) translateZ(120px);
+  animation: cm-float-a 11s ease-in-out infinite;
+}
+
+.scene__panel--b {
+  top: 40%;
+  right: 22%;
+  width: 152px;
+  padding: var(--sp-4);
+  transform: rotateY(-18deg) rotateX(-6deg) translateZ(190px);
+  animation: cm-float-b 14s ease-in-out infinite;
+}
+
+/* The third panel stays out of the way of the copy. */
+.scene__panel--c {
+  top: 58%;
+  right: 2%;
+  width: 124px;
+  padding: var(--sp-3);
+  transform: rotateY(-24deg) rotateX(10deg) translateZ(60px);
+  animation: cm-float-c 17s ease-in-out infinite;
+}
+
+.scene__panel-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: var(--sp-2);
+}
+
+.scene__panel-value {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-stretch: var(--stretch-display);
+  font-size: var(--fs-2xl);
+  line-height: 1;
+  letter-spacing: var(--tracking-tight);
+  color: var(--ink);
+}
+
+.scene__panel-value span {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  color: var(--ink-3);
+  margin-left: var(--sp-1);
+}
+
+.scene__panel-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: var(--sp-3);
+}
+
+.scene__panel-bar {
+  height: 5px;
+  background: var(--paper-sunken);
+  border: 1px solid var(--line-faint);
+}
+
+.scene__panel-bar i {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+}
+
+.scene__panel-bar[data-tone="muted"] i {
+  background: var(--ink-3);
+}
+
+@keyframes cm-float-a {
+  0%,
+  100% {
+    transform: rotateY(20deg) rotateX(8deg) translateZ(120px) translateY(0);
+  }
+  50% {
+    transform: rotateY(20deg) rotateX(8deg) translateZ(120px) translateY(-14px);
+  }
+}
+
+@keyframes cm-float-b {
+  0%,
+  100% {
+    transform: rotateY(-18deg) rotateX(-6deg) translateZ(190px) translateY(0);
+  }
+  50% {
+    transform: rotateY(-18deg) rotateX(-6deg) translateZ(190px) translateY(18px);
+  }
+}
+
+@keyframes cm-float-c {
+  0%,
+  100% {
+    transform: rotateY(-24deg) rotateX(10deg) translateZ(60px) translateY(0);
+  }
+  50% {
+    transform: rotateY(-24deg) rotateX(10deg) translateZ(60px) translateY(-10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene__panel {
+    animation: none !important;
+  }
+}
+
+/* --- Small screens --------------------------------------------------------
+   The graphic keeps its own band, the floating panels thin down to one, and
+   the wall pulls back so it never fights the headline. */
+@media (max-width: 899px) {
+  .scene__panel--b,
+  .scene__panel--c {
+    display: none;
+  }
+
+  .scene__panel--a {
+    top: 16px;
+    right: 6px;
+    width: 126px;
+    padding: var(--sp-3);
+    transform: rotateY(18deg) rotateX(6deg) translateZ(60px);
+  }
+
+  .scene__panel--a .scene__panel-value {
+    font-size: var(--fs-xl);
+  }
+
+  .scene__panel--a .scene__panel-value span {
+    display: block;
+    font-size: var(--fs-xs);
+  }
+
+  /* The wall runs off both sides, so it reads as a wide field rather than a
+     card floating in the middle of a phone screen. */
+  .scene__wall {
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateX(56deg) rotateZ(-10deg) scale(0.42);
+    transform-origin: 50% 50%;
+  }
+}

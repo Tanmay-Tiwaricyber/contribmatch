@@ -1,0 +1,58 @@
+name: Refresh issue catalogue
+
+# Layer D. The catalogue (data/issues.json) is refreshed a few times a day by
+# real GitHub search queries, so every visitor can start from verified issue
+# data without hitting the live API. A failed refresh exits non-zero and the
+# previous catalogue stays published.
+
+on:
+  schedule:
+    # Every 6 hours; GitHub may shift scheduled runs slightly.
+    - cron: '7 */6 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-catalogue
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Refresh the catalogue
+        run: node tools/refresh-catalogue.mjs
+        env:
+          # The GITHUB_TOKEN is enough for public search reads; it is not
+          # unlimited and we only make 3-4 bounded searches per run.
+          CATALOGUE_TOKEN: ${{ secrets.CATALOGUE_TOKEN || secrets.GITHUB_TOKEN }}
+          CATALOGUE_LANGUAGES: ''
+          CATALOGUE_MAX_ISSUES: '120'
+
+      - name: Sanity check the result
+        run: node -e "
+          const c = require('./data/issues.json');
+          if (!Array.isArray(c.issues) || c.issues.length === 0) process.exit(1);
+          if (!c.fetchedAt) process.exit(1);
+          console.log('catalogue ok:', c.issues.length, 'issues, fetched', c.fetchedAt);
+        "
+
+      - name: Commit the refreshed catalogue
+        run: |
+          git config user.name "contribmatch-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/issues.json
+          if git diff --cached --quiet -- data/issues.json; then
+            echo "No catalogue change since the last refresh."
+            exit 0
+          fi
+          git commit -m "chore(catalogue): refresh open beginner issues"
+          git push

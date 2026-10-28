@@ -1,0 +1,1543 @@
+{
+  "version": 1,
+  "fetchedAt": "2026-10-27T15:27:32.804Z",
+  "source": "github-search-api",
+  "queries": [
+    "is:issue is:open no:assignee label:\"help wanted\"",
+    "is:issue is:open no:assignee label:\"hacktoberfest\"",
+    "is:issue is:open no:assignee label:\"good first issue\"",
+    "is:issue is:open no:assignee label:\"good first issue\""
+  ],
+  "count": 81,
+  "duplicateCount": 39,
+  "issues": [
+    {
+      "id": 6062177559,
+      "number": 49,
+      "title": "Check the whole app for accessibility problems",
+      "url": "https://github.com/DepressionCenter/datalavista/issues/49",
+      "repo": "DepressionCenter/datalavista",
+      "labels": [
+        "help wanted",
+        "question",
+        "todo"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:20:02Z",
+      "updatedAt": "2026-10-27T15:21:19Z",
+      "body": "DataLaVista aims to meet WCAG 2.2 AA, but nobody has checked the whole app against it yet. The automated tests added in #48 scan only the tab list in the Connect to Data Source popup. Everything else still needs a full review. ## Problems already found We found these while working on #23 and #48. We haven't looked for others yet. - **The Browse… control on the Upload Files tab can't be reached wi…",
+      "language": ""
+    },
+    {
+      "id": 6062104574,
+      "number": 13,
+      "title": "Go: document a module proxy for developers where proxy.golang.org is blocked",
+      "url": "https://github.com/bitpin-dev/bitpin-sdk/issues/13",
+      "repo": "bitpin-dev/bitpin-sdk",
+      "labels": [
+        "help wanted",
+        "go",
+        "docs"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:16:00Z",
+      "updatedAt": "2026-10-27T15:16:00Z",
+      "body": "`proxy.golang.org` returns **403** from Iran, and toolchain downloads fail. So: - `GOTOOLCHAIN=auto` can't fetch the `toolchain go1.27.3` pinned in `go.mod`. The workaround is `GOTOOLCHAIN=local` with a local Go ≥ 1.26 (already in the Go guide). - `go get github.com/bitpin-dev/bitpin-sdk/go` and its dependencies may also fail or time out without a reachable proxy. ## Proposal - List proxies that…",
+      "language": ""
+    },
+    {
+      "id": 6062093064,
+      "number": 202,
+      "title": "frontend_render_harness.js cannot dispatch keyboard events, so every Escape-close path in the app is untestable",
+      "url": "https://github.com/BistaDinesh03/critique/issues/202",
+      "repo": "BistaDinesh03/critique",
+      "labels": [
+        "help wanted",
+        "tests",
+        "frontend",
+        "intermediate"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:15:23Z",
+      "updatedAt": "2026-10-27T15:15:23Z",
+      "body": " ## Problem `backend/tests/frontend_render_harness.js` enumerates its complete call-type set at `:728-832`: `clickCreatedContaining`/`clickId` (L728), `submitCreatedContaining`/`submitId` (L729), `dispatchDocumentClickId`/`dispatchDocumentClickCreated` (L781), `evaluate` (L804), `fn` (L819), `setValuePlaceholder`/`checkInput` — **click- and submit-shaped input only. There is no way to express a k…",
+      "language": ""
+    },
+    {
+      "id": 6062091438,
+      "number": 201,
+      "title": "The delete-confirmation dialog — the app's only destructive gate — has no behavioral test",
+      "url": "https://github.com/BistaDinesh03/critique/issues/201",
+      "repo": "BistaDinesh03/critique",
+      "labels": [
+        "help wanted",
+        "tests",
+        "frontend",
+        "intermediate"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:15:18Z",
+      "updatedAt": "2026-10-27T15:15:18Z",
+      "body": " ## Problem Project deletion is gated by one modal: - `frontend/my_projects.html:355-381` — `CritiqueUI.showConfirmModal({ title:'Delete project?', … onConfirm(success, fail){ fetch('/api/projects/'+id, {method:'DELETE', headers:{'X-CSRF-Token':…}})… })` - `static/ui.js:54-145` — builds the dialog (`role='dialog'` L70, `aria-modal` L71, body-scroll lock L107), Cancel/backdrop dismiss, `confirmBtn…",
+      "language": ""
+    },
+    {
+      "id": 6062089873,
+      "number": 200,
+      "title": "Discover's pagination UI (changePage, prev/next disabled states, page-info) has zero frontend-render coverage",
+      "url": "https://github.com/BistaDinesh03/critique/issues/200",
+      "repo": "BistaDinesh03/critique",
+      "labels": [
+        "help wanted",
+        "tests",
+        "frontend",
+        "intermediate"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:15:13Z",
+      "updatedAt": "2026-10-27T15:15:13Z",
+      "body": " ## Problem `frontend/discover.html:219-222` ships the site's only paginated navigation: ```html <nav class=\"pagination\" id=\"pagination\" style=\"display:none;\" aria-label=\"Pagination\">   <button id=\"prev-btn\" onclick=\"changePage(-1)\" …>Previous</button>   <span id=\"page-info\" aria-live=\"polite\"></span>   <button id=\"next-btn\" onclick=\"changePage(1)\" …>Next</button> </nav> ``` with the state logic…",
+      "language": ""
+    },
+    {
+      "id": 6062058408,
+      "number": 14584,
+      "title": "[scanner] retro human-review lessons: GitHub trusted review-feedback source",
+      "url": "https://github.com/hivecommons/hive/issues/14584",
+      "repo": "hivecommons/hive",
+      "labels": [
+        "help wanted",
+        "agent/scanner",
+        "stage/020-claimed",
+        "hive/claimed-by-human"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:13:32Z",
+      "updatedAt": "2026-10-27T15:22:39Z",
+      "body": "Part of #14551 **Target: v6** (open the PR with `--base v6`; v5 is out of scope). ## Scope: GitHub review-feedback source for retro (B1, B2, B3) Add the GitHub side that collects trusted human review feedback and a rework summary for a hive-attributed PR, for the retro lane to consume. Read the full spec in #14551. - **B1**: qualification. A PR qualifies when `github.PRReworkStats` (`src/pkg/gith…",
+      "language": ""
+    },
+    {
+      "id": 6062038519,
+      "number": 6,
+      "title": "Per-directory breakdown (`--by-dir`)",
+      "url": "https://github.com/celaldrg/aichurn/issues/6",
+      "repo": "celaldrg/aichurn",
+      "labels": [
+        "help wanted"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:12:28Z",
+      "updatedAt": "2026-10-27T15:12:28Z",
+      "body": "Churn often concentrates in a few parts of a repo. Show the AI vs human split per top-level directory (or a chosen depth). Needs the engine to keep per-path counters alongside the global `Side` metrics; the replay already knows the file for every line. Open to ideas on the output format before coding.",
+      "language": ""
+    },
+    {
+      "id": 6061982347,
+      "number": 465,
+      "title": "[Frontend] feat: duplicate a product from the catalogue",
+      "url": "https://github.com/nikhilb2/simple_invoicing/issues/465",
+      "repo": "nikhilb2/simple_invoicing",
+      "labels": [
+        "enhancement",
+        "help wanted",
+        "frontend",
+        "ux"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:09:31Z",
+      "updatedAt": "2026-10-27T15:09:31Z",
+      "body": "## Summary Invoices can be duplicated, but products cannot. Setting up several similar products (same unit, GST rate, HSN) means re-entering everything. Add a \"Duplicate\" action in the catalogue. ## Proposal - Add a \"Duplicate\" action to a product row in the catalogue (see `frontend/src/pages/catalogue/CatalogueTable.tsx`). - It opens `frontend/src/pages/catalogue/ProductFormModal.tsx` in create…",
+      "language": ""
+    },
+    {
+      "id": 6061981779,
+      "number": 464,
+      "title": "[Frontend] feat: press ? to show a keyboard shortcut cheat sheet",
+      "url": "https://github.com/nikhilb2/simple_invoicing/issues/464",
+      "repo": "nikhilb2/simple_invoicing",
+      "labels": [
+        "enhancement",
+        "help wanted",
+        "frontend",
+        "ux"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:09:29Z",
+      "updatedAt": "2026-10-27T15:09:29Z",
+      "body": "## Summary There is no way to quickly see the available keyboard shortcuts. Add a cheat sheet that opens when the user presses `?`. ## Proposal - Listen for `?` (Shift+/) and open a small modal that lists every shortcut with its current key (the user's custom key if they changed it, otherwise the default). - The list already exists: `ACTION_KEYS`, `ACTION_LABELS` and `DEFAULT_SHORTCUTS` in `front…",
+      "language": ""
+    },
+    {
+      "id": 6061981263,
+      "number": 463,
+      "title": "[Frontend Easy] fix: add the http fallback to the shared copyToClipboard helper",
+      "url": "https://github.com/nikhilb2/simple_invoicing/issues/463",
+      "repo": "nikhilb2/simple_invoicing",
+      "labels": [
+        "bug",
+        "help wanted",
+        "good first issue",
+        "frontend"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:09:28Z",
+      "updatedAt": "2026-10-27T15:17:56Z",
+      "body": "## Summary Copy-to-clipboard is implemented in three places, and only one of them works everywhere. - `frontend/src/components/ShareModal.tsx` copies with `navigator.clipboard.writeText` and falls back to a hidden-textarea `document.execCommand('copy')` (`copyViaSelection`). Its comment explains why: an instance reached over plain http on a shop LAN has no `navigator.clipboard` at all. - `fronten…",
+      "language": ""
+    },
+    {
+      "id": 6061941001,
+      "number": 341,
+      "title": "Turkish language support",
+      "url": "https://github.com/user-grinch/RivoPhoneApp/issues/341",
+      "repo": "user-grinch/RivoPhoneApp",
+      "labels": [
+        "help wanted"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:07:23Z",
+      "updatedAt": "2026-10-27T15:22:04Z",
+      "body": "Please add Turkish language support, your app is great.",
+      "language": ""
+    },
+    {
+      "id": 6061930221,
+      "number": 47,
+      "title": "Move build outputs (DataLaVista.html) to /dist/ directory",
+      "url": "https://github.com/DepressionCenter/datalavista/issues/47",
+      "repo": "DepressionCenter/datalavista",
+      "labels": [
+        "enhancement",
+        "help wanted"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:06:50Z",
+      "updatedAt": "2026-10-27T15:06:50Z",
+      "body": "We should move the 3 output files (DataLaVista-nojs.html, DataLaVista.html, datalavista.js to a dist/ folder, and update the docs and links to those files. This would move the hosted files (github static pages) from https://github.com/DepressionCenter/datalavista/DataLaVista.html to https://github.com/DepressionCenter/datalavista/dist/DataLaVista.html. I'm pretty sure the main README.md and index…",
+      "language": ""
+    },
+    {
+      "id": 6061924090,
+      "number": 206,
+      "title": "A webhook purge can deadlock with a concurrent channel or space delete (no retry)",
+      "url": "https://github.com/Aizen93/voxium/issues/206",
+      "repo": "Aizen93/voxium",
+      "labels": [
+        "bug",
+        "help wanted",
+        "severity: low",
+        "area: webhooks",
+        "skill: backend",
+        "skill: database",
+        "difficulty: intermediate"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:06:31Z",
+      "updatedAt": "2026-10-27T15:06:31Z",
+      "body": "Deleting a webhook locks the webhook row first and then deletes or detaches its remaining messages. Deleting the channel (or the whole space) reaches the same message and webhook rows through cascades, in the opposite order. If both run at the same time, PostgreSQL detects a deadlock and aborts one of them, and whoever lost gets a 500. Nothing in the server retries on a deadlock. ### Details - `d…",
+      "language": ""
+    },
+    {
+      "id": 6061922463,
+      "number": 205,
+      "title": "After a webhook delete or purge, open clients keep stale messages and unread counts",
+      "url": "https://github.com/Aizen93/voxium/issues/205",
+      "repo": "Aizen93/voxium",
+      "labels": [
+        "bug",
+        "help wanted",
+        "severity: low",
+        "area: webhooks",
+        "skill: backend",
+        "skill: frontend",
+        "difficulty: intermediate"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:06:26Z",
+      "updatedAt": "2026-10-27T15:06:26Z",
+      "body": "When a moderator deletes an incoming webhook, clients that already have the channel loaded are only partly updated. Without purge, the loaded messages keep showing as posted by a live webhook until the channel is reloaded. With purge, the loaded rows disappear from the channel on screen, but unread badges keep counting the deleted messages, and a delivery that was in flight during the purge can s…",
+      "language": ""
+    },
+    {
+      "id": 6061920865,
+      "number": 204,
+      "title": "Theme marketplace install counts can be inflated or drained by any user",
+      "url": "https://github.com/Aizen93/voxium/issues/204",
+      "repo": "Aizen93/voxium",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "severity: low",
+        "security",
+        "area: web-ui",
+        "skill: backend",
+        "skill: database"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:06:22Z",
+      "updatedAt": "2026-10-27T15:06:22Z",
+      "body": "The install count shown for community themes, which also drives the \"popular\" sort, is a bare counter. `POST /themes/:themeId/install` adds one and `POST /themes/:themeId/uninstall` removes one, with no record of who installed what. Any verified account can therefore push a theme up the popular list, or bring any theme's count down to zero, at up to 30 requests a minute. ### Details - Install che…",
+      "language": ""
+    },
+    {
+      "id": 6061919281,
+      "number": 203,
+      "title": "Theme SVG sanitizer is regex-based and lets namespaced elements and url() references through",
+      "url": "https://github.com/Aizen93/voxium/issues/203",
+      "repo": "Aizen93/voxium",
+      "labels": [
+        "help wanted",
+        "severity: low",
+        "security",
+        "area: web-ui",
+        "skill: backend",
+        "skill: frontend",
+        "difficulty: intermediate"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:06:17Z",
+      "updatedAt": "2026-10-27T15:06:17Z",
+      "body": "Community themes can carry SVG background patterns. `sanitizeSvg()` (shared package) rejects a few dangerous substrings and then rebuilds the markup with regular expressions against a tag/attribute allowlist. The tag regex only matches unprefixed names, so namespaced elements such as `<svg:script>` (which the `<script` quick-reject does not match) and their attributes pass through unchanged; the…",
+      "language": ""
+    },
+    {
+      "id": 6061917650,
+      "number": 202,
+      "title": "Theme browser and theme editor show unthemed scrollbars (inline scrollbarWidth)",
+      "url": "https://github.com/Aizen93/voxium/issues/202",
+      "repo": "Aizen93/voxium",
+      "labels": [
+        "bug",
+        "help wanted",
+        "good first issue",
+        "severity: low",
+        "area: web-ui",
+        "skill: frontend"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:06:12Z",
+      "updatedAt": "2026-10-27T15:06:12Z",
+      "body": "The theme browser and the theme editor set `style={{ scrollbarWidth: 'thin' }}` on their scroll containers. In Chromium-based engines (including the Windows webview), setting the standard `scrollbar-width` property makes the element ignore the `::-webkit-scrollbar` rules, so these two panes paint the grey native scrollbar instead of the app's themed one. ### Details - `apps/desktop/src/components…",
+      "language": ""
+    },
+    {
+      "id": 6061916046,
+      "number": 201,
+      "title": "ServerIcon never clears its failed-image state when the icon changes",
+      "url": "https://github.com/Aizen93/voxium/issues/201",
+      "repo": "Aizen93/voxium",
+      "labels": [
+        "bug",
+        "help wanted",
+        "good first issue",
+        "severity: low",
+        "area: web-ui",
+        "skill: frontend"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:06:07Z",
+      "updatedAt": "2026-10-27T15:06:07Z",
+      "body": "`ServerIcon` remembers that its image failed to load, but never forgets it when the icon changes. After one failed load (a transient network error, an expired link), a newly uploaded icon is not shown: the component keeps rendering the initials until it remounts. `Avatar` handles the same case correctly. ### Details - `apps/desktop/src/components/server/ServerIcon.tsx:42` — `const [failed, setFai…",
+      "language": ""
+    },
+    {
+      "id": 6061914464,
+      "number": 200,
+      "title": "Nickname edit silently drops failures when saved by leaving the field",
+      "url": "https://github.com/Aizen93/voxium/issues/200",
+      "repo": "Aizen93/voxium",
+      "labels": [
+        "bug",
+        "help wanted",
+        "good first issue",
+        "severity: low",
+        "area: web-ui",
+        "skill: frontend"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:06:03Z",
+      "updatedAt": "2026-10-27T15:06:03Z",
+      "body": "In the user card, a space nickname is saved either by pressing Enter or by leaving the field. Enter shows a success or error toast; leaving the field calls the same save inside an empty `catch`, so a refused change (no CHANGE_NICKNAME permission, too long, rate limited, offline) disappears without a word and the user believes the nickname changed. ### Details - `apps/desktop/src/components/layout…",
+      "language": ""
+    },
+    {
+      "id": 6061911308,
+      "number": 198,
+      "title": "Components subscribe to whole zustand stores and re-render on unrelated state changes",
+      "url": "https://github.com/Aizen93/voxium/issues/198",
+      "repo": "Aizen93/voxium",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "severity: low",
+        "performance",
+        "area: web-ui",
+        "skill: frontend"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:05:53Z",
+      "updatedAt": "2026-10-27T15:05:53Z",
+      "body": "About 60 components read zustand stores with `useXStore()` and no selector, which subscribes them to every change of the whole store. The channel sidebar, for example, re-renders its entire tree on every chat message and typing event, although it only uses two chat *actions*. ### Details - `apps/desktop/src/components/channel/ChannelSidebar.tsx:431-434` subscribes to all of `serverStore`, `voiceS…",
+      "language": ""
+    },
+    {
+      "id": 6061909746,
+      "number": 197,
+      "title": "The spaces strip layout has no automated geometry or visual test",
+      "url": "https://github.com/Aizen93/voxium/issues/197",
+      "repo": "Aizen93/voxium",
+      "labels": [
+        "help wanted",
+        "severity: low",
+        "testing",
+        "area: web-ui",
+        "skill: frontend",
+        "skill: testing",
+        "difficulty: intermediate"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:05:48Z",
+      "updatedAt": "2026-10-27T15:05:48Z",
+      "body": "The spaces strip (Messages zone, Spaces tabs, the `+N` overflow, the auto-hide panel) depends on real layout: zone widths, how many tabs fit at a given window width, label hiding below a breakpoint, the chamfered auto-hide panel. The unit tests run in jsdom, which has no layout, so a CSS regression in the main navigation (for example a class that stops a zone from growing and shrinks the tab budg…",
+      "language": ""
+    },
+    {
+      "id": 6061908091,
+      "number": 196,
+      "title": "Dead P2P voice:signal code is still wired on the server, the client and the shared types",
+      "url": "https://github.com/Aizen93/voxium/issues/196",
+      "repo": "Aizen93/voxium",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "severity: low",
+        "tech-debt",
+        "area: voice",
+        "skill: backend",
+        "skill: frontend"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:05:43Z",
+      "updatedAt": "2026-10-27T15:05:43Z",
+      "body": "Voice channels moved from peer-to-peer to the mediasoup SFU, but the old `voice:signal` event is still registered everywhere. No current client emits it; the server keeps a rate-limited no-op handler and even routes the event to the channel's owner node, only to drop it there. ### Details - Server: a no-op `on('voice:signal', ...)` handler, and `'voice:signal'` in the list of events routed to the…",
+      "language": ""
+    },
+    {
+      "id": 6061906450,
+      "number": 195,
+      "title": "Connect-time voice occupancy replay can undo a join or leave that lands during it",
+      "url": "https://github.com/Aizen93/voxium/issues/195",
+      "repo": "Aizen93/voxium",
+      "labels": [
+        "bug",
+        "help wanted",
+        "severity: low",
+        "area: voice",
+        "skill: backend",
+        "skill: frontend",
+        "difficulty: advanced"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:05:38Z",
+      "updatedAt": "2026-10-27T15:05:38Z",
+      "body": "On socket connect, and when someone joins a space, `replayVoiceState()` sends a snapshot of the occupants of every visible voice channel. It reads the occupancy from Redis, waits for a database query and a Redis round trip, and only then emits. A `voice:user_left` or `voice:user_joined` for another channel that is emitted inside that window reaches the client first and is then overwritten by the…",
+      "language": ""
+    },
+    {
+      "id": 6061904785,
+      "number": 194,
+      "title": "voice:force_move is advisory: the server only asks the target client to move",
+      "url": "https://github.com/Aizen93/voxium/issues/194",
+      "repo": "Aizen93/voxium",
+      "labels": [
+        "help wanted",
+        "severity: low",
+        "security",
+        "area: voice",
+        "skill: backend",
+        "skill: webrtc",
+        "difficulty: intermediate"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:05:34Z",
+      "updatedAt": "2026-10-27T15:05:34Z",
+      "body": "A moderator with MOVE_MEMBERS can move someone to another voice channel. The server checks the permission, the role hierarchy, the target's CONNECT permission and the destination's capacity, then only sends `voice:force_moved` to the target's socket and leaves the actual move to the client. A modified client can ignore the event and stay where it is, and there is no server-enforced way to disconn…",
+      "language": ""
+    },
+    {
+      "id": 6061903133,
+      "number": 193,
+      "title": "No voice load-test baseline is recorded in the repository",
+      "url": "https://github.com/Aizen93/voxium/issues/193",
+      "repo": "Aizen93/voxium",
+      "labels": [
+        "help wanted",
+        "severity: low",
+        "testing",
+        "area: voice",
+        "skill: webrtc",
+        "skill: devops",
+        "skill: testing",
+        "difficulty: intermediate"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:05:29Z",
+      "updatedAt": "2026-10-27T15:05:29Z",
+      "body": "`scripts/load-test-voice.ts` drives many users with real WebRTC media into voice channels, and the README says the SFU was load-tested with 25 users per channel, but no result is recorded anywhere in the repository: no date, machine, success rate or join latency. The SFU has changed a lot since the script was written (one WebRtcServer per worker, the multi-node relay, end-to-end encrypted secure…",
+      "language": ""
+    },
+    {
+      "id": 6061901491,
+      "number": 192,
+      "title": "settingsStore has two different noise-gate threshold defaults (0.008 and 0.03)",
+      "url": "https://github.com/Aizen93/voxium/issues/192",
+      "repo": "Aizen93/voxium",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "severity: low",
+        "tech-debt",
+        "area: voice",
+        "skill: frontend"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:05:24Z",
+      "updatedAt": "2026-10-27T15:05:24Z",
+      "body": "`settingsStore` uses 0.008 as the noise-gate threshold for a fresh install, but when stored settings exist and the value is missing or not a number it falls back to 0.03, almost four times higher. Both paths should use one constant. In practice the fallback is rarely reached, because the app always writes the field when it saves settings; it applies when a stored entry lost the value (edited by h…",
+      "language": ""
+    },
+    {
+      "id": 6061899913,
+      "number": 191,
+      "title": "voiceStore.ts is a 3,000-line store mixing every voice concern",
+      "url": "https://github.com/Aizen93/voxium/issues/191",
+      "repo": "Aizen93/voxium",
+      "labels": [
+        "help wanted",
+        "severity: low",
+        "tech-debt",
+        "area: voice",
+        "skill: frontend",
+        "difficulty: advanced"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:05:19Z",
+      "updatedAt": "2026-10-27T15:05:19Z",
+      "body": "`apps/desktop/src/stores/voiceStore.ts` is about 3,050 lines. One Zustand store holds voice channels over the SFU, DM P2P calls, screen sharing, privacy-mask hooks, secure-voice keys, push-to-talk and device handling, plus module-level subscriptions. A change in one mode regularly has to respect invariants of another, and the file is hard to review and to test in isolation. ### Details - Dead sur…",
+      "language": ""
+    },
+    {
+      "id": 6061898338,
+      "number": 190,
+      "title": "Rapid microphone changes during a call can leave the call on the wrong device",
+      "url": "https://github.com/Aizen93/voxium/issues/190",
+      "repo": "Aizen93/voxium",
+      "labels": [
+        "bug",
+        "help wanted",
+        "severity: low",
+        "area: voice",
+        "skill: frontend",
+        "skill: webrtc",
+        "difficulty: intermediate"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:05:14Z",
+      "updatedAt": "2026-10-27T15:05:14Z",
+      "body": "When the input device changes during a call, a settings subscription re-acquires the mic and rebuilds the audio pipeline in an async function. Nothing cancels an older run when a newer change arrives, so two quick changes can interleave: the older run can stop the newer stream and finish last, leaving the call on a device the settings no longer show, or with a half-rebuilt pipeline. ### Details -…",
+      "language": ""
+    },
+    {
+      "id": 6061896720,
+      "number": 189,
+      "title": "Voice quality changes apply only on the next join; apply them during a call",
+      "url": "https://github.com/Aizen93/voxium/issues/189",
+      "repo": "Aizen93/voxium",
+      "labels": [
+        "enhancement",
+        "help wanted",
+        "severity: low",
+        "area: voice",
+        "skill: frontend",
+        "skill: webrtc",
+        "difficulty: intermediate"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:05:09Z",
+      "updatedAt": "2026-10-27T15:05:09Z",
+      "body": "The voice quality setting (16, 32 or 64 kbps) is applied when a call is set up. Changing it during a call has no effect until the user leaves and rejoins, and the settings screen says so (\"Takes effect on next voice join\"). Applying it live would help users who lower the quality to cope with a bad connection. ### Details - Voice channels: `voiceStore.ts` reads `settingsStore.voiceQuality` once, w…",
+      "language": ""
+    },
+    {
+      "id": 6061895050,
+      "number": 188,
+      "title": "Voice UI shows the mic as unmuted while push-to-talk is idle",
+      "url": "https://github.com/Aizen93/voxium/issues/188",
+      "repo": "Aizen93/voxium",
+      "labels": [
+        "bug",
+        "help wanted",
+        "good first issue",
+        "severity: low",
+        "area: voice",
+        "skill: frontend",
+        "skill: design"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:05:05Z",
+      "updatedAt": "2026-10-27T15:05:05Z",
+      "body": "In push-to-talk mode the mic is off until the key is held, and the server is told the user is muted, so other participants see a muted icon. The user's own controls still show the normal \"unmuted\" mic: the voice panel reads only the manual mute flag, and no voice control looks at the push-to-talk mode. The user cannot tell from their own UI whether they are transmitting. ### Details - In push-to-…",
+      "language": ""
+    },
+    {
+      "id": 6059825219,
+      "number": 140,
+      "title": "No coding needed: explain a solution in plain English (5 min)",
+      "url": "https://github.com/Huerte/algo-solutions-python/issues/140",
+      "repo": "Huerte/algo-solutions-python",
+      "labels": [
+        "documentation",
+        "good first issue",
+        "beginner-friendly",
+        "no-code-needed",
+        "5-minutes",
+        "hacktoberfest",
+        "leetcode",
+        "codewars",
+        "hackerrank",
+        "interview-prep",
+        "open-source",
+        "students"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T13:09:42Z",
+      "updatedAt": "2026-10-27T13:09:42Z",
+      "body": "## You don't have to write code to contribute Some solutions have short or missing explanations. Help the next learner understand them. **Time:** ~5 minutes | **Skills needed:** Reading + writing ### Task - [ ] Pick any solution file (any language) - [ ] Read it - [ ] Improve the top comment: what does it do, in simple words? - [ ] (Optional) Add the time complexity if you know it Only edit **com…",
+      "language": ""
+    },
+    {
+      "id": 6059060475,
+      "number": 33219,
+      "title": "[good first issue, hacktoberfest] 🏯 Hacktoberfest Task - Add new Dialect Entry 563 (good-first-issue)",
+      "url": "https://github.com/lingdojo/kana-dojo/issues/33219",
+      "repo": "lingdojo/kana-dojo",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "hacktoberfest",
+        "community",
+        "low hanging fruit",
+        "up-for-grabs",
+        "first-timers-only",
+        "good-first-issue"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T12:20:51Z",
+      "updatedAt": "2026-10-27T12:20:56Z",
+      "body": "## 🟢 Good First Issue: Add Dialect Entry #56 — Beginner-Friendly Open Source Contribution ![Time: <1 minute](https://img.shields.io/badge/Time-<1_minute-brightgreen) ![Difficulty: Beginner](https://img.shields.io/badge/Difficulty-Beginner-blue) ![No Code Required](https://img.shields.io/badge/No_Code-Required-orange) > 🟢 **No prerequisites needed!** You don't need to clone the repo, install any…",
+      "language": ""
+    },
+    {
+      "id": 6057917703,
+      "number": 241,
+      "title": "[Good First Issue] Add a false-positive review tip [MC-004]",
+      "url": "https://github.com/Berserk-hub150/skillhawk/issues/241",
+      "repo": "Berserk-hub150/skillhawk",
+      "labels": [
+        "enhancement",
+        "help wanted",
+        "good first issue",
+        "community",
+        "low hanging fruit",
+        "up-for-grabs",
+        "first-timers-only",
+        "micro-contribution",
+        "type: task",
+        "beginner-friendly",
+        "hacktoberfest",
+        "category:false-positive"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T11:04:21Z",
+      "updatedAt": "2026-10-27T11:04:23Z",
+      "body": "<!-- skillhawk-task:MC-004 --> <!-- automated-by:skillhawk-community-factory --> ## Add a false-positive review tip > **Browser-only · 2–5 minutes · beginner-friendly · no local setup required** ### Your task Add the prepared contributor note below. Create `community/micro-contributions/contributor-notes/false-positive-review.json`: ```json {   \"topic\": \"False-positive review\",   \"tip\": \"Before b…",
+      "language": ""
+    },
+    {
+      "id": 6057917014,
+      "number": 240,
+      "title": "[Good First Issue] Add an actionable-remediation tip [MC-003]",
+      "url": "https://github.com/Berserk-hub150/skillhawk/issues/240",
+      "repo": "Berserk-hub150/skillhawk",
+      "labels": [
+        "enhancement",
+        "help wanted",
+        "good first issue",
+        "community",
+        "low hanging fruit",
+        "up-for-grabs",
+        "first-timers-only",
+        "micro-contribution",
+        "type: task",
+        "beginner-friendly",
+        "hacktoberfest",
+        "category:remediation"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T11:04:19Z",
+      "updatedAt": "2026-10-27T11:04:20Z",
+      "body": "<!-- skillhawk-task:MC-003 --> <!-- automated-by:skillhawk-community-factory --> ## Add an actionable-remediation tip > **Browser-only · 2–5 minutes · beginner-friendly · no local setup required** ### Your task Add the prepared contributor note below. Create `community/micro-contributions/contributor-notes/actionable-remediation.json`: ```json {   \"topic\": \"Actionable remediation\",   \"tip\": \"Reme…",
+      "language": ""
+    },
+    {
+      "id": 6057565403,
+      "number": 33214,
+      "title": "[good first issue, hacktoberfest] 🐡 Hacktoberfest Task - Add new Video Game Quote 103 (good-first-issue)",
+      "url": "https://github.com/lingdojo/kana-dojo/issues/33214",
+      "repo": "lingdojo/kana-dojo",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "hacktoberfest",
+        "community",
+        "low hanging fruit",
+        "up-for-grabs",
+        "first-timers-only",
+        "good-first-issue"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T10:40:53Z",
+      "updatedAt": "2026-10-27T10:41:02Z",
+      "body": "## 🟢 Good First Issue: Add Video Game Quote #10 — Beginner-Friendly Open Source Contribution ![Time: <1 minute](https://img.shields.io/badge/Time-<1_minute-brightgreen) ![Difficulty: Beginner](https://img.shields.io/badge/Difficulty-Beginner-blue) ![No Code Required](https://img.shields.io/badge/No_Code-Required-orange) > 🟢 **No prerequisites needed!** You don't need to clone the repo, install…",
+      "language": ""
+    },
+    {
+      "id": 6057389500,
+      "number": 138,
+      "title": "Be the first! Add a solution in a language this repo doesn't have yet",
+      "url": "https://github.com/Huerte/algo-solutions-python/issues/138",
+      "repo": "Huerte/algo-solutions-python",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "beginner-friendly",
+        "5-minutes",
+        "15-minutes",
+        "python",
+        "algorithm",
+        "easy",
+        "hacktoberfest",
+        "any-language",
+        "javascript",
+        "typescript"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T10:28:45Z",
+      "updatedAt": "2026-10-27T10:28:45Z",
+      "body": "## This repo is mostly Python. Help me change that. I'd love for this to become a collection where the **same problem is solved in many languages**, so learners can compare styles side by side. **Time:** ~15 minutes | **Level:** Beginner and up ### Languages I'd love to see JavaScript, TypeScript, Java, C++, C, C#, Go, Rust, Kotlin, Swift, PHP, Ruby, Dart, Scala, Haskell, or anything else you lov…",
+      "language": ""
+    },
+    {
+      "id": 6057385450,
+      "number": 137,
+      "title": "Challenge: make an existing solution shorter or faster (30 min)",
+      "url": "https://github.com/Huerte/algo-solutions-python/issues/137",
+      "repo": "Huerte/algo-solutions-python",
+      "labels": [
+        "help wanted",
+        "30-minutes",
+        "algorithm",
+        "refactor",
+        "medium",
+        "hacktoberfest",
+        "any-language",
+        "leetcode",
+        "codewars",
+        "hackerrank",
+        "interview-prep",
+        "open-source"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T10:28:29Z",
+      "updatedAt": "2026-10-27T10:28:29Z",
+      "body": "## Think you can do it better? Prove it. Pick any solution and write a cleaner, more idiomatic, or faster version, in the same language or a different one. **Time:** ~30 minutes | **Level:** Beginner to intermediate ### Rules - [ ] Keep the original solution - [ ] Add yours as `practice<n>_v2.<ext>` (or below the original) - [ ] Explain what changed in a comment - [ ] Mention time complexity befo…",
+      "language": ""
+    },
+    {
+      "id": 6057302916,
+      "number": 541,
+      "title": "docs: slide `id` example in rest-api-schemas.md does not match the real REST output",
+      "url": "https://github.com/noruzzamans/gslider-blocks/issues/541",
+      "repo": "noruzzamans/gslider-blocks",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "type: bug",
+        "type: documentation",
+        "focus: headless",
+        "size: XS",
+        "hacktoberfest"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T10:23:29Z",
+      "updatedAt": "2026-10-27T10:23:29Z",
+      "body": "## Summary In `docs/reference-guides/rest-api-schemas.md`, the **`slides` Specification Table (Flexi Content REST Output)** describes the `id` property of each slide incorrectly: ```md | `id` | `string` | Unique slide identifier or block ID (e.g. `'gslider-slide-1'`). | ``` Two things are wrong: 1. **The example value is wrong.** The REST output never produces a `gslider-slide-1` style ID. 2. **\"…",
+      "language": ""
+    },
+    {
+      "id": 6057029642,
+      "number": 33213,
+      "title": "[good first issue, hacktoberfest] 🍚 Hacktoberfest Task - Add new Anime Quote 503 (good-first-issue)",
+      "url": "https://github.com/lingdojo/kana-dojo/issues/33213",
+      "repo": "lingdojo/kana-dojo",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "hacktoberfest",
+        "community",
+        "low hanging fruit",
+        "up-for-grabs",
+        "first-timers-only",
+        "good-first-issue"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T10:05:37Z",
+      "updatedAt": "2026-10-27T10:05:46Z",
+      "body": "## 🟢 Good First Issue: Add Anime Quote #50 — Beginner-Friendly Open Source Contribution ![Time: <1 minute](https://img.shields.io/badge/Time-<1_minute-brightgreen) ![Difficulty: Beginner](https://img.shields.io/badge/Difficulty-Beginner-blue) ![No Code Required](https://img.shields.io/badge/No_Code-Required-orange) > 🟢 **No prerequisites needed!** You don't need to clone the repo, install anyth…",
+      "language": ""
+    },
+    {
+      "id": 6056643459,
+      "number": 287,
+      "title": "Feature request: mark decisions as superseded",
+      "url": "https://github.com/Get-Concord-AI/concord-mcp/issues/287",
+      "repo": "Get-Concord-AI/concord-mcp",
+      "labels": [
+        "enhancement",
+        "help wanted",
+        "hacktoberfest"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T09:39:42Z",
+      "updatedAt": "2026-10-27T11:25:11Z",
+      "body": "## Problem Decisions are logged on the task they were made on, and there is currently no way to say that a later decision replaces an earlier one. Nothing expires them either. When a new task or a later session reads the decision store, an old ruling (for example a rejected approach) looks as valid as the current one, so the next agent can act on something that has already been reversed. Two peop…",
+      "language": ""
+    },
+    {
+      "id": 6056515197,
+      "number": 33212,
+      "title": "[good first issue, hacktoberfest] 🌺 Hacktoberfest Task - Add new Grammar Point 1071 (good-first-issue)",
+      "url": "https://github.com/lingdojo/kana-dojo/issues/33212",
+      "repo": "lingdojo/kana-dojo",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "hacktoberfest",
+        "community",
+        "low hanging fruit",
+        "up-for-grabs",
+        "first-timers-only",
+        "good-first-issue"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T09:31:03Z",
+      "updatedAt": "2026-10-27T09:31:11Z",
+      "body": "## 🟢 Good First Issue: Add Grammar Point #107 — Beginner-Friendly Open Source Contribution ![Time: <1 minute](https://img.shields.io/badge/Time-<1_minute-brightgreen) ![Difficulty: Beginner](https://img.shields.io/badge/Difficulty-Beginner-blue) ![No Code Required](https://img.shields.io/badge/No_Code-Required-orange) > 🟢 **No prerequisites needed!** You don't need to clone the repo, install an…",
+      "language": ""
+    },
+    {
+      "id": 6056357355,
+      "number": 1087,
+      "title": "confluence: the CQL search reads a negated `~` clause as the clause, `or` as `and`, and no `not` in front of a negated clause, where real reads each",
+      "url": "https://github.com/brekkylab/backlot/issues/1087",
+      "repo": "brekkylab/backlot",
+      "labels": [
+        "help wanted",
+        "fidelity",
+        "hacktoberfest"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T09:20:39Z",
+      "updatedAt": "2026-10-27T10:02:39Z",
+      "body": "Found while reviewing #1083. **Source and commit** — `confluence`, `main` at `baee7803`. The CQL search reads a `~` operand as a term to match whatever negates it, reads no `or`, and reads no `not` in front of a clause that is already negated. | # | Divergence | Silent? | |---|---|---| | 1 | a `~` clause negated with `!~` or `not` is read as the clause | yes | | 2 | `or` is read as `and`, and of…",
+      "language": ""
+    },
+    {
+      "id": 6055840544,
+      "number": 33211,
+      "title": "[good first issue, hacktoberfest] 🍱 Hacktoberfest Task - Add new Trivia Question 784 (good-first-issue)",
+      "url": "https://github.com/lingdojo/kana-dojo/issues/33211",
+      "repo": "lingdojo/kana-dojo",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "hacktoberfest",
+        "community",
+        "low hanging fruit",
+        "up-for-grabs",
+        "first-timers-only",
+        "good-first-issue"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T08:45:46Z",
+      "updatedAt": "2026-10-27T08:45:55Z",
+      "body": "## 🟢 Good First Issue: Add Trivia Question #78 — Beginner-Friendly Open Source Contribution ![Time: <1 minute](https://img.shields.io/badge/Time-<1_minute-brightgreen) ![Difficulty: Beginner](https://img.shields.io/badge/Difficulty-Beginner-blue) ![No Code Required](https://img.shields.io/badge/No_Code-Required-orange) > 🟢 **No prerequisites needed!** You don't need to clone the repo, install a…",
+      "language": ""
+    },
+    {
+      "id": 6055754141,
+      "number": 3,
+      "title": "Run the README example as a doctest so it can't drift from the code",
+      "url": "https://github.com/zovo-one/crx-permission-risk/issues/3",
+      "repo": "zovo-one/crx-permission-risk",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "hacktoberfest"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T08:40:00Z",
+      "updatedAt": "2026-10-27T08:40:00Z",
+      "body": "The README has a Rust example that uses `risk_of`, `max_score` and `RiskClass`, including `assert_eq!(max_score(&[\"storage\", \"alarms\", \"cookies\"]), 93);`. The crate docs in `src/lib.rs` have a separate example, and only that one runs under `cargo test`. If a score in `TABLE` changes, the README can go stale without any test failing. ## What to change Add the usual pattern that compiles the README…",
+      "language": ""
+    },
+    {
+      "id": 6055753060,
+      "number": 2,
+      "title": "Add common permissions that currently fall back to \"Unrecognised permission\"",
+      "url": "https://github.com/zovo-one/crx-permission-risk/issues/2",
+      "repo": "zovo-one/crx-permission-risk",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "hacktoberfest"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T08:39:55Z",
+      "updatedAt": "2026-10-27T08:39:55Z",
+      "body": "`risk_of` returns Moderate, 40, with \"Unrecognised permission; treat as moderate until reviewed.\" for anything not in `TABLE`. Some well-known Chrome extension permissions are missing, so they get that fallback text instead of a real rationale. I checked these with `risk_of` and all return the fallback. - `webNavigation` - `pageCapture` - `privacy` - `declarativeNetRequest` - `sessions` - `topSit…",
+      "language": ""
+    },
+    {
+      "id": 6055750739,
+      "number": 3,
+      "title": "Self-host calculator uses about 88 GB for Mixtral 8x22B, but the other models are sized at 2 bytes per parameter",
+      "url": "https://github.com/theluckystrike/kickllm.com/issues/3",
+      "repo": "theluckystrike/kickllm.com",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "hacktoberfest"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T08:39:45Z",
+      "updatedAt": "2026-10-27T08:39:45Z",
+      "body": "The self-host break-even tool picks how many GPUs a model needs from `vramNeeded` in `SH_MODELS`. Three of the four entries follow the same rule, about 2 bytes per parameter for fp16 weights. - Llama 3 70B has 70B parameters and `vramNeeded: 140`. - Llama 3 8B has 8B parameters and `vramNeeded: 16`. - Mistral 7B has 7.3B parameters and `vramNeeded: 14`. - Mixtral 8x22B has 141B parameters in tota…",
+      "language": ""
+    },
+    {
+      "id": 6055749594,
+      "number": 2,
+      "title": "Calculator accepts negative and out-of-range numbers and shows negative costs",
+      "url": "https://github.com/theluckystrike/kickllm.com/issues/2",
+      "repo": "theluckystrike/kickllm.com",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "hacktoberfest"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T08:39:40Z",
+      "updatedAt": "2026-10-27T08:39:40Z",
+      "body": "The number inputs on the home page have `min` and `max` attributes, but a browser doesn't enforce them on typed values. `getInputs` reads each one with `parseInt(value, 10) || default`. That turns an empty field into the default, which is fine, but a negative number passes straight through. Examples on the home page. - Requests per day `-100` gives a negative token total and a negative cost in th…",
+      "language": ""
+    },
+    {
+      "id": 6055748351,
+      "number": 1,
+      "title": "Mistral Large price on the calculator disagrees with the site's own Mistral Large page",
+      "url": "https://github.com/theluckystrike/kickllm.com/issues/1",
+      "repo": "theluckystrike/kickllm.com",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "hacktoberfest"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T08:39:35Z",
+      "updatedAt": "2026-10-27T08:39:35Z",
+      "body": "The main cost calculator and the comparison table list Mistral Large at $4.00 input and $12.00 output per 1M tokens. The site's own Mistral Large pricing page and two other answer pages say $2.00 and $6.00. A user who checks both pages gets two answers, and the calculator overstates Mistral Large cost by 2x if the answer pages are right. Here is where each price lives. - `assets/app.js`, line 14,…",
+      "language": ""
+    },
+    {
+      "id": 6055747228,
+      "number": 3,
+      "title": "MultiheadAttention calculator gives the per-head weights shape, but PyTorch averages heads by default",
+      "url": "https://github.com/theluckystrike/heytensor.com/issues/3",
+      "repo": "theluckystrike/heytensor.com",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "hacktoberfest"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T08:39:30Z",
+      "updatedAt": "2026-10-27T08:39:30Z",
+      "body": "`nn.MultiheadAttention.forward` has `average_attn_weights=True` by default. With that default the returned attention weights have shape `(N, L, S)`, averaged over heads. The `(N, num_heads, L, S)` shape only comes back with `average_attn_weights=False`. See the \"Outputs\" section of the PyTorch docs for `torch.nn.MultiheadAttention`. The site shows only the per-head shape, as if it were the defaul…",
+      "language": ""
+    },
+    {
+      "id": 6055746000,
+      "number": 2,
+      "title": "Chain mode shows a green \"Final Output\" after a layer fails or gets the wrong input rank",
+      "url": "https://github.com/theluckystrike/heytensor.com/issues/2",
+      "repo": "theluckystrike/heytensor.com",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "hacktoberfest"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T08:39:26Z",
+      "updatedAt": "2026-10-27T08:39:26Z",
+      "body": "In Chain Mode, `recalcChain` keeps going after a layer returns an error. It skips that layer's shape and still renders the result box with the class `result-box success` and the last good shape as \"Final Output\". The failing row only says \"Error\", without the message. Two ways to see it. 1. Open the MaxPool2d page, switch to Chain Mode, set the starting input to `1,3,1,1` and click outside the fi…",
+      "language": ""
+    },
+    {
+      "id": 6055744875,
+      "number": 1,
+      "title": "Chain mode drops the middle dimensions when a Linear layer follows a 3D tensor",
+      "url": "https://github.com/theluckystrike/heytensor.com/issues/1",
+      "repo": "theluckystrike/heytensor.com",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "hacktoberfest"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T08:39:21Z",
+      "updatedAt": "2026-10-27T08:39:21Z",
+      "body": "`nn.Linear` only changes the last dimension. The Linear page FAQ says so too. \"For input [batch, seq, in_features], output is [batch, seq, out_features].\" The shape calculator does not follow this in Chain Mode. `LAYERS.Linear.calc` always returns `[p.batch, p.out_features]`, and `autoSetInput` for `Linear` only copies the first and last dimension of the incoming shape. Every dimension in between…",
+      "language": ""
+    },
+    {
+      "id": 6055743753,
+      "number": 4,
+      "title": "`-sort:name` drops the minus without a message",
+      "url": "https://github.com/theluckystrike/search-operators/issues/4",
+      "repo": "theluckystrike/search-operators",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "hacktoberfest"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T08:39:16Z",
+      "updatedAt": "2026-10-27T08:39:16Z",
+      "body": "In `parseToken` in `src/query.ts`, a leading `-` sets `negate` and is stripped first. The `sort:` branch then returns `{ sort: k }` and never looks at `negate`. So `-sort:name` sorts by name, the same as `sort:name`. It isn't marked as a NOT query either. `parseQuery('-sort:name', now)` returns `sort: 'name'`, `errors: []` and `pro: []`. A user who meant \"not by name\" gets no hint that the minus…",
+      "language": ""
+    },
+    {
+      "id": 6055741487,
+      "number": 2,
+      "title": "Reversed date range like `created:2026-09-30..2026-09-01` silently matches nothing",
+      "url": "https://github.com/theluckystrike/search-operators/issues/2",
+      "repo": "theluckystrike/search-operators",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "hacktoberfest"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T08:39:06Z",
+      "updatedAt": "2026-10-27T08:39:06Z",
+      "body": "`parseDateSpec` in `src/query.ts` accepts a range `a..b` and returns `{ from: a.from, to: b.to }`. It never checks that `a` comes before `b`. So `created:2026-09-30..2026-09-01` parses without an error, gives a range where `from` is later than `to`, and lists zero notes. The status line shows a count of 0 and no hint, so it looks like there are no notes in September. Other bad dates already get a…",
+      "language": ""
+    },
+    {
+      "id": 6055740463,
+      "number": 3,
+      "title": "\"Go from a footnote definition to its reference\" fails on the second line of a multi-line definition",
+      "url": "https://github.com/theluckystrike/callout-table-footnotes/issues/3",
+      "repo": "theluckystrike/callout-table-footnotes",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "hacktoberfest"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T08:39:01Z",
+      "updatedAt": "2026-10-27T08:39:01Z",
+      "body": "A definition can run over several lines when the next lines are indented by two spaces or more. The README says so, and `scanFootnotes` already records those continuation lines in `scan.defLines`. The Pro command \"Go from a footnote definition to its reference\" only works when the caret is on the first line of the definition. On any continuation line it shows \"Place the caret on a footnote defini…",
+      "language": ""
+    },
+    {
+      "id": 6055739224,
+      "number": 2,
+      "title": "Footnote check says \"all 0 have a reference\" on a note with no footnotes",
+      "url": "https://github.com/theluckystrike/callout-table-footnotes/issues/2",
+      "repo": "theluckystrike/callout-table-footnotes",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "hacktoberfest"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T08:38:56Z",
+      "updatedAt": "2026-10-27T08:38:56Z",
+      "body": "The Pro command \"Check for unused and missing footnotes\" builds its notice with `describeProblems` in `src/footnotes.ts`. When nothing is wrong it prints `Footnotes: all ${scan.defs.length} have a reference and a definition.` That count is wrong in two cases. - A note with no footnotes at all gives `Footnotes: all 0 have a reference and a definition.` - A note where one label is defined twice cou…",
+      "language": ""
+    },
+    {
+      "id": 6055738086,
+      "number": 18,
+      "title": "Wire up unsaved form protection, which the README lists as a known limitation",
+      "url": "https://github.com/theluckystrike/tab-suspender-chrome-extension/issues/18",
+      "repo": "theluckystrike/tab-suspender-chrome-extension",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "hacktoberfest"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T08:38:52Z",
+      "updatedAt": "2026-10-27T12:07:20Z",
+      "body": "The README (line 30) says the \"Never suspend unsaved forms\" setting doesn't work yet. The pieces are mostly there. - The content script sends `FORM_STATUS` with `hasUnsavedForms` (`src/contentScript.js` lines 25 to 46). - The background handler drops it (`src/background.js` lines 276 and 277). - `shouldSuspendTab()` (lines 329 to 345) never checks it. - The settings page and onboarding save `neve…",
+      "language": ""
+    },
+    {
+      "id": 6055736882,
+      "number": 17,
+      "title": "Popup Suspend All and per-tab suspend skip the allowlist, pinned and audio rules",
+      "url": "https://github.com/theluckystrike/tab-suspender-chrome-extension/issues/17",
+      "repo": "theluckystrike/tab-suspender-chrome-extension",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "hacktoberfest"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T08:38:47Z",
+      "updatedAt": "2026-10-27T08:38:47Z",
+      "body": "The popup suspends tabs on its own instead of asking the background worker. `handleSuspendAll()` in `src/popup.js` (lines 300 to 330) and the per-tab button handler (line 244) both call `suspendTabDirect()` (lines 259 to 278). That function only skips `chrome://` pages, extension pages and tabs that are already suspended. So clicking Suspend All in the popup also suspends allowlisted sites (Gmail…",
+      "language": ""
+    },
+    {
+      "id": 6055735597,
+      "number": 16,
+      "title": "Any web page with suspended.html in its URL is treated as a suspended tab",
+      "url": "https://github.com/theluckystrike/tab-suspender-chrome-extension/issues/16",
+      "repo": "theluckystrike/tab-suspender-chrome-extension",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "hacktoberfest"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T08:38:42Z",
+      "updatedAt": "2026-10-27T08:38:42Z",
+      "body": "`isSuspendedPage()` in `src/background.js` lines 477 to 480 returns true for any URL that contains `suspended.html`. `src/popup.js` does the same inline check on lines 65, 117, 263, 284, 308, 339 and 432. So a normal page such as `https://example.com/account-suspended.html` is never auto-suspended, counts toward the badge and shows as suspended in the popup. It can also move the tab somewhere els…",
+      "language": ""
+    },
+    {
+      "id": 6055734456,
+      "number": 4,
+      "title": "Add unit tests for build_preset_tasks in pipeline/task_templates.py",
+      "url": "https://github.com/theluckystrike/100xagenticdev/issues/4",
+      "repo": "theluckystrike/100xagenticdev",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "hacktoberfest"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T08:38:37Z",
+      "updatedAt": "2026-10-27T08:38:37Z",
+      "body": "The repo has no tests. `pipeline/task_templates.py` is a good place to start because it's pure Python with no network calls, and the README's preset table (the \"Max agents\" column) depends on it. ## What to change Add `pipeline/test_task_templates.py` using the standard library `unittest`, since `requirements.txt` only lists `httpx`. Cover these cases. - An unknown preset name raises `ValueError`…",
+      "language": ""
+    },
+    {
+      "id": 6055733315,
+      "number": 3,
+      "title": "runner.py accepts zero or negative agent counts and silently builds the wrong task list",
+      "url": "https://github.com/theluckystrike/100xagenticdev/issues/3",
+      "repo": "theluckystrike/100xagenticdev",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "hacktoberfest"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T08:38:32Z",
+      "updatedAt": "2026-10-27T08:38:32Z",
+      "body": "In `pipeline/runner.py` the agent count, fan-out and budget options (lines 36 to 39 and 76) are plain `int` and `float` with no range check. The preset builders slice with `prompts[:n]`, so a bad value changes the run without any warning. - An agent count of 0 builds zero tasks. - An agent count of -3 builds 17 tasks for market_scan, because a negative slice drops items from the end. - A budget o…",
+      "language": ""
+    },
+    {
+      "id": 6062253116,
+      "number": 6,
+      "title": "feat: Add Go (go run) and C++ (CMake) language detection presets",
+      "url": "https://github.com/MaxwellAt/UnifiedCompiler/issues/6",
+      "repo": "MaxwellAt/UnifiedCompiler",
+      "labels": [
+        "enhancement",
+        "good first issue",
+        "ecosystem"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:24:11Z",
+      "updatedAt": "2026-10-27T15:24:11Z",
+      "body": "### Descrição da Funcionalidade Expandir a detecção automática de linguagens em `src/language.rs` para suportar projetos Go e C++. ### Critérios de Aceite - Detectar `go.mod` ou `main.go` -> comando padrão: `[\"go\", \"run\", \".\"]` - Detectar `CMakeLists.txt` -> comando padrão de compilação e execução - Adicionar exemplos de teste em `examples/go_job` e `examples/cpp_job`",
+      "language": ""
+    },
+    {
+      "id": 6062251576,
+      "number": 2,
+      "title": "feat: Support project-level configuration file (.unicomp.toml)",
+      "url": "https://github.com/MaxwellAt/UnifiedCompiler/issues/2",
+      "repo": "MaxwellAt/UnifiedCompiler",
+      "labels": [
+        "enhancement",
+        "good first issue",
+        "ergonomics"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:24:05Z",
+      "updatedAt": "2026-10-27T15:24:05Z",
+      "body": "### Descrição da Funcionalidade Permitir que o cliente leia um arquivo `.unicomp.toml` na raiz do projeto local. ### Caso de Uso Evita que o usuário precise digitar `--host 192.168.1.50:9876` toda vez no terminal. Basta digitar `unicomp run`. ### Exemplo de Configuração Proposta ```toml [host] default = \"192.168.1.50:9876\" timeout_seconds = 300 [sync] ignore = [\"datasets/\", \"*.tmp\"] artifacts = […",
+      "language": ""
+    },
+    {
+      "id": 6062100984,
+      "number": 205,
+      "title": "README env tables (all four languages) say SECRET_KEY has \"No default\" — code falls back to a random per-process key outside production and raises only in production",
+      "url": "https://github.com/BistaDinesh03/critique/issues/205",
+      "repo": "BistaDinesh03/critique",
+      "labels": [
+        "documentation",
+        "good first issue",
+        "beginner"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:15:48Z",
+      "updatedAt": "2026-10-27T15:19:40Z",
+      "body": " ## Problem The env table tells readers the strictest thing: | File | Line | Claim | |---|---|---| | `README.md` | 276 | `\\| SECRET_KEY \\| Signs session tokens and OAuth state \\| No default — generate: …` | | `README.zh-CN.md` | 259 | 无默认值 (same claim, translated) | | `README.ja.md` | 267 | デフォルトなし (same claim, translated) | | `README.es.md` | 280 | Sin valor por defecto (same claim, translated)…",
+      "language": ""
+    },
+    {
+      "id": 6062099532,
+      "number": 204,
+      "title": "docs/pull-request-review.md limitations claims \"No pull request in this repository has ever had a review on it\" — 13 PRs carry reviews",
+      "url": "https://github.com/BistaDinesh03/critique/issues/204",
+      "repo": "BistaDinesh03/critique",
+      "labels": [
+        "documentation",
+        "good first issue",
+        "beginner"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:15:44Z",
+      "updatedAt": "2026-10-27T15:15:44Z",
+      "body": " ## Problem `docs/pull-request-review.md:256-261` (on `origin/main`) justifies the tool's duplicate-suppression limitation with a factual claim that is no longer true: > \"**Duplicate suppression has not been exercised against a posted review.** No pull request in this repository has ever had a review on it, so the re-read-before-posting check has been run against real *empty* review state and aga…",
+      "language": ""
+    },
+    {
+      "id": 6062074848,
+      "number": 195,
+      "title": "README and CONTRIBUTING route newcomers to docs/issue-roadmap.md as a live plan, but 8 of its \"published\" rows are closed-completed and the summary still says \"42 new issues to publish\"",
+      "url": "https://github.com/BistaDinesh03/critique/issues/195",
+      "repo": "BistaDinesh03/critique",
+      "labels": [
+        "documentation",
+        "good first issue",
+        "beginner"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:14:25Z",
+      "updatedAt": "2026-10-27T15:14:25Z",
+      "body": " ## Problem Two entry points send first-time contributors into a file presented as current: - `README.md:405-407`: *\"…50 reviewed issues with the problem, scope, acceptance criteria, difficulty and relevant files spelled out for each. **Looking for something to work on?** Start with the curated plan…\"* - `CONTRIBUTING.md:126-129`: *\"A curated, reviewed plan of 50 issues lives in docs/issue-roadma…",
+      "language": ""
+    },
+    {
+      "id": 6062073422,
+      "number": 194,
+      "title": "The 60-second per-email magic-link cooldown is documented nowhere: retries return {\"ok\": true} and silently send nothing",
+      "url": "https://github.com/BistaDinesh03/critique/issues/194",
+      "repo": "BistaDinesh03/critique",
+      "labels": [
+        "documentation",
+        "good first issue",
+        "beginner"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:14:20Z",
+      "updatedAt": "2026-10-27T15:14:20Z",
+      "body": " ## Problem `backend/app/auth.py:34`: ```python _EMAIL_COOLDOWN_SECONDS = 60 ``` `backend/app/auth.py:475` (comment at the call site): ```python # Per-email cooldown. Silently accept but do not send if on cooldown. ``` So a second `/auth/email/start` for the same address within 60 seconds returns `{\"ok\": true}` and **no email is sent**. Meanwhile: - `docs/api.md:46` documents only: *\"Always `{\"ok…",
+      "language": ""
+    },
+    {
+      "id": 6062072066,
+      "number": 193,
+      "title": "Maintainer docs still claim this repo has no CI and no branch protection — and tell maintainers to create tests.yml from scratch",
+      "url": "https://github.com/BistaDinesh03/critique/issues/193",
+      "repo": "BistaDinesh03/critique",
+      "labels": [
+        "documentation",
+        "good first issue",
+        "beginner"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:14:16Z",
+      "updatedAt": "2026-10-27T15:14:16Z",
+      "body": " ## Problem Both places that explain the merge gate describe a repository that hasn't existed since 2026-10-18: `docs/pull-request-review.md:133-136`: > \"Two gates depend on settings that a script cannot change, and this repository **currently has neither**. Until both exist, `--merge` refuses by design…\" `docs/pull-request-review.md:140-166`: > \"1. **Add CI.** Create `.github/workflows/tests.yml…",
+      "language": ""
+    },
+    {
+      "id": 6062070690,
+      "number": 192,
+      "title": "GET /auth/email/verify with a missing `token` param returns framework 422 JSON instead of the designed /?error=email_link redirect",
+      "url": "https://github.com/BistaDinesh03/critique/issues/192",
+      "repo": "BistaDinesh03/critique",
+      "labels": [
+        "bug",
+        "good first issue",
+        "backend",
+        "tests",
+        "beginner"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:14:11Z",
+      "updatedAt": "2026-10-27T15:14:11Z",
+      "body": " ## Problem `backend/app/auth.py:511-518` (on `origin/main`): ```python @router.get(\"/email/verify\") def email_verify(     token: str,                                   # required query param — no default     db: Session = Depends(get_db),     _: None = Depends(rate_limit(\"email_login_verify\")), ):     \"\"\"Consume a magic-link token, establish a session, and redirect.\"\"\"     if not token or len(to…",
+      "language": ""
+    },
+    {
+      "id": 6062038169,
+      "number": 5,
+      "title": "GitHub Action wrapper",
+      "url": "https://github.com/celaldrg/aichurn/issues/5",
+      "repo": "celaldrg/aichurn",
+      "labels": [
+        "good first issue"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:12:27Z",
+      "updatedAt": "2026-10-27T15:12:27Z",
+      "body": "Let people add a churn check to CI without installing anything: ```yaml - uses: celaldrg/aichurn@v0   with:     fail-above: 15 ``` **Task** - Add `action.yml` (composite) that downloads the release binary for the runner OS/arch, verifies it, and runs `aichurn` with the given inputs (`args`, `fail-above`, `card`, `badge`). - Add a dogfood job to `.github/workflows/ci.yml`. - Document it in the REA…",
+      "language": ""
+    },
+    {
+      "id": 6062037771,
+      "number": 4,
+      "title": "CSV output (`--csv`)",
+      "url": "https://github.com/celaldrg/aichurn/issues/4",
+      "repo": "celaldrg/aichurn",
+      "labels": [
+        "good first issue"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:12:25Z",
+      "updatedAt": "2026-10-27T15:12:25Z",
+      "body": "Spreadsheets are the easiest place to compare repos. Add `--csv` that prints one row per period: `period,partial,ai_lines,ai_churn,human_lines,human_churn,ai_dup,human_dup,ai_moved,human_moved` **Task** - Add a `csv` function in `src/render.rs` next to `markdown` and `json`. - Wire the flag in `src/main.rs`; it should conflict with `--json` / `--markdown`. - Test it in `tests/cli.rs` against the…",
+      "language": ""
+    },
+    {
+      "id": 6062037420,
+      "number": 3,
+      "title": "Add a `--by week` period",
+      "url": "https://github.com/celaldrg/aichurn/issues/3",
+      "repo": "celaldrg/aichurn",
+      "labels": [
+        "good first issue"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:12:24Z",
+      "updatedAt": "2026-10-27T15:12:24Z",
+      "body": "`--by` supports `quarter` and `month`. Small repos with a short history would read better per week. **Task** - Extend `period_key` / `period_end` in `src/engine.rs` with ISO weeks (`2026-W43`). - Accept `week` in `src/main.rs` and update `--help` and the README. - Add a unit test for a week that crosses a year boundary.",
+      "language": ""
+    },
+    {
+      "id": 6062036968,
+      "number": 2,
+      "title": "Detect more agent signatures (Cline, Kilo Code, Roo Code, Augment)",
+      "url": "https://github.com/celaldrg/aichurn/issues/2",
+      "repo": "celaldrg/aichurn",
+      "labels": [
+        "good first issue"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:12:23Z",
+      "updatedAt": "2026-10-27T15:12:23Z",
+      "body": "`src/agents.rs` recognises 14 agents from self-declared commit trailers and author emails. Some newer agents are missing. **Task** - Find a real commit made by Cline, Kilo Code, Roo Code or Augment (search GitHub for their `Co-authored-by` trailer or bot email). - Add a rule to `src/agents.rs`, matching only that exact signature (no loose name prefixes: `opencode <` once matched a release bot). -…",
+      "language": ""
+    },
+    {
+      "id": 6062011939,
+      "number": 191,
+      "title": "\"Project URL\" and \"Short description\" are labeled (required) but enforced nowhere — no HTML `required`, and the API accepts `null`",
+      "url": "https://github.com/BistaDinesh03/critique/issues/191",
+      "repo": "BistaDinesh03/critique",
+      "labels": [
+        "bug",
+        "good first issue",
+        "frontend",
+        "beginner"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:11:02Z",
+      "updatedAt": "2026-10-27T15:11:02Z",
+      "body": " ## Problem The submission form makes a promise no layer keeps (`frontend/index.html`, on `origin/main`): ```html L1200: <label ...>Project title <span class=\"form-required\">(required)</span></label> L1201: <input ... id=\"title\" ... required ...>                     ← enforced L1205: <label ...>Project URL <span class=\"form-required\">(required)</span></label> L1206: <input type=\"url\" id=\"url\" ...…",
+      "language": ""
+    },
+    {
+      "id": 6062010209,
+      "number": 190,
+      "title": "The results page's failure state is invisible to screen readers and offers no retry, unlike every sibling page",
+      "url": "https://github.com/BistaDinesh03/critique/issues/190",
+      "repo": "BistaDinesh03/critique",
+      "labels": [
+        "bug",
+        "accessibility",
+        "good first issue",
+        "frontend",
+        "beginner"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:10:57Z",
+      "updatedAt": "2026-10-27T15:10:57Z",
+      "body": " ## Problem `frontend/project_results.html:562-564`: ```js } catch (error) {     content.innerHTML = '<div class=\"error-state\"><p>Something went wrong. Please try again.</p></div>'; } ``` Two defects, both in one line: 1. **No `role=\"alert\"`** — text injected via `innerHTML` into a container that is not a live region is never announced. A screen-reader user whose results load fails hears *nothing…",
+      "language": ""
+    },
+    {
+      "id": 6062008501,
+      "number": 189,
+      "title": "--text-muted (#888888) and the placeholder grey (#999999) fail the 4.5:1 contrast minimum across the whole site",
+      "url": "https://github.com/BistaDinesh03/critique/issues/189",
+      "repo": "BistaDinesh03/critique",
+      "labels": [
+        "bug",
+        "accessibility",
+        "good first issue",
+        "frontend",
+        "beginner"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:10:52Z",
+      "updatedAt": "2026-10-27T15:10:52Z",
+      "body": " ## Problem `static/shared.css:12` defines the site's most-used secondary text colour: ```css --text-muted: #888888;   /* shared.css:12 */ ``` and `static/shared.css:393` sets the placeholder colour: ```css color: #999999;          /* .form-input::placeholder, .form-textarea::placeholder */ ``` Measured contrast ratios (WCAG 1.4.3 requires **≥4.5:1** for text this size — every usage is 10–14px):…",
+      "language": ""
+    },
+    {
+      "id": 6062006592,
+      "number": 188,
+      "title": "DELETE /api/projects/{id} returns 500 instead of 404 for IDs outside the signed 64-bit range (the one project_id route #107/#120 missed)",
+      "url": "https://github.com/BistaDinesh03/critique/issues/188",
+      "repo": "BistaDinesh03/critique",
+      "labels": [
+        "bug",
+        "good first issue",
+        "backend",
+        "tests",
+        "beginner"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:10:46Z",
+      "updatedAt": "2026-10-27T15:10:46Z",
+      "body": " ## Problem `backend/app/routes_projects.py:326-336` (on `origin/main`) is the last `project_id` route without the range guard that the rest of the API already has: ```python @router.delete(\"/{project_id}\", status_code=204) def delete_project(     project_id: int,     ... ):     \"\"\"Delete a project. Only the owner can delete it.\"\"\"     project = db.query(Project).filter(Project.id == project_id).…",
+      "language": ""
+    },
+    {
+      "id": 6061985692,
+      "number": 12,
+      "title": "Remove the initial wait for the startup of the ide- the extra 5 secs",
+      "url": "https://github.com/somayaj/reaper/issues/12",
+      "repo": "somayaj/reaper",
+      "labels": [
+        "good first issue"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:09:42Z",
+      "updatedAt": "2026-10-27T15:09:51Z",
+      "body": "The logo wait has an additional 5 sec timer wait on IDE startup, remove to it loads up faster. ",
+      "language": ""
+    },
+    {
+      "id": 6061975997,
+      "number": 2,
+      "title": "Issue Title",
+      "url": "https://github.com/ogniank/HTML-and-CSS-Projects/issues/2",
+      "repo": "ogniank/HTML-and-CSS-Projects",
+      "labels": [
+        "documentation",
+        "good first issue"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:09:12Z",
+      "updatedAt": "2026-10-27T15:09:12Z",
+      "body": "<!-- Edit the body of your new issue then click the ✓ \"Create Issue\" button in the top right of the editor. The first line will be the issue title. Assignees and Labels follow after a blank line. Leave an empty line before beginning the body of the issue. -->",
+      "language": ""
+    },
+    {
+      "id": 6061893444,
+      "number": 187,
+      "title": "Space and channel deletions leave the icon and attachment files in object storage",
+      "url": "https://github.com/Aizen93/voxium/issues/187",
+      "repo": "Aizen93/voxium",
+      "labels": [
+        "bug",
+        "help wanted",
+        "good first issue",
+        "severity: low",
+        "area: uploads",
+        "skill: backend"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:05:00Z",
+      "updatedAt": "2026-10-27T15:05:00Z",
+      "body": "When an admin deletes a space, its icon file is never deleted (the owner's delete path does delete it). And neither space deletion (owner or admin) nor channel deletion deletes the files of the message attachments that the database cascade removes, so those files stay in object storage until the orphan sweep finds them after its grace period, instead of being deleted with their rows. ### Details…",
+      "language": ""
+    },
+    {
+      "id": 6061890324,
+      "number": 185,
+      "title": "Video and audio attachments are downloaded whole on render, with no playback fallback",
+      "url": "https://github.com/Aizen93/voxium/issues/185",
+      "repo": "Aizen93/voxium",
+      "labels": [
+        "help wanted",
+        "good first issue",
+        "severity: low",
+        "performance",
+        "area: uploads",
+        "skill: frontend"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:04:50Z",
+      "updatedAt": "2026-10-27T15:04:50Z",
+      "body": "Every image, video and audio attachment is fetched in full, as a blob, as soon as its message renders. For video and audio that means the whole file (videos up to 12 MB) is downloaded into memory just by scrolling past it, which makes `preload=\"metadata\"` pointless. A failed fetch is not logged, and a blob the browser cannot decode leaves dead player controls. ### Details - `apps/desktop/src/comp…",
+      "language": ""
+    },
+    {
+      "id": 6061888714,
+      "number": 184,
+      "title": "E2E helpers call \"localhost\" but the API listens on IPv4 only; fails where localhost is ::1",
+      "url": "https://github.com/Aizen93/voxium/issues/184",
+      "repo": "Aizen93/voxium",
+      "labels": [
+        "bug",
+        "help wanted",
+        "good first issue",
+        "severity: low",
+        "area: test-infra",
+        "skill: testing"
+      ],
+      "state": "open",
+      "createdAt": "2026-10-27T15:04:45Z",
+      "updatedAt": "2026-10-27T15:04:45Z",
+      "body": "The API server listens on `0.0.0.0` (IPv4 only), while the Playwright config, the e2e helpers and a few specs address it as `http://localhost:3001`. Since Node 17, `localhost` resolves in the operating system's order, and on machines where that is `::1` first (typically Windows) the helper calls get `ECONNREFUSED`, unless `NODE_OPTIONS=--dns-result-order=ipv4first` is set, which is documented now…",
+      "language": ""
+    }
+  ],
+  "requested": 81
+}

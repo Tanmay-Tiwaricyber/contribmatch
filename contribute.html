@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contribute — ContribMatch</title>
+<meta name="description" content="Good first issues, design contribution rules, and how to open a pull request to ContribMatch — an MIT licensed, open-source project.">
+<link rel="canonical" href="https://contribmatch.github.io/contribmatch/contribute.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ContribMatch">
+<meta property="og:title" content="Contribute — ContribMatch">
+<meta property="og:description" content="Good first issues and how to open a pull request to ContribMatch.">
+<meta property="og:url" content="https://contribmatch.github.io/contribmatch/contribute.html">
+<meta property="og:image" content="https://contribmatch.github.io/contribmatch/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contribute — ContribMatch">
+<meta name="twitter:description" content="Good first issues and how to open a pull request to ContribMatch.">
+<meta name="twitter:image" content="https://contribmatch.github.io/contribmatch/assets/og-image.png">
+<meta name="theme-color" content="#faf8f4">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/icons/icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/mascot.css">
+<link rel="stylesheet" href="css/heatmap.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/pages.css">
+<script>
+  (function () {
+    try {
+      var mode = localStorage.getItem('contribmatch:v1:theme') || 'system';
+      var dark = mode === 'dark' || (mode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      var lang = localStorage.getItem('contribmatch:v1:lang') || 'en';
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.lang = lang === 'hi' ? 'hi' : (lang === 'hinglish' ? 'en-Latn' : 'en');
+    } catch (e) { /* ignore */ }
+  })();
+</script>
+</head>
+<body data-page="home">
+<a class="skip-link" href="#main" data-i18n="skip.link">Skip to main content</a>
+<div id="site-header"></div>
+
+<main id="main" class="page">
+  <div class="container container--narrow">
+    <nav aria-label="Breadcrumb">
+      <ol class="breadcrumbs">
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><span aria-current="page" data-i18n="contribute.eyebrow">Contribute</span></li>
+      </ol>
+    </nav>
+
+    <div class="page__head">
+      <h1 class="page__title" data-i18n-html="contribute.title">Help make ContribMatch better</h1>
+      <p class="page__lede" data-i18n="contribute.lede"></p>
+    </div>
+
+    <div class="prose">
+      <h2 id="first">Start with a starter issue</h2>
+      <p>
+        Fifteen starter issues are listed in
+        <a href="https://github.com/contribmatch/contribmatch/blob/main/docs/GOOD_FIRST_ISSUES.md"><code>docs/GOOD_FIRST_ISSUES.md</code></a>.
+        They cover packs, translations, interface work, tests and documentation, and five
+        of them are design tasks. Comment on the issue before you start so two people do
+        not do the same work.
+      </p>
+
+      <h2 id="setup">Set the project up</h2>
+      <div class="code" data-copy>
+        <div class="code__head"><span class="code__lang">bash</span></div>
+        <pre><code>git clone https://github.com/contribmatch/contribmatch.git
+cd contribmatch
+npm install          # dev tools only: the app itself needs nothing
+npm test             # runs the whole test suite
+python3 -m http.server 8080</code></pre>
+      </div>
+      <p>
+        The app has no build step. <code>npm install</code> only pulls the development
+        tools (the screenshot script and the accessibility audit). The site itself is
+        plain HTML, CSS and ES modules.
+      </p>
+
+      <h2 id="workflow">The pull request workflow</h2>
+      <ol>
+        <li>Fork the repository and create a branch from <code>main</code>.</li>
+        <li>Read <code>CONTRIBUTING.md</code> — especially the design rules below.</li>
+        <li>Make the change, and run <code>npm test</code> before you push.</li>
+        <li>Open a pull request that says what changed and why, and link the issue.</li>
+      </ol>
+
+      <h2 id="design">Design contribution rules</h2>
+      <p>
+        ContribMatch has a strict visual language. These rules are not preferences; a
+        pull request that breaks them will be asked to change.
+      </p>
+      <ul>
+        <li>One accent colour only: <code>#2d81ff</code>. No second accent, no gradients, no glows, no glassmorphism.</li>
+        <li>Type is Archivo for display, Instrument Serif italic for one emphasised phrase per heading, Geist Mono for labels and numbers, Inter for body text.</li>
+        <li>An 8px spacing rhythm, with 4px fine tuning. Borders are 1px and crisp.</li>
+        <li>Every interactive element needs a visible <code>:focus-visible</code> state and a touch target of at least 44px.</li>
+        <li>Contrast is checked: body text at 4.5:1, controls and graphics at 3:1. Run <code>node tools/contrast.mjs --strict</code>.</li>
+        <li>Motion is under 250ms, purposeful, and disabled under <code>prefers-reduced-motion</code>.</li>
+        <li>No emoji as decoration. No invented statistics, testimonials or logos.</li>
+        <li>Copy is plain and specific. Banned words: revolutionise, supercharge, seamless, unlock.</li>
+      </ul>
+      <p>
+        The living style guide, with measured contrast ratios, is at
+        <a href="design-system.html">design-system.html</a>.
+      </p>
+
+      <h2 id="adding">Adding something new</h2>
+      <ul>
+        <li><strong>A community pack</strong> — see <a href="packs.html#add">packs</a>. JSON or YAML, validated by <code>npm run validate:packs</code>.</li>
+        <li><strong>A translation</strong> — add or extend a file in <code>js/i18n/</code>. Every key in <code>en.js</code> must exist in all three dictionaries.</li>
+        <li><strong>A test</strong> — tests live in <code>tests/</code> and run with <code>node --test</code>.</li>
+      </ul>
+
+      <h2 id="conduct">Code of conduct</h2>
+      <p>
+        ContribMatch follows the
+        <a href="https://github.com/contribmatch/contribmatch/blob/main/CODE_OF_CONDUCT.md">Contributor Covenant</a>.
+        Be patient with beginners, including beginners on the project itself. That is the
+        whole point of it.
+      </p>
+    </div>
+
+    <div class="cta-band" style="margin-top: var(--sp-8);">
+      <div>
+        <h2>Questions first</h2>
+        <p>
+          If something is unclear, open an issue and ask. A question costs nothing and
+          the answer helps the next person.
+        </p>
+      </div>
+      <div class="cluster">
+        <a class="btn btn--primary" href="https://github.com/contribmatch/contribmatch/issues" target="_blank" rel="noopener noreferrer">Open an issue</a>
+        <a class="btn btn--secondary" href="docs.html">Read the docs</a>
+      </div>
+    </div>
+
+    <p class="field__error" data-page-error hidden role="alert"></p>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
