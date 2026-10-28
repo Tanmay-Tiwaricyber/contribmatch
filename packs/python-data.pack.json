@@ -11,7 +11,7 @@
   "ecosystems": ["python", "data"],
   "license": "CC0-1.0",
   "author": "ContribMatch community",
-  "homepage": "https://github.com/contribmatch/contribmatch/tree/main/packs",
+  "homepage": "https://github.com/Tanmay-Tiwaricyber/contribmatch/tree/main/packs",
   "vocabulary": {
     "pull request": "A change you propose to a Python project, with a description and a test.",
     "type hint": "A type written next to a function so readers and tools know what to expect."

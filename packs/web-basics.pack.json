@@ -11,7 +11,7 @@
   "ecosystems": ["web", "frontend"],
   "license": "CC0-1.0",
   "author": "ContribMatch community",
-  "homepage": "https://github.com/contribmatch/contribmatch/tree/main/packs",
+  "homepage": "https://github.com/Tanmay-Tiwaricyber/contribmatch/tree/main/packs",
   "vocabulary": {
     "pull request": "A change you propose to a project, with a description of what changed and why.",
     "issue": "A task someone wrote down for the project.",

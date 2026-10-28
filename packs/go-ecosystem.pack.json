@@ -11,7 +11,7 @@
   "ecosystems": ["go", "cli"],
   "license": "CC0-1.0",
   "author": "ContribMatch community",
-  "homepage": "https://github.com/contribmatch/contribmatch/tree/main/packs",
+  "homepage": "https://github.com/Tanmay-Tiwaricyber/contribmatch/tree/main/packs",
   "vocabulary": {
     "interface": "A set of methods a value promises to have, so other code can use it without knowing the concrete type.",
     "benchmark": "A test that measures how fast something runs, and how much it allocates."

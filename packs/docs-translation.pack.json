@@ -11,7 +11,7 @@
   "ecosystems": ["docs"],
   "license": "CC0-1.0",
   "author": "ContribMatch community",
-  "homepage": "https://github.com/contribmatch/contribmatch/tree/main/packs",
+  "homepage": "https://github.com/Tanmay-Tiwaricyber/contribmatch/tree/main/packs",
   "vocabulary": {
     "pull request": "A change to words on a page, with the same shape as the original text."
   },

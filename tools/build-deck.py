@@ -300,7 +300,7 @@ s = add_slide()
 title_and_body(s, "Try it", [], "try it", 11)
 rect(s, 0.55, 1.9, 6.4, 1.35, INK)
 textbox(s, 0.8, 2.05, 6.0, 1.1, [
-    ("git clone https://github.com/contribmatch/contribmatch", {"size": 12, "color": PAPER, "font": "Consolas", "space": 2}),
+    ("git clone https://github.com/Tanmay-Tiwaricyber/contribmatch", {"size": 12, "color": PAPER, "font": "Consolas", "space": 2}),
     ("cd contribmatch && npm install && npm run serve", {"size": 12, "color": PAPER, "font": "Consolas", "space": 2}),
 ])
 textbox(s, 0.55, 3.55, 6.4, 3.2, bullets([
@@ -312,9 +312,9 @@ rect(s, 7.15, 1.9, 5.6, 4.4, PAPER_RAISED)
 textbox(s, 7.45, 2.15, 5.0, 0.5, [("LINKS", {"size": 11, "color": INK_2, "font": "Consolas"})])
 textbox(s, 7.45, 2.7, 5.0, 3.4, [
     ("Live app", {"size": 14, "bold": True}),
-    ("https://<user>.github.io/contribmatch/", {"size": 13, "color": ACCENT, "space": 12}),
+    ("https://tanmay-tiwaricyber.github.io/contribmatch/", {"size": 13, "color": ACCENT, "space": 12}),
     ("Repository", {"size": 14, "bold": True}),
-    ("https://github.com/<user>/contribmatch", {"size": 13, "color": ACCENT, "space": 12}),
+    ("https://github.com/Tanmay-Tiwaricyber/contribmatch", {"size": 13, "color": ACCENT, "space": 12}),
     ("Demo video", {"size": 14, "bold": True}),
     ("link to be added on submission", {"size": 13, "color": INK_2}),
 ])
@@ -340,7 +340,7 @@ textbox(s, 0.7, 2.7, 11.9, 1.2, [
     ("Find an issue you can actually finish.", {"size": 40, "bold": True, "color": WHITE}),
 ])
 textbox(s, 0.7, 4.1, 11.9, 2.2, [
-    ("Live: https://<user>.github.io/contribmatch/   ·   Code: https://github.com/<user>/contribmatch   ·   Demo: [video link]", {"size": 14, "color": PAPER, "font": "Consolas"}),
+    ("Live: https://tanmay-tiwaricyber.github.io/contribmatch/   ·   Code: https://github.com/Tanmay-Tiwaricyber/contribmatch   ·   Demo: [video link]", {"size": 14, "color": PAPER, "font": "Consolas"}),
     ("MIT licensed. Open-source because the contribution pipeline is the product, and the product should belong to the people building it.", {"size": 14, "color": RGBColor(0xAA, 0xAA, 0xB0)}),
     ("Built by Tanmay Tiwari · Built for Hacktoberfest HackDays · Powered by open-weight Gemma", {"size": 14, "color": RGBColor(0x8A, 0x8A, 0x90)}),
 ])

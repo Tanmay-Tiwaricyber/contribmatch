@@ -123,7 +123,7 @@ tools/       validation, contrast audit, accessibility audit, screenshots
 There is no build step. Clone and open it.
 
 ```bash
-git clone https://github.com/contribmatch/contribmatch.git
+git clone https://github.com/Tanmay-Tiwaricyber/contribmatch.git
 cd contribmatch
 npm install          # only needed for the dev tools (puppeteer, axe-core)
 npm run serve        # http://localhost:8080

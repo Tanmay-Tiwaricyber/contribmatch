@@ -240,7 +240,7 @@ first three are the only ones that matter if the time is short.
 **11 — Try it**
 
 > ```bash
-> git clone https://github.com/contribmatch/contribmatch
+> git clone https://github.com/Tanmay-Tiwaricyber/contribmatch
 > cd contribmatch && npm install && npm run serve
 > ```
 >

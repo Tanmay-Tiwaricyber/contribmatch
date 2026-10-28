@@ -37,7 +37,7 @@ const FOOTER_COLUMNS = [
       { href: 'contribute.html', key: 'nav.contribute' },
       { href: 'packs.html#add', key: 'packs.add' },
       { href: 'open-innovation.html', key: 'nav.home', label: 'Why open innovation matters' },
-      { href: 'https://github.com/contribmatch/contribmatch/issues', key: 'nav.contribute', label: 'Issue tracker' },
+      { href: 'https://github.com/Tanmay-Tiwaricyber/contribmatch/issues', key: 'nav.contribute', label: 'Issue tracker' },
     ],
   },
   {
@@ -45,13 +45,13 @@ const FOOTER_COLUMNS = [
     links: [
       { href: 'docs.html', key: 'nav.docs' },
       { href: 'privacy.html', key: 'nav.privacy' },
-      { href: 'https://github.com/contribmatch/contribmatch', key: 'footer.repo' },
-      { href: 'https://github.com/contribmatch/contribmatch/blob/main/LICENSE', key: 'footer.license' },
+      { href: 'https://github.com/Tanmay-Tiwaricyber/contribmatch', key: 'footer.repo' },
+      { href: 'https://github.com/Tanmay-Tiwaricyber/contribmatch/blob/main/LICENSE', key: 'footer.license' },
     ],
   },
 ];
 
-const REPO_URL = 'https://github.com/contribmatch/contribmatch';
+const REPO_URL = 'https://github.com/Tanmay-Tiwaricyber/contribmatch';
 
 /** Build the language switch. */
 function createLanguageSwitch() {
