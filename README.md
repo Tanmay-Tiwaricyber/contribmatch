@@ -155,6 +155,40 @@ Other scripts:
 
 ---
 
+## Running Gemma, the model behind the matcher
+
+Gemma makes the project tick: after the transparent rule-based ranker scores
+every issue, only the top eight are sent to Gemma, which rates each one for
+ease, clarity and fit — and that rating is blended at 35% into the final
+score. It also writes the plain-language coaching notes. If no model is
+available, the app still works fully on rules and says so in a banner.
+
+Two supported ways to run it, both optional and both user-owned:
+
+**Option A — Gemma 3 on your own machine (Ollama, no API key, no data leaves
+your computer):**
+
+```bash
+ollama pull gemma3:4b     # or gemma3:12b / gemma3:27b, per your hardware
+OLLAMA_ORIGINS=http://localhost:8080 ollama serve
+```
+
+Open **Docs → Settings** in the site, pick **Ollama** as the provider with the
+model `gemma3:4b`, and save. `OLLAMA_ORIGINS` must include the origin the site
+is served from — for GitHub Pages that is `https://<user>.github.io`.
+
+**Option B — hosted Gemma via Google AI Studio (no install):**
+
+Create a free key at [aistudio.google.com](https://aistudio.google.com), open
+**Docs → Settings**, choose **Google AI Studio** as the provider with the model
+`gemma-3-27b-it` (or `gemma-3-12b-it`), and paste the key. It lives in
+`sessionStorage` for the tab only and is sent to nothing but Google.
+
+The settings screen confirms which model it reached. There is also **Mock
+mode** for a completely offline demo of the whole flow.
+
+---
+
 ## Settings
 
 Open **Docs → Settings** in the running site, or use the controls in the
