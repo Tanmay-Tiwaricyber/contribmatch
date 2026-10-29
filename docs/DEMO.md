@@ -259,6 +259,10 @@ first three are the only ones that matter if the time is short.
 > - The search only sees what GitHub's search index sees.
 > - It is a static site, which means it cannot do anything on your behalf,
 >   and that is on purpose.
+>
+> The deck presents these as **"By design, not by accident"** — the same five
+> facts, framed as deliberate decisions rather than shortcomings. Say them
+> either way; never drop them.
 
 ---
 

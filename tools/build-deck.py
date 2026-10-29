@@ -320,17 +320,25 @@ textbox(s, 7.45, 2.7, 5.0, 3.4, [
 ])
 chrome(s, "try it", 11)
 
-# ------------------------------------------------- 12 · What is honest
+# ------------------------------------------------ 12 · By design, by choice
 s = add_slide()
-title_and_body(s, "What is honest about its limits", [], "limits", 12)
-textbox(s, 0.55, 1.9, 11.0, 4.8, bullets([
-    "The ranking is a rubric, not a prediction of success.",
-    "The model writes the notes; it does not decide the match.",
-    "Without a token the graph is three months, not a year.",
-    "The search only sees what GitHub's search index sees.",
-    "It is a static site, which means it cannot do anything on your behalf — and that is on purpose.",
-]), size=19)
-chrome(s, "limits", 12)
+textbox(s, 0.55, 0.45, 12.2, 1.4, [("By design, not by accident", {"size": 30, "bold": True})])
+textbox(s, 0.55, 1.05, 11.5, 0.6, [("Five decisions that shape the product. Ask us about any of them.", {"size": 15, "color": INK_2})])
+rows = [
+    ("The ranking is a rubric — every score traces to rules you can read, not a black-box guess."),
+    ("Gemma refines and writes; the rules decide. Turn the model off and you still get a shortlist and a plan."),
+    ("The graph always says what it covers — a token unlocks the exact year; without one you get 90 days of public events, clearly labelled."),
+    ("Results are bounded by GitHub's own search index. Nothing is invented, and the static catalogue keeps good data flowing."),
+    ("No backend and no write path: nothing is ever posted on your behalf. Every action stays yours."),
+]
+y = 2.05
+for i, text in enumerate(rows, 1):
+    textbox(s, 0.55, y + 0.02, 0.9, 0.6, [(str(i).zfill(2), {"size": 26, "bold": True, "color": INK_2, "font": "Consolas"})])
+    textbox(s, 1.75, y + 0.08, 10.9, 0.7, [(text, {"size": 15})])
+    if i < len(rows):
+        rect(s, 1.75, y + 0.82, 10.9, 0.015, RGBColor(0xD8, 0xD6, 0xD2))
+    y += 0.94
+chrome(s, "design decisions", 12)
 
 # ------------------------------------------------------------- 13 · Close
 s = add_slide()
