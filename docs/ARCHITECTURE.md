@@ -84,7 +84,7 @@ import { rankIssues } from '../core/ranker.js';
 | `normalize.js` | Turns raw GitHub shapes into the internal shape. Also the level thresholds and the heat buckets. |
 | `profile.js` | Reads the public profile and infers skills and level. |
 | `issues.js` | The Scout: per-language searches, dedupe, batched repository lookups. |
-| `contributions.js` | The exact → approximate → sample chain. |
+| `contributions.js` | The exact → approximate (events + a year of public issues and pull requests) → sample chain. |
 
 ### `js/ui`
 

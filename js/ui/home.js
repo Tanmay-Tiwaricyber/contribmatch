@@ -110,9 +110,14 @@ export function initHome(opts = {}) {
     });
 
     // The graph shows the window the data actually covers, so it never
-    // implies a full year when the data is only an approximation.
+    // implies a full year when the data is only an approximation. The
+    // events-year source does cover a full year of opens, so it draws wide.
     const maxWeeks =
-      contributions.source === 'events' ? 13 : contributions.source === 'sample' ? 26 : 53;
+      contributions.source === 'events'
+        ? 13
+        : contributions.source === 'sample'
+          ? 26
+          : 53;
 
     const heat = createHeatmap({
       days: contributions.days,

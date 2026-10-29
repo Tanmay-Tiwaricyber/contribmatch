@@ -3,8 +3,10 @@
  *
  * Three providers, in order of accuracy:
  *
- *   1. exact       — GitHub GraphQL contribution calendar. Needs a token.
- *   2. approximate — public REST events, roughly the last 90 days / 300 events.
+ *   1. exact        — GitHub GraphQL contribution calendar. Needs a token.
+ *   2. approximate — public REST events for the last 90 days / 300 events,
+ *                    widened to a year of the user's public issues and pull
+ *                    requests from the search API (still no token).
  *   3. sample      — synthetic data, clearly labelled.
  *
  * Every provider returns the same shape:
@@ -13,13 +15,17 @@
  * No scraping. No third-party contribution proxies.
  */
 
-import { normalizeEvents, normalizeGraphQL, toDayKey } from './normalize.js';
+import { normalizeEvents, normalizeGraphQL, mergeAuthoredDays, toDayKey } from './normalize.js';
 
 export const CONTRIBUTION_SOURCES = {
   GRAPHQL: 'graphql',
   EVENTS: 'events',
+  EVENTS_YEAR: 'events-year',
   SAMPLE: 'sample',
 };
+
+/** Maximum search pages fetched per type (issues, pull requests). */
+export const MAX_AUTHOR_PAGES = 2;
 
 const GRAPHQL_QUERY = `query ContributionCalendar($login: String!) {
   user(login: $login) {
@@ -68,11 +74,56 @@ export async function fetchExactContributions(client, login, { signal } = {}) {
 }
 
 /**
- * Provider 2 — approximate calendar from public events.
+ * The search query for one year of the user's own public issues or pull
+ * requests, starting at `sinceKey` (YYYY-MM-DD).
+ * @param {string} login
+ * @param {'pr'|'issue'} type
+ * @param {string} sinceKey
+ */
+export function authoredSearchQuery(login, type, sinceKey) {
+  return `author:${login} type:${type} created:>=${sinceKey}`;
+}
+
+/**
+ * The year layer: the user's own public issues and pull requests for the
+ * last year, from the search API. Same origin and rules as every other
+ * GitHub call — queued, cached, no token needed.
+ *
  * @param {object} client
  * @param {string} login
+ * @param {{sinceKey?: string, signal?: AbortSignal}} [opts]
+ * @returns {Promise<object[]>}
  */
-export async function fetchApproximateContributions(client, login, { signal } = {}) {
+export async function fetchAuthoredYear(client, login, { sinceKey, signal } = {}) {
+  const items = [];
+  for (const type of ['pr', 'issue']) {
+    for (let page = 1; page <= MAX_AUTHOR_PAGES; page++) {
+      const res = await client.searchIssues(
+        authoredSearchQuery(login, type, sinceKey),
+        { perPage: 100, page },
+        { signal }
+      );
+      const batch = Array.isArray(res?.items) ? res.items : [];
+      items.push(...batch);
+      if (batch.length < 100) break;
+    }
+  }
+  return items;
+}
+
+/**
+ * Provider 2 — approximate calendar from public events, widened to a year of
+ * the user's public issues and pull requests when the search API cooperates.
+ *
+ * The event detail (commits, reviews, comments) covers roughly the last 90
+ * days; the year layer fills the older months with opens only. The recent
+ * days are never doubled: search items inside the events window are skipped.
+ *
+ * @param {object} client
+ * @param {string} login
+ * @param {{signal?: AbortSignal, now?: Date}} [opts]
+ */
+export async function fetchApproximateContributions(client, login, { signal, now = new Date() } = {}) {
   const events = [];
   for (let page = 1; page <= MAX_EVENT_PAGES; page++) {
     const batch = await client.getPublicEvents(login, { perPage: 100, page }, { signal });
@@ -81,8 +132,40 @@ export async function fetchApproximateContributions(client, login, { signal } = 
     if (batch.length < 100) break;
   }
 
-  const { days, totals } = normalizeEvents(events, { days: 91 });
-  return { days, totals, source: CONTRIBUTION_SOURCES.EVENTS, eventCount: events.length };
+  const recent = normalizeEvents(events, { days: 91, now });
+  const base = { ...recent, source: CONTRIBUTION_SOURCES.EVENTS, eventCount: events.length };
+
+  // The year layer is best effort: if search is rate limited or offline, the
+  // 90-day approximation is what gets shown — degraded, clearly labelled,
+  // never wrong.
+  const windowStartKey = recent.days[0]?.date ?? '';
+  if (!windowStartKey) return base;
+  let items;
+  try {
+    const sinceKey = new Date(now.getTime() - 364 * 86400000).toISOString().slice(0, 10);
+    items = await fetchAuthoredYear(client, login, { sinceKey, signal });
+  } catch {
+    return base;
+  }
+
+  const days = normalizeEvents(events, { days: 365, now });
+  const merged = mergeAuthoredDays(days.days, items, { beforeKey: windowStartKey });
+  const totals = { ...days.totals, total: 0 };
+  let total = 0;
+  for (const day of days.days) {
+    day.count = day.byType.commits + day.byType.pullRequests + day.byType.issues + day.byType.reviews;
+    for (const key of Object.keys(day.byType)) totals[key] += day.byType[key];
+    total += day.count;
+  }
+  totals.total = total;
+  return {
+    days: days.days,
+    totals,
+    source: CONTRIBUTION_SOURCES.EVENTS_YEAR,
+    eventCount: events.length,
+    yearItems: items.length,
+    merged,
+  };
 }
 
 /**
@@ -176,6 +259,7 @@ export function sourceLabel(source) {
     case CONTRIBUTION_SOURCES.GRAPHQL:
       return 'Exact';
     case CONTRIBUTION_SOURCES.EVENTS:
+    case CONTRIBUTION_SOURCES.EVENTS_YEAR:
       return 'Approximate';
     default:
       return 'Sample';
@@ -190,6 +274,8 @@ export function sourceNote(source) {
   switch (source) {
     case CONTRIBUTION_SOURCES.GRAPHQL:
       return 'Full contribution calendar from the GitHub GraphQL API.';
+    case CONTRIBUTION_SOURCES.EVENTS_YEAR:
+      return 'A full year of your public issues and pull requests, with commit and review detail from the last 90 days (approximate). Add a token for the exact calendar.';
     case CONTRIBUTION_SOURCES.EVENTS:
       return 'Based on recent public activity (approximate). Add a token for the full year.';
     default:

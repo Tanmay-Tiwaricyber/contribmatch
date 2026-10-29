@@ -253,7 +253,7 @@ s = add_slide()
 title_and_body(s, "Exact versus approximate data", [], "honesty", 8)
 modes = [
     ("Exact", "a token is set", "the full calendar from GraphQL"),
-    ("Approximate", "no token", "about 90 days of public events, mapped"),
+    ("Approximate", "no token", "a full year of public issues + pull requests (search API), 90 days of event detail"),
     ("Sample", "no name yet", "clearly labelled sample data"),
 ]
 y = 2.0
@@ -327,7 +327,7 @@ textbox(s, 0.55, 1.05, 11.5, 0.6, [("Five decisions that shape the product. Ask 
 rows = [
     ("The ranking is a rubric — every score traces to rules you can read, not a black-box guess."),
     ("Gemma refines and writes; the rules decide. Turn the model off and you still get a shortlist and a plan."),
-    ("The graph always says what it covers — a token unlocks the exact year; without one you get 90 days of public events, clearly labelled."),
+    ("The graph always says what it covers — a token unlocks the exact calendar; without one you still get a full year of public issues and pull requests, clearly labelled."),
     ("Results are bounded by GitHub's own search index. Nothing is invented, and the static catalogue keeps good data flowing."),
     ("No backend and no write path: nothing is ever posted on your behalf. Every action stays yours."),
 ]

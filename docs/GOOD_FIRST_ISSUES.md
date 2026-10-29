@@ -125,12 +125,13 @@ them.
 ### 9. Add a second contribution data source: the commits API
 **Difficulty:** medium · **Files:** `js/github/api.js`, `js/github/contributions.js`
 
-The contribution chain is exact (GraphQL) → approximate (public events) →
-sample. The approximate mode is limited to about 90 days because the events
-feed is limited.
+**Partly done.** The approximate mode now covers a full year of public issues
+and pull requests (`fetchAuthoredYear`, using `/search/issues` with
+`author:` qualifiers), merged behind the last ~90 days of event detail.
 
-Add a `/repos` and `/commits` based fallback that covers a longer window,
-still approximate, still labelled as such.
+What remains: exact commit-level detail beyond 90 days and the review
+history. Add a `/repos` and `/commits` based fallback that covers a longer
+window, still approximate, still labelled as such.
 
 **Done when:** the new mode is labelled honestly, it never claims to be a
 full year, and `tests/contributions.test.js` covers the mapping.

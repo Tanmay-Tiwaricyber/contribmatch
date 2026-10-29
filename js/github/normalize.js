@@ -97,6 +97,43 @@ export function normalizeEvents(events = [], { days = 91, now = new Date() } = {
 }
 
 /**
+ * Merge a year of authored public issues and pull requests (from the search
+ * API) into an events-based day series. Each item counts as one open on its
+ * `created_at` day — as a pull request when GitHub reports `pull_request` on
+ * the item, otherwise as an issue.
+ *
+ * Items created at or after `beforeKey` are skipped: the events feed already
+ * covers that window in detail, and counting both sources would double the
+ * recent days.
+ *
+ * Mutates the given day entries and returns what was merged, so the caller
+ * can update its totals.
+ *
+ * @param {Array<{date:string,count:number,byType:object}>} days a series wide enough to hold every item
+ * @param {object[]} items raw /search/issues results
+ * @param {{beforeKey?: string|null}} [opts] only items strictly before this day key merge
+ * @returns {{pullRequests: number, issues: number}}
+ */
+export function mergeAuthoredDays(days, items = [], { beforeKey = null } = {}) {
+  const index = new Map(days.map((day) => [day.date, day]));
+  let pullRequests = 0;
+  let issues = 0;
+  for (const item of items) {
+    if (!item?.created_at) continue;
+    const date = toDayKey(item.created_at);
+    const entry = index.get(date);
+    if (!entry) continue;
+    if (beforeKey && date >= beforeKey) continue;
+    const bucket = item.pull_request ? 'pullRequests' : 'issues';
+    entry.count += 1;
+    entry.byType[bucket] += 1;
+    if (bucket === 'pullRequests') pullRequests += 1;
+    else issues += 1;
+  }
+  return { pullRequests, issues };
+}
+
+/**
  * Normalise a GraphQL contribution calendar.
  * @param {{weeks: Array<{contributionDays: Array<{date:string, contributionCount:number}>}>}} calendar
  * @param {{totals?: object}} [extra]

@@ -30,7 +30,9 @@ Type `octocat` into the field. Press **Find my issues**.
 ### 0:25 — The activity panel (10 seconds)
 
 > "First, it reads your public activity and works out what you already
-> know. Without a token this is an approximation of your last three months,
+> know. Without a token this is an approximation — your full year of public
+> issues and pull requests, with commit and review detail from the last
+> three months —
 > and it says so. Add a token in Settings and it becomes your exact year."
 
 Point at the label on the activity panel. **Sample** before a name is entered,
@@ -199,7 +201,7 @@ first three are the only ones that matter if the time is short.
 > | Mode | When | What you get |
 > | --- | --- | --- |
 > | Exact | a token is set | the full calendar from GraphQL |
-> | Approximate | no token | about 90 days of public events, mapped |
+> | Approximate | no token | a full year of public issues and pull requests, with 90 days of event detail, mapped |
 > | Sample | no name yet | clearly labelled sample data |
 >
 > The 3D wall always covers the same window as the panel. An approximation is
@@ -255,7 +257,8 @@ first three are the only ones that matter if the time is short.
 
 > - The ranking is a rubric, not a prediction of success.
 > - The model writes the notes; it does not decide the match.
-> - Without a token the graph is three months, not a year.
+> - Without a token the graph still shows a full year of your public issues
+>   and pull requests; only exact commit-level detail needs a token.
 > - The search only sees what GitHub's search index sees.
 > - It is a static site, which means it cannot do anything on your behalf,
 >   and that is on purpose.

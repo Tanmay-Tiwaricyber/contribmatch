@@ -62,7 +62,7 @@ export default {
   'activity.source.sample': 'Sample',
   'activity.note.exact': 'Poora contribution calendar, GitHub GraphQL API se.',
   'activity.note.approximate':
-    'Haan ki recent public activity pe based (approximate). Poore saal ke liye token add karo.',
+    'Poore saal ke public issues aur pull requests, aur pichhle 90 din ke commits aur reviews (approximate). Exact calendar ke liye token add karo.',
   'activity.note.sample': 'Sample data. Apni activity dekhne ke liye username daalo.',
   'activity.takeaway': 'Takeaway',
   'activity.commits': 'Commits',

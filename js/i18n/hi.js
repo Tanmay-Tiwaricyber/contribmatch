@@ -64,7 +64,7 @@ export default {
   'activity.source.sample': 'सैंपल',
   'activity.note.exact': 'GitHub GraphQL API से पूरा कॉन्ट्रिब्यूशन कैलेंडर।',
   'activity.note.approximate':
-    'हाल की सार्वजनिक गतिविधि पर आधारित (अनुमानित)। पूरे साल के लिए टोकन जोड़ें।',
+    'आपके पिछले एक साल के सार्वजनिक issues और pull requests, और पिछले 90 दिनों का commit व review विवरण (अनुमानित)। सटीक कैलेंडर के लिए टोकन जोड़ें।',
   'activity.note.sample': 'सैंपल डेटा। अपनी गतिविधि देखने के लिए यूज़रनेम लिखें।',
   'activity.takeaway': 'निष्कर्ष',
   'activity.commits': 'Commits',

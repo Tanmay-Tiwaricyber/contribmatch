@@ -79,8 +79,10 @@ server, and can be forked into a different community the same afternoon.
 - **Quality Guard** — flags typo-only changes, mass pull requests, and
   contributions that ignore `CONTRIBUTING.md`.
 - **Contribution graph** — an exact year from the GraphQL API when a token is
-  present, an honest approximation from public events when it is not, and a
-  clearly labelled sample before you enter a name. The graph never pretends an
+  present, a materialised approximation without one (a full year of public
+  issues and pull requests, with commit, review and comment detail from the
+  last ~90 days of events), and a clearly labelled sample before you enter a
+  name. The graph never pretends an
   approximation is a full year.
 - **English, Hindi and Hinglish** — the interface, the coaching notes and the
   comments you copy are all available in three languages.
@@ -218,7 +220,7 @@ everywhere it applies.
 | Mode | When | What you get | Labelled as |
 | --- | --- | --- | --- |
 | **Exact** | A GitHub token is present in Settings | The full contribution calendar from the GraphQL API | "Exact" |
-| **Approximate** | No token | Up to 90 days of public events, mapped to commits, pull requests, issues and reviews | "Based on recent public activity (approximate). Add a token for the full year." |
+| **Approximate** | No token | A full year of your public issues and pull requests (search API), plus commit, review and comment detail from the last ~90 days (events) | "A full year of your public issues and pull requests, with commit and review detail from the last 90 days (approximate). Add a token for the exact calendar." |
 | **Sample** | No username entered, or mock mode | Realistic sample data so the page is never empty | "Sample" |
 
 The 3D wall in the hero always covers the same window as the panel next to it.

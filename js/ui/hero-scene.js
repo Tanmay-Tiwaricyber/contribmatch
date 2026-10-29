@@ -16,7 +16,9 @@ const ROWS = 7;
  * How many weeks the wall shows.
  *
  * The wall never shows more history than the data actually covers: an
- * approximate graph covers about three months, so the wall does too.
+ * events-only graph covers about three months, so the wall does too, while
+ * a year-layered approximation (public issues and pull requests) shows a
+ * full year.
  */
 function weeksFor(source, dayCount) {
   if (source === 'events') return Math.max(4, Math.min(13, Math.ceil(dayCount / 7)));

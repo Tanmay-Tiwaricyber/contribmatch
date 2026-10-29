@@ -64,7 +64,7 @@ export default {
   'activity.source.sample': 'Sample',
   'activity.note.exact': 'Full contribution calendar from the GitHub GraphQL API.',
   'activity.note.approximate':
-    'Based on recent public activity (approximate). Add a token for the full year.',
+    'A full year of your public issues and pull requests, with commit and review detail from the last 90 days (approximate). Add a token for the exact calendar.',
   'activity.note.sample': 'Sample data. Enter a GitHub username to see your own activity.',
   'activity.takeaway': 'Takeaway',
   'activity.commits': 'Commits',
