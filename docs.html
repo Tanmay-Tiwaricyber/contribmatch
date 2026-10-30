@@ -130,9 +130,12 @@ curl http://localhost:11434/api/tags</code></pre>
           </p>
         </div>
         <ol>
-          <li>Create a key in Google AI Studio.</li>
+          <li>Create a key in Google AI Studio, OpenRouter or Groq.</li>
           <li>Paste it into the API key field below.</li>
-          <li>Choose <strong>Google AI Studio</strong> and a Gemma model, then <strong>Save</strong>.</li>
+          <li>Choose that provider and a model, then <strong>Save</strong>. Pick
+              <strong>OpenRouter</strong> for hosted Gemma (a
+              <code>:free</code> variant exists);
+              <strong>Groq</strong> carries other open models, ultra-fast.</li>
         </ol>
 
         <h2 id="settings">Settings</h2>
@@ -146,6 +149,8 @@ curl http://localhost:11434/api/tags</code></pre>
             <select class="select" id="setting-provider" name="provider">
               <option value="ollama">Ollama (local, open weights)</option>
               <option value="google">Google AI Studio (hosted Gemma)</option>
+              <option value="openrouter">OpenRouter (hosted Gemma + other open models, free tier)</option>
+              <option value="groq">Groq (hosted inference, ultra-fast)</option>
               <option value="mock">Sample mode (offline, no model)</option>
             </select>
             <p class="field__hint">
@@ -161,6 +166,9 @@ curl http://localhost:11434/api/tags</code></pre>
             <p class="field__hint">
               For Ollama: <code>gemma3:4b</code>, <code>gemma3:12b</code>, <code>qwen2.5:7b</code>.
               For AI Studio: <code>gemma-3-27b-it</code> or <code>gemma-3-12b-it</code>.
+              For OpenRouter: <code>google/gemma-3-27b-it</code> or <code>google/gemma-3-27b-it:free</code>.
+              For Groq: <code>openai/gpt-oss-120b</code> or <code>qwen/qwen3.8-27b</code>.
+              Any model id the service hosts works.
             </p>
           </div>
 
@@ -171,7 +179,7 @@ curl http://localhost:11434/api/tags</code></pre>
           </div>
 
           <div class="field is-hidden">
-            <label class="field__label" for="setting-api-key">Google AI Studio API key</label>
+            <label class="field__label" for="setting-api-key">API key (AI Studio / OpenRouter / Groq)</label>
             <input class="input" id="setting-api-key" name="apiKey" type="password"
                    autocomplete="off" spellcheck="false" placeholder="Paste a key — it stays in this tab">
             <p class="field__hint">Kept in sessionStorage only. Never committed, never logged.</p>

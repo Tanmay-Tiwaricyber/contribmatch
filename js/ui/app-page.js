@@ -49,6 +49,17 @@ export function buildProvider(current) {
     }
     return createProvider({ provider: 'google', apiKey: current.apiKey, model: current.model });
   }
+  if (current.provider === 'openrouter' || current.provider === 'groq') {
+    if (!current.apiKey) {
+      throw new ProviderError(
+        current.provider === 'openrouter'
+          ? 'Add an OpenRouter key in the docs page first.'
+          : 'Add a Groq key in the docs page first.',
+        { kind: 'config' }
+      );
+    }
+    return createProvider({ provider: current.provider, apiKey: current.apiKey, model: current.model });
+  }
   return createProvider({
     provider: 'ollama',
     endpoint: current.endpoint,

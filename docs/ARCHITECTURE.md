@@ -59,7 +59,7 @@ import { rankIssues } from '../core/ranker.js';
 | Module | What it does |
 | --- | --- |
 | `schema.js` | A hand-written validator. Every agent output is checked against a schema before it is used. |
-| `provider.js` | One interface, `generate({system, prompt, schema})`. Two implementations: Ollama and AI Studio. Exactly one retry on a parse or validation failure; a network or configuration error throws immediately. |
+| `provider.js` | One interface, `generate({system, prompt, schema})`. Four implementations: Ollama, AI Studio, OpenRouter and Groq (the last two share one OpenAI-compatible class). Exactly one retry on a parse or validation failure; a network or configuration error throws immediately. |
 | `prompt.js` | Builds prompts. Untrusted text is wrapped in `===BEGIN_UNTRUSTED_DATA===` markers and is never treated as an instruction. |
 | `level.js` | Buckets a contributor into 0–4 from commit, pull request, issue and review counts. |
 | `ranker.js` | The 100-point score. Rules first; only the top eight go to the model. |
@@ -128,7 +128,8 @@ live steps panel on the matcher page.
 
 ## 4. The provider contract
 
-One interface, two implementations, one mock.
+One interface, four implementations, one mock. OpenRouter and Groq share an
+OpenAI-compatible base class — same ask, same retry rules, different endpoints.
 
 ```js
 const provider = createProvider({ kind: 'ollama', model: 'gemma3:12b' });
@@ -142,6 +143,12 @@ const result = await provider.generate({ system, prompt, schema });
 - **AI Studio.** A key in `sessionStorage`. The key is only ever sent to
   Google's endpoint. The app warns, in the interface, that a real key must
   never be committed.
+- **OpenRouter.** Same key-in-`sessionStorage` rule. Hosts Gemma directly
+  (`google/gemma-3-27b-it`, with `:free` variants), plus many other open
+  models — so the open-weights story ships without an install.
+- **Groq.** Same key rule, ultra-fast inference. Groq retired its Gemma
+  models, so a current open model (`openai/gpt-oss-120b`) is the default there;
+  Gemma stays first through Ollama, AI Studio and OpenRouter.
 - **Mock.** Runs the whole flow offline on realistic sample data, with
   simulated steps, so a judge who has no GPU and no key still sees the product
   work.

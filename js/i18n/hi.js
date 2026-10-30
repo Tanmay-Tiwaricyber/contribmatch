@@ -157,7 +157,7 @@ export default {
     'सिर्फ़ छँटी सूची वाले issue का शीर्षक, विवरण और लेबल, plus आपकी अनुमानित स्किल। Ollama इस्तेमाल करें तो यह अनुरोध आपके मशीन से बाहर नहीं जाता।',
   'faq.3.q': 'क्या API key चाहिए?',
   'faq.3.a':
-    'Ollama के लिए नहीं — मॉडल लोकली चलता है। Google AI Studio के लिए आप ब्राउज़र में key डालते हैं; वह टैब में रहती है और कहीं नहीं भेजी जाती।',
+    'Ollama के लिए नहीं — मॉडल लोकली चलता है। Google AI Studio, OpenRouter या Groq के लिए आप ब्राउज़र में key डालते हैं; वह टैब में रहती है और कहीं नहीं भेजी जाती।',
   'faq.4.q': 'क्या कॉन्ट्रिब्यूशन ग्राफ़ असली GitHub कैलेंडर है?',
   'faq.4.a':
     'टोकन के साथ हाँ — यह GraphQL कैलेंडर का उपयोग करता है। बिना टोकन यह पब्लिक इवेंट गिनता है, जो लगभग पिछले 90 दिनों को कवर करता है। ग्राफ़ के नीचे हमेशा लिखा है कि आप क्या देख रहे हैं।',
@@ -227,7 +227,7 @@ export default {
   'app.ruleOnly': 'केवल नियम-आधारित स्कोर',
   'app.modelNote': 'मॉडल की टिप्पणी',
   'app.source.model': 'मॉडल',
-  'app.source.fallback': 'स्कोर अंतर्निहित नियम-इंजन से बने — AI मॉडल उपलब्ध नहीं था। स्कोर और कारण पूरे हैं; शीर्ष matches के लिए मॉडल-आधारित rating चाहिए तो Ollama (gemma3:4b) चलाएँ या docs page में Google AI Studio key जोड़ें।',
+  'app.source.fallback': 'स्कोर अंतर्निहित नियम-इंजन से बने — AI मॉडल उपलब्ध नहीं था। स्कोर और कारण पूरे हैं; शीर्ष matches के लिए मॉडल-आधारित rating चाहिए तो Ollama (gemma3:4b) चलाएँ या docs page में AI Studio, OpenRouter या Groq key जोड़ें।',
   'app.retry': 'फिर कोशिश करें',
   'app.api.title': 'GitHub API',
   'app.api.paused': 'रुका है — लगभग {seconds}s में फिर शुरू ({reason})',
@@ -253,7 +253,7 @@ export default {
   'app.errorDialog.config.title': 'AI मॉडल सेटअप नहीं है',
   'app.errorDialog.config.hint.ollama': 'नियम-आधारित स्कोर चलते रहेंगे। मॉडल-आधारित rating के लिए Ollama चलाएँ —',
   'app.errorDialog.config.link.ollama': 'Ollama गाइड देखें',
-  'app.errorDialog.config.hint.key': 'या Google AI Studio जोड़ें:',
+  'app.errorDialog.config.hint.key': 'या Google AI Studio, OpenRouter या Groq जोड़ें:',
   'app.errorDialog.config.link.aiStudio': 'docs page में key जोड़ें',
   'app.errorDialog.action.setup': 'मॉडल सेटअप करें',
   'app.errorDialog.queueFull.title': 'एक साथ बहुत ज़्यादा requests',

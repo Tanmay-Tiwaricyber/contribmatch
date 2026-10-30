@@ -85,10 +85,13 @@ function initSettingsForm() {
   if (mockMode) mockMode.checked = current.mockMode;
 
   function refresh() {
-    const isGoogle = provider?.value === 'google';
-    if (endpoint) endpoint.disabled = isGoogle;
-    if (model) model.disabled = provider?.value === 'mock';
-    if (apiKey) apiKey.closest('.field')?.classList.toggle('is-hidden', !isGoogle);
+    // Everything except Ollama is a hosted service: it needs a key and the
+    // local endpoint field is meaningless there.
+    const value = provider?.value;
+    const isHosted = value === 'google' || value === 'openrouter' || value === 'groq';
+    if (endpoint) endpoint.disabled = isHosted;
+    if (model) model.disabled = value === 'mock';
+    if (apiKey) apiKey.closest('.field')?.classList.toggle('is-hidden', !isHosted);
   }
   refresh();
   provider?.addEventListener('change', refresh);

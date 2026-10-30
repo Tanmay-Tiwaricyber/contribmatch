@@ -51,7 +51,7 @@ Pages, GitLab Pages, or a bucket.
 ```
 Content-Security-Policy:
   default-src 'self';
-  connect-src 'self' https://api.github.com https://generativelanguage.googleapis.com http://localhost:11434;
+  connect-src 'self' https://api.github.com https://generativelanguage.googleapis.com https://openrouter.ai https://api.groq.com http://localhost:11434;
   img-src 'self' data:;
   style-src 'self' 'unsafe-inline';
   font-src 'self';

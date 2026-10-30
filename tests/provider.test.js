@@ -14,6 +14,8 @@ import {
   ProviderError,
   OllamaProvider,
   GoogleStudioProvider,
+  OpenRouterProvider,
+  GroqProvider,
   createProvider,
 } from '../js/core/provider.js';
 import { validate } from '../js/core/schema.js';
@@ -182,8 +184,119 @@ test('the Google AI Studio provider requires a key and never sends one in the bo
 test('createProvider builds the right implementation', () => {
   assert.ok(createProvider({ provider: 'ollama' }) instanceof OllamaProvider);
   assert.ok(createProvider({ provider: 'google', apiKey: 'k' }) instanceof GoogleStudioProvider);
+  assert.ok(createProvider({ provider: 'openrouter', apiKey: 'k' }) instanceof OpenRouterProvider);
+  assert.ok(createProvider({ provider: 'groq', apiKey: 'k' }) instanceof GroqProvider);
   assert.throws(() => createProvider({ provider: 'mock' }), /createMockProvider/);
   assert.throws(() => createProvider({ provider: 'nope' }), /Unknown provider/);
+});
+
+/* ------------------------------------------------------------------ *
+ * The OpenAI-compatible hosted providers: OpenRouter and Groq.
+ *
+ * Same wire format for both:
+ *   POST {endpoint}, Authorization: Bearer <key>,
+ *   { model, messages, temperature } -> choices[0].message.content
+ * ------------------------------------------------------------------ */
+
+test('the OpenRouter provider posts to its endpoint with the key in the header', async () => {
+  const calls = [];
+  const provider = new OpenRouterProvider({
+    apiKey: 'openrouter-key-not-real',
+    model: 'google/gemma-3-27b-it:free',
+    fetchImpl: async (url, options) => {
+      calls.push({ url, options });
+      return {
+        ok: true,
+        status: 200,
+        async json() {
+          return { choices: [{ message: { content: '{"summary":"from openrouter"}' } }] };
+        },
+      };
+    },
+  });
+  const result = await provider.generate({ system: 's', prompt: 'p', schema: SCHEMA });
+  assert.deepEqual(result, { summary: 'from openrouter' });
+  assert.equal(calls[0].url, 'https://openrouter.ai/api/v1/chat/completions');
+  assert.equal(calls[0].options.headers.Authorization, 'Bearer openrouter-key-not-real');
+  const body = JSON.parse(calls[0].options.body);
+  assert.equal(body.model, 'google/gemma-3-27b-it:free');
+  assert.equal(body.messages[0].role, 'system');
+  assert.equal(body.messages[1].role, 'user');
+  // The key travels in the header, never in the body.
+  assert.ok(!calls[0].options.body.includes('openrouter-key-not-real'));
+  // Attribution headers OpenRouter documents for apps.
+  assert.equal(calls[0].options.headers['X-Title'], 'ContribMatch');
+});
+
+test('the Groq provider defaults to a current open model, not a retired Gemma', async () => {
+  assert.equal(new GroqProvider({ apiKey: 'k' }).model, 'openai/gpt-oss-120b');
+  assert.equal(new OpenRouterProvider({ apiKey: 'k' }).model, 'google/gemma-3-27b-it');
+
+  const calls = [];
+  const provider = new GroqProvider({
+    apiKey: 'groq-key-not-real',
+    model: 'openai/gpt-oss-120b',
+    fetchImpl: async (url, options) => {
+      calls.push({ url, options });
+      return {
+        ok: true,
+        status: 200,
+        async json() {
+          return { choices: [{ message: { content: '{"summary":"from groq"}' } }] };
+        },
+      };
+    },
+  });
+  const result = await provider.generate({ system: 's', prompt: 'p', schema: SCHEMA });
+  assert.deepEqual(result, { summary: 'from groq' });
+  assert.equal(calls[0].url, 'https://api.groq.com/openai/v1/chat/completions');
+  assert.equal(calls[0].options.headers.Authorization, 'Bearer groq-key-not-real');
+  assert.equal(JSON.parse(calls[0].options.body).model, 'openai/gpt-oss-120b');
+});
+
+test('a wrong key on a hosted provider is a configuration error, not a retry', async () => {
+  for (const Ctor of [OpenRouterProvider, GroqProvider]) {
+    const provider = new Ctor({
+      apiKey: 'bad-key',
+      fetchImpl: async () => ({
+        ok: false,
+        status: 401,
+        async text() { return 'invalid api key'; },
+      }),
+    });
+    await assert.rejects(
+      () => provider.generate({ system: 's', prompt: 'p', schema: SCHEMA }),
+      (err) => {
+        assert.ok(err instanceof ProviderError);
+        assert.equal(err.kind, 'config');
+        assert.match(err.message, /401/);
+        return true;
+      }
+    );
+  }
+});
+
+test('both hosted providers require a key at construction', () => {
+  assert.throws(() => new OpenRouterProvider({}), /An OpenRouter API key is required/);
+  assert.throws(() => new GroqProvider({}), /A Groq API key is required/);
+});
+
+test('an empty completion from a hosted provider is a parse error', async () => {
+  const provider = new GroqProvider({
+    apiKey: 'k',
+    fetchImpl: async () => ({
+      ok: true,
+      status: 200,
+      async json() { return { choices: [] }; },
+    }),
+  });
+  await assert.rejects(
+    () => provider.generate({ system: 's', prompt: 'p', schema: SCHEMA }),
+    (err) => {
+      assert.equal(err.kind, 'parse');
+      return true;
+    }
+  );
 });
 
 test('the validator used by providers catches a missing field', () => {

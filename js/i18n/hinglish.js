@@ -155,7 +155,7 @@ export default {
     'Sirf shortlist wale issue ka title, body aur labels, plus aapki inferred skills. Ollama use karo to ye request aapke machine se bahar nahi jaati.',
   'faq.3.q': 'API key chahiye?',
   'faq.3.a':
-    'Ollama ke liye nahi — model local chalta hai. Google AI Studio ke liye aap browser mein key paste karte ho; wo tab mein rehti hai aur kahin nahi bheji jaati.',
+    'Ollama ke liye nahi — model local chalta hai. Google AI Studio, OpenRouter ya Groq ke liye aap browser mein key paste karte ho; wo tab mein rehti hai aur kahin nahi bheji jaati.',
   'faq.4.q': 'Kya contribution graph asli GitHub calendar hai?',
   'faq.4.a':
     'Token ke saath haan — ye GraphQL contribution calendar use karta hai. Bina token ye public events ginata hai, jo lagbhag pichhle 90 din cover karta hai. Graph ke neeche hamesha likha hota hai ki aap kya dekh rahe ho.',
@@ -225,7 +225,7 @@ export default {
   'app.ruleOnly': 'Sirf rule score',
   'app.modelNote': 'Model note',
   'app.source.model': 'Model',
-  'app.source.fallback': 'Score rule engine se bane — AI model available nahi tha. Scores aur reasons poore hain; top matches ke liye model-refined rating chahiye to Ollama (gemma3:4b) chalao ya docs page me Google AI Studio key add karo.',
+  'app.source.fallback': 'Score rule engine se bane — AI model available nahi tha. Scores aur reasons poore hain; top matches ke liye model-refined rating chahiye to Ollama (gemma3:4b) chalao ya docs page me AI Studio, OpenRouter ya Groq key add karo.',
   'app.retry': 'Dobara try karo',
   'app.api.title': 'GitHub API',
   'app.api.paused': 'Ruka hua hai — lagbhag {seconds}s me phir shuru ({reason})',
@@ -251,7 +251,7 @@ export default {
   'app.errorDialog.config.title': 'AI model setup nahi hai',
   'app.errorDialog.config.hint.ollama': 'Rule-based scores chalte rahenge. Model-refined rating ke liye Ollama chalao —',
   'app.errorDialog.config.link.ollama': 'Ollama guide dekho',
-  'app.errorDialog.config.hint.key': 'Ya Google AI Studio connect karo:',
+  'app.errorDialog.config.hint.key': 'Ya Google AI Studio, OpenRouter ya Groq connect karo:',
   'app.errorDialog.config.link.aiStudio': 'docs page me key add karo',
   'app.errorDialog.action.setup': 'Model setup karo',
   'app.errorDialog.queueFull.title': 'Ek saath bahut zyada requests',

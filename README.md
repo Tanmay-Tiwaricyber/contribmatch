@@ -98,7 +98,7 @@ flowchart TD
     U[Browser] -->|username only| P[Profile Agent]
     U -->|labels| S[Scout Agent]
     S -->|issues| R[Ranker<br/>rules first]
-    R -->|top 8| M[Gemma via<br/>Ollama / AI Studio]
+    R -->|top 8| M[Gemma via<br/>Ollama / AI Studio /<br/>OpenRouter]
     M -->|ease, clarity, fit| R
     R -->|0-100 + reasons| C[Match cards]
     C --> G[Coach Agent]
@@ -165,7 +165,7 @@ ease, clarity and fit — and that rating is blended at 35% into the final
 score. It also writes the plain-language coaching notes. If no model is
 available, the app still works fully on rules and says so in a banner.
 
-Two supported ways to run it, both optional and both user-owned:
+Four supported ways to run it, all optional and all user-owned:
 
 **Option A — Gemma 3 on your own machine (Ollama, no API key, no data leaves
 your computer):**
@@ -186,6 +186,21 @@ Create a free key at [aistudio.google.com](https://aistudio.google.com), open
 `gemma-3-27b-it` (or `gemma-3-12b-it`), and paste the key. It lives in
 `sessionStorage` for the tab only and is sent to nothing but Google.
 
+**Option C — hosted Gemma (and many other open models) via OpenRouter
+(free tier):**
+
+Create a key at [openrouter.ai/keys](https://openrouter.ai/keys), choose
+**OpenRouter** in **Docs → Settings**, and set the model to
+`google/gemma-3-27b-it`. `:free` model variants exist, so the full flow can be
+judged without any billing — and any other model id OpenRouter hosts works too.
+
+**Option D — ultra-fast hosted inference via Groq:**
+
+Create a key at [console.groq.com](https://console.groq.com), choose **Groq**
+in **Docs → Settings**. Groq retired its Gemma models, so its default model is
+one of its current open models (`openai/gpt-oss-120b`); any Groq model id
+works. Open-weight Gemma remains the core story through Options A–C.
+
 The settings screen confirms which model it reached. There is also **Mock
 mode** for a completely offline demo of the whole flow.
 
@@ -202,7 +217,7 @@ sidebar.
 | Language | `localStorage` | English, Hindi, Hinglish |
 | Mock mode | `localStorage` | Runs the whole flow offline on realistic sample data |
 | GitHub token | `sessionStorage` | Read-only, optional, never sent anywhere but GitHub |
-| AI Studio key | `sessionStorage` | Optional, never sent anywhere but Google |
+| AI Studio / OpenRouter / Groq key | `sessionStorage` | Optional, sent only to the provider it belongs to — never committed, never logged |
 | Shortlist | `localStorage` | Exportable as Markdown |
 
 A token is only needed for the exact contribution graph. Without one the app

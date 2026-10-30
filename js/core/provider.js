@@ -5,9 +5,10 @@
  *
  *   provider.generate({ system, prompt, schema }) -> Promise<object>
  *
- * Two real implementations are provided — Ollama (local, open weights) and
- * Google AI Studio (hosted Gemma). A mock implementation powers offline demo
- * mode. Every implementation must:
+ * Four real implementations are provided — Ollama (local, open weights),
+ * Google AI Studio (hosted Gemma), OpenRouter (hosted Gemma plus many other
+ * open models) and Groq (ultra-fast hosted inference). A mock implementation
+ * powers offline demo mode. Every implementation must:
  *
  *   - return strict JSON parsed from the model output,
  *   - validate it against `schema` before returning,
@@ -343,8 +344,155 @@ export class GoogleStudioProvider extends BaseProvider {
 }
 
 /**
+ * Shared plumbing for the OpenAI-compatible chat APIs: OpenRouter and Groq
+ * are two independent hosted options, but both speak the same wire format.
+ *
+ *   POST {endpoint}
+ *   Authorization: Bearer <key>
+ *   { model, messages, temperature }  ->  choices[0].message.content
+ *
+ * The API key is supplied by the user at runtime and must never be committed.
+ * Any model id on the service works — the defaults below are just sensible
+ * starting points (OpenRouter serves Gemma; Groq no longer does, so its
+ * default picks one of its current open models).
+ */
+export class OpenAICompatibleProvider extends BaseProvider {
+  constructor({
+    apiKey,
+    model,
+    endpoint,
+    temperature = 0.2,
+    keyLabel = 'An API key',
+    extraHeaders = null,
+    ...rest
+  } = {}) {
+    super(rest);
+    if (!apiKey) {
+      throw new ProviderError(`${keyLabel} is required.`, { kind: 'config' });
+    }
+    this.apiKey = apiKey;
+    this.model = model;
+    this.endpoint = endpoint.replace(/\/$/, '');
+    this.temperature = temperature;
+    // Optional attribution headers (OpenRouter's leaderboard), set by
+    // subclasses that want them.
+    this.extraHeaders = extraHeaders;
+  }
+
+  async _call({ system, prompt }) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), this.timeoutMs);
+    let res;
+    try {
+      res = await this.fetch(`${this.endpoint}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.apiKey}`,
+          ...(this.extraHeaders || {}),
+        },
+        body: JSON.stringify({
+          model: this.model,
+          temperature: this.temperature,
+          messages: [
+            { role: 'system', content: system },
+            { role: 'user', content: prompt },
+          ],
+        }),
+        signal: controller.signal,
+      });
+    } catch (err) {
+      const timedOut = err?.name === 'AbortError';
+      throw new ProviderError(
+        timedOut
+          ? `${this.constructor.serviceName} did not answer within ${Math.round(this.timeoutMs / 1000)}s.`
+          : `Cannot reach ${this.constructor.serviceName}. ${err.message}`,
+        { kind: 'network', cause: err }
+      );
+    } finally {
+      clearTimeout(timer);
+    }
+
+    if (!res.ok) {
+      const body = await res.text().catch(() => '');
+      // 401/403 mean the key is wrong or spent — no retry can fix that.
+      const kind = res.status === 401 || res.status === 403 ? 'config' : 'network';
+      throw new ProviderError(
+        `${this.constructor.serviceName} responded ${res.status}. ${body.slice(0, 200)}`,
+        { kind }
+      );
+    }
+    const data = await res.json();
+    const content = data?.choices?.[0]?.message?.content;
+    if (typeof content !== 'string' || !content) {
+      const reason = data?.error?.message || 'no content returned';
+      throw new ProviderError(`Empty response from ${this.constructor.serviceName} (${reason}).`, {
+        kind: 'parse',
+      });
+    }
+    return content;
+  }
+}
+
+/**
+ * OpenRouter — one key, hundreds of hosted models, including Google's Gemma.
+ * Free `:free` model variants exist for judging without any billing.
+ */
+export class OpenRouterProvider extends OpenAICompatibleProvider {
+  static serviceName = 'OpenRouter';
+
+  constructor({
+    apiKey,
+    model = 'google/gemma-3-27b-it',
+    endpoint = 'https://openrouter.ai/api/v1/chat/completions',
+    ...rest
+  } = {}) {
+    super({
+      apiKey,
+      model,
+      endpoint,
+      keyLabel: 'An OpenRouter API key',
+      // Attribution headers OpenRouter documents for apps. Referer must be
+      // `null`-safe: it is only read when this provider runs on the site.
+      extraHeaders: {
+        'HTTP-Referer': 'https://tanmay-tiwaricyber.github.io/contribmatch/',
+        'X-Title': 'ContribMatch',
+      },
+      ...rest,
+    });
+    this.label = `openrouter:${model}`;
+  }
+}
+
+/**
+ * Groq — extremely fast hosted inference. Note: Groq retired its Gemma
+ * models (gemma2-9b-it was shut down in Oct 2025), so the default here is
+ * one of its current open models, not a Gemma. Gemma stays available
+ * through Ollama, AI Studio and OpenRouter.
+ */
+export class GroqProvider extends OpenAICompatibleProvider {
+  static serviceName = 'Groq';
+
+  constructor({
+    apiKey,
+    model = 'openai/gpt-oss-120b',
+    endpoint = 'https://api.groq.com/openai/v1/chat/completions',
+    ...rest
+  } = {}) {
+    super({
+      apiKey,
+      model,
+      endpoint,
+      keyLabel: 'A Groq API key',
+      ...rest,
+    });
+    this.label = `groq:${model}`;
+  }
+}
+
+/**
  * Build a provider from plain settings.
- * @param {{provider:'ollama'|'google'|'mock', model?:string, apiKey?:string, endpoint?:string}} settings
+ * @param {{provider:'ollama'|'google'|'openrouter'|'groq'|'mock', model?:string, apiKey?:string, endpoint?:string}} settings
  */
 export function createProvider(settings = {}, deps = {}) {
   const kind = settings.provider || 'mock';
@@ -359,6 +507,20 @@ export function createProvider(settings = {}, deps = {}) {
     return new GoogleStudioProvider({
       apiKey: settings.apiKey,
       model: settings.model || 'gemma-3-27b-it',
+      ...deps,
+    });
+  }
+  if (kind === 'openrouter') {
+    return new OpenRouterProvider({
+      apiKey: settings.apiKey,
+      model: settings.model || 'google/gemma-3-27b-it',
+      ...deps,
+    });
+  }
+  if (kind === 'groq') {
+    return new GroqProvider({
+      apiKey: settings.apiKey,
+      model: settings.model || 'openai/gpt-oss-120b',
       ...deps,
     });
   }

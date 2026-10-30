@@ -158,7 +158,7 @@ export default {
     'Only the issue title, body and labels of the shortlist, plus your inferred skills. If you use Ollama, that request never leaves your machine.',
   'faq.3.q': 'Do I need an API key?',
   'faq.3.a':
-    'For Ollama, no — the model runs locally. For Google AI Studio you paste a key into the browser; it stays in the tab and is never sent anywhere else.',
+    'For Ollama, no — the model runs locally. For Google AI Studio, OpenRouter or Groq you paste a key into the browser; it stays in the tab and is never sent anywhere else.',
   'faq.4.q': 'Is the contribution graph the real GitHub calendar?',
   'faq.4.a':
     'With a token, yes — it uses the GraphQL contribution calendar. Without one it falls back to counting public events, which covers roughly the last 90 days. The label under the graph always says which one you are looking at.',
@@ -228,7 +228,7 @@ export default {
   'app.ruleOnly': 'Rule score only',
   'app.modelNote': 'Model note',
   'app.source.model': 'Model',
-  'app.source.fallback': 'Scored by the built-in rule engine — the AI model was unavailable. Scores and reasons are still complete; for model-refined ratings of the top matches, start Ollama (gemma3:4b) or add a Google AI Studio key in the docs page.',
+  'app.source.fallback': 'Scored by the built-in rule engine — the AI model was unavailable. Scores and reasons are still complete; for model-refined ratings of the top matches, start Ollama (gemma3:4b) or add an AI Studio, OpenRouter or Groq key in the docs page.',
   'app.retry': 'Try again',
   'app.api.title': 'GitHub API',
   'app.api.paused': 'Paused — resumes in about {seconds}s ({reason})',
@@ -254,7 +254,7 @@ export default {
   'app.errorDialog.config.title': 'The AI model is not set up',
   'app.errorDialog.config.hint.ollama': 'Rule-based scores still work. For model-refined ratings, start Ollama —',
   'app.errorDialog.config.link.ollama': 'see the Ollama guide',
-  'app.errorDialog.config.hint.key': 'Or connect Google AI Studio:',
+  'app.errorDialog.config.hint.key': 'Or connect Google AI Studio, OpenRouter or Groq:',
   'app.errorDialog.config.link.aiStudio': 'add a key in the docs page',
   'app.errorDialog.action.setup': 'Set up the model',
   'app.errorDialog.queueFull.title': 'Too many requests at once',

@@ -14,7 +14,7 @@ const PREF_KEY = 'contribmatch:v1:settings';
 const SECRET_KEY = 'contribmatch:v1:secrets';
 
 export const DEFAULT_SETTINGS = {
-  provider: 'ollama', // 'ollama' | 'google' | 'mock'
+  provider: 'ollama', // 'ollama' | 'google' | 'openrouter' | 'groq' | 'mock'
   model: 'gemma3:4b',
   endpoint: 'http://localhost:11434',
   theme: 'system', // 'system' | 'light' | 'dark'
