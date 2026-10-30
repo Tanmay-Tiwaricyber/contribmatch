@@ -204,6 +204,36 @@ works. Open-weight Gemma remains the core story through Options A–C.
 The settings screen confirms which model it reached. There is also **Mock
 mode** for a completely offline demo of the whole flow.
 
+### The configuration flow, at a glance
+
+```mermaid
+flowchart TD
+    S[Open Docs → Settings] --> D{How should the model run?}
+    D -->|no key, fastest demo| MM[Mock mode<br/>whole flow offline on sample data]
+    D -->|own machine, nothing leaves home| OL[Pick Ollama<br/>ollama pull gemma3:4b<br/>set OLLAMA_ORIGINS to the site origin]
+    D -->|hosted, no install| HK{Which key do you have?}
+    HK -->|Google AI Studio| GS[Model gemma-3-27b-it<br/>or gemma-3-12b-it]
+    HK -->|OpenRouter| ORR[Model google/gemma-3-27b-it<br/>or its :free variant]
+    HK -->|Groq| GQ[Model openai/gpt-oss-120b<br/>or any Groq model id]
+    OL --> EP[Keep the local endpoint<br/>http://localhost:11434]
+    EP --> SV[Save]
+    GS --> K[Paste the API key]
+    ORR --> K
+    GQ --> K
+    K --> SV
+    MM --> SV
+    SV --> STORE[Preferences in localStorage<br/>key in sessionStorage — this tab only, sent only to its provider]
+    STORE --> RUN[Run the matcher]
+    RUN --> OK{Model reachable?}
+    OK -->|yes| AI[Gemma rates the top 8 on ease, clarity, fit<br/>blended at 35% into the rules ranking — coach notes are written]
+    OK -->|no| FB[Rule-based fallback banner<br/>the shortlist and the plan are still produced]
+    AI --> OUT[Final ranked matches]
+    FB --> OUT
+```
+
+Every path ends in working matches: the rules rank, the model refines — no
+configuration is required to see a complete run.
+
 ---
 
 ## Settings
